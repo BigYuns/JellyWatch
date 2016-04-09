@@ -1,0 +1,16 @@
+#form {
+    line-height: 1.8;
+    padding: 20px;
+    font-size: 13px;
+    padding-top: 100px;
+    }
+
+.qty { /* for button increasing/decreasing quantity*/
+    width: 40px;
+    height: 25px;
+    text-align: center;
+    }
+
+.image {
+    width: 100px;
+    }
