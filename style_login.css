@@ -1,0 +1,47 @@
+body{
+   background-color:rgb(91,93,252);
+   color:white;
+}
+#JellyWatch
+{
+  position: absolute;
+  margin: auto;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  width: 200px;
+  height: 200px;
+  border-radius: 3px;
+  text-align: center;
+
+}
+#Info
+{
+  position: absolute;
+  margin: auto;
+  top: 350px;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  width: 200px;
+  height: 200px;
+  border-radius: 3px;
+  text-align: center;
+
+}
+
+a:link {
+    text-decoration: none;
+    color:white;
+}
+a:visited {
+    text-decoration: none;
+    color:white;
+
+}
+h4{
+}
+p{
+  margin: 0;
+}
