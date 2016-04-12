@@ -1,43 +1,34 @@
-FAKE_ACCOUNTS = [
-	{username: "lynn", "password": "123", isAdmin: true, organization: false},
-	{username: "savethebay", "password": "savethebae", isAdmin: false, organization: true},
-	{username: "n8", "password": "wow", isAdmin: false, organization: false}
-]
-
 Data = {
-	loggedIn: false,
-	individualName: null,
-	isAdmin: false,
-	logIn: function(username, password, callback) {
+	user: null,
+	token: null,
+	logIn: function(email, password, callback) {
 		/* 
-		username and password are strings
-		callback is a function(correct_username, correct_password),
-		where correct_username and correct_password are true/false.
-		If both are true, login succeeded.
+		email and password are strings
+		callback is called with a dictionary: {success: true/false, message: <an error message, if present>}
 		
 		Once you're done logging in, individualName may be set, or it might be null.
 		if it's null, they've logged in with an organizational account,
 		so we need to ask them THEIR name. set Data.individualName = <that name> before submitting any jellyfish sightings.
 		*/
-		setTimeout(function() {
-			for (var i=0; i<FAKE_ACCOUNTS.length; i++) {
-				var acct = FAKE_ACCOUNTS[i];
-				var correctName = (acct.username == username);
-				var correctPwd = (acct.password == password);
-				if (correctName) {
-					if (correctPwd) {
-						Data.loggedIn = true;
-						Data.individualName = acct.organization ? null : username;
-						Data.isAdmin = acct.isAdmin;
-						callback(true, true);
-					} else {
-						callback(true, false)
-					}
-					return
+		Data.post('/users/login', {email: email, password: password}, function(resp) {
+			if (resp) {
+				if (resp.success) {
+					Data.token = resp.token;
+					Data.user = resp.user;
+					localStorage.token = Data.token;
+					localStorage.user = Data.user;
+					callback(resp);
 				}
+			} else {
+				callback({success: false});
 			}
-			callback(false, false);
-		}, 300);
+		})
+	},
+	logOut: function() {
+		Data.user = null;
+		Data.token = null;
+		localStorage.user = null;
+		localStorage.token = null;
 	},
 	getJellyfishForMap: function(latitude, longitude, callback) {
 		/* callback is called w/ an array of jellyfish sightings nearby.
@@ -114,5 +105,50 @@ Data = {
 				callback(null);
 			}
 		}, 300);
+	},
+	get: function(url, params, callback) {
+		var http = new XMLHttpRequest();
+		var reqURL = Data._url + url + "?" + Data._serialize(params);
+		http.open("GET", reqURL, true);
+		http.onreadystatechange = function() {
+		    if(http.readyState == 4) {
+				if (http.status == 200) {
+			        callback(JSON.parse(http.responseText));
+				} else {
+					callback(null);
+				}
+		    }
+		}
+		http.send(null);
+	},
+	post: function(url, params, callback) {
+		var http = new XMLHttpRequest();
+		var reqURL = Data._url + url;
+		http.open("POST", reqURL, true);
+		http.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+		http.onreadystatechange = function() {
+		    if(http.readyState == 4) {
+				if (http.status == 200) {
+			        callback(JSON.parse(http.responseText));
+				} else {
+					callback(null);
+				}
+		    }
+		}
+		http.send(Data._serialize(params));
+	},
+	_serialize: function(obj) {
+	  var str = [];
+	  for(var p in obj)
+	     str.push(encodeURIComponent(p) + "=" + encodeURIComponent(obj[p]));
+	  return str.join("&");
+	},
+	_url: "https://ri-jellywatch.appspot.com",
+	_setup: function() {
+		if (localStorage.user && localStorage.token) {
+			Data.token = localStorage.token;
+			Data.user = JSON.parse(localStorage.user)
+		}
 	}
 }
+Data._setup();
