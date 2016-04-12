@@ -1,0 +1,37 @@
+<h1>Backend test page</h1>
+
+<form method='POST' action='/users/update'>
+	<h2>Create or update user</h2>
+	<input name='token' placeholder='Login token'/>
+	<input name='email' placeholder='Email'/>
+	<input name='password' placeholder='password'/>
+	<input name='is_admin' placeholder='is admin (true/false)'/>
+	<input name='is_organization' placeholder='is organization (true/false)'/>
+	<input type=submit>
+</form>
+
+<form method='GET' action='/users'>
+	<h2>List users</h2>
+	<input name='token' placeholder='Login token'/>
+	<input type=submit>
+</form>
+
+<form method='POST' action='/users/delete'>
+	<h2>Delete user</h2>
+	<input name='token' placeholder='Login token'/>
+	<input name='email' placeholder='Email'/>
+	<input type=submit>
+</form>
+
+<form method='POST' action='/users/login'>
+	<h2>Log in</h2>
+	<input name='email' placeholder='Email'/>
+	<input name='password' placeholder='password'/>
+	<input type=submit>
+</form>
+
+<style>
+form input {
+	display: block;
+}
+</style>
