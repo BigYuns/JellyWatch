@@ -19,6 +19,11 @@ import users
 import json
 from google.appengine.ext import ndb
 
+def send_json(handler, response):
+    handler.response.headers['Content-Type'] = 'application/json'
+    handler.response.headers['Access-Control-Allow-Origin'] = '*'
+    handler.response.write(json.dumps(response))
+
 class MainHandler(webapp2.RequestHandler):
     def get(self):
         self.response.write("hey")
@@ -56,8 +61,7 @@ class CreateOrUpdateAccountHandler(webapp2.RequestHandler):
         else:
             response = {"success": False, "message": "Only admins can create new users"}
         
-        self.response.headers['Content-Type'] = 'application/json'
-        self.response.write(json.dumps(response))
+        send_json(self, response)
 
 class DeleteUserHandler(webapp2.RequestHandler):
     def post(self):
@@ -74,8 +78,7 @@ class DeleteUserHandler(webapp2.RequestHandler):
         else:
             response = {"success": False, "message": "Only adins can delete users"}
         
-        self.response.headers['Content-Type'] = 'application/json'
-        self.response.write(json.dumps(response))
+        send_json(self, response)
 
 class LoginHandler(webapp2.RequestHandler):
     def post(self):
@@ -93,8 +96,7 @@ class LoginHandler(webapp2.RequestHandler):
         else:
             response["message"] = "No matching user found"
         
-        self.response.headers['Content-Type'] = 'application/json'
-        self.response.write(json.dumps(response))
+        send_json(self, response)
 
 class ListUsersHandler(webapp2.RequestHandler):
     def get(self):
@@ -104,8 +106,8 @@ class ListUsersHandler(webapp2.RequestHandler):
             response = {"users": [u.to_json() for u in users.User.query()]}
         else:
             response = {"message": "Only admins can see the list of users"}
-        self.response.headers['Content-Type'] = 'application/json'
-        self.response.write(json.dumps(response))
+        
+        send_json(self, response)
 
 app = webapp2.WSGIApplication([
     ('/', MainHandler),

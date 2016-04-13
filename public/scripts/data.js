@@ -16,9 +16,9 @@ Data = {
 					Data.token = resp.token;
 					Data.user = resp.user;
 					localStorage.token = Data.token;
-					localStorage.user = Data.user;
-					callback(resp);
+					localStorage.user = JSON.stringify(Data.user);
 				}
+				callback(resp);
 			} else {
 				callback({success: false});
 			}
@@ -60,51 +60,28 @@ Data = {
 		}, 300);
 	},
 	// ADMIN FUNCTIONS:
-	createOrUpdateAccount: function(username, password, isAdmin, isOrganizationalAccount, callback) {
+	createOrUpdateAccount: function(email, password, isAdmin, isOrganizationalAccount, callback) {
 		// callback returns true or false, for success or not
 		// if the username already exists, we'll update it
 		// only admins can call this
-		setTimeout(function() {
-			if (Data.isAdmin) {
-				FAKE_ACCOUNTS.push({username: username, password: password, organization: isOrganizationalAccount, isAdmin: isAdmin});
-				callback(true);
-			} else {
-				callback(false);
-			}
-		}, 300);
+		var bool = function(b) { return b ? 'true' : 'false' }
+		Data.post('/users/update', {email: email, password: password, is_admin: bool(isAdmin), is_organization: bool(isOrganizationalAccount)}, callback);
 	},
-	deleteAccount: function(username, callback) {
+	deleteAccount: function(email, callback) {
 		// must be an admin
 		// callback(success) is called w/ true or false
-		setTimeout(function() {
-			if (Data.isAdmin) {
-				FAKE_ACCOUNTS = FAKE_ACCOUNTS.filter(function(a) { return a.username != username });
-				callback(true);
-			} else {
-				callback(false);
-			}
-		}, 300);
+		Data.post('/users/delete', {email: email}, callback)
 	},
 	listUsers: function(callback) {
 		/*
-		callback(users) is called with an array that looks like this:
-		
-		FAKE_ACCOUNTS = [
-			{username: "lynn", isAdmin: true, organization: false},
-			{username: "savethebay", isAdmin: false, organization: true},
-			{username: "n8", isAdmin: false, organization: false}
-		]
-		
-		if you aren't an admin, it's called back w/ false
-		
+		callback(users) is called with a dictionary that looks like this:
+		{
+			"users": [ {"email": "abc@gmail.com", "is_admin": true, "is_organization": false} ],
+			"message": <error message, or nothing>
+		}
+		must be an admin to call this
 		*/
-		setTimeout(function() {
-			if (Data.isAdmin) {
-				callback(FAKE_ACCOUNTS);
-			} else {
-				callback(null);
-			}
-		}, 300);
+		Data.get('/users', {}, callback);
 	},
 	get: function(url, params, callback) {
 		var http = new XMLHttpRequest();
@@ -139,11 +116,13 @@ Data = {
 	},
 	_serialize: function(obj) {
 	  var str = [];
+	  if (this.token) obj.token = this.token;
 	  for(var p in obj)
 	     str.push(encodeURIComponent(p) + "=" + encodeURIComponent(obj[p]));
 	  return str.join("&");
 	},
 	_url: "https://ri-jellywatch.appspot.com",
+	// _url: 'http://localhost:19080',
 	_setup: function() {
 		if (localStorage.user && localStorage.token) {
 			Data.token = localStorage.token;
