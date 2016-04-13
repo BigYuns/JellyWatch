@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>Administrator Page</title>
+
+	<!-- Fonts -->
+    <link href='https://fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Rubik' rel='stylesheet' type='text/css'>
+
+    <!-- Stylin -->
+    <link href='../public/stylesheets/header_style.css' rel='stylesheet' type='text/css'>
+    <link href='../public/stylesheets/admin_style.css' rel='stylesheet' type='text/css'>
+    
+    <!-- Javascript/JQUERY -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+
+    <!-- Temporary styling, will move this to a css file later -->
+    <style>
+    	.label{
+    		font-weight: bolder;
+    	}
+    	td{
+    		padding: 10px;
+    	}
+    	#add_user_row{
+    		display:none;
+    	}
+    	.user_row:nth-child(odd) {
+    		background-color: #CCC
+    	}
+
+    </style>
+</head>
+
+<body>
+
+	<h2>Registered Users</h2>
+
+	<button id="add_user" onclick="showAddUserRow()">Add User</button>
+
+	<div id="users">
+
+		<!-- Table of Users -->
+		<table id="user_table">
+
+			<!-- Row of Column Labels -->
+			<tr id = "label_row"> 
+				<td class="name label">Name</td>
+				<td class="org label">Organization</td>
+				<td class="email label">Email</td>
+				<td class="buttons"> <!-- Column for Buttons --> </td>
+				</tr>
+
+			<!-- Add User -->
+			<tr id = "add_user_row">
+			<form id = "add_user_form">
+				<td><input type="text" class="name" name="new_name"></input></td>	
+				<td><input type="text" class="org" name="new_org"></input></td>	
+				<td><input type="text" class="email" name="new_email"></input></td>	
+				<td><input type="submit" id="submit_new_user"></input></td>
+				</form>
+				</tr>
+
+			<!-- Sample Users -->
+			<tr class = "user_row">
+				<td class="name">Koko Nakajima</td>
+				<td class="org">Jellyfish Enthusiasts</td>
+				<td class="email">koko_nakajima@brown.edu</td>
+				</tr>
+			<tr class = "user_row">
+				<td class="name">Nate Parrott</td>
+				<td class="org">Actual Jellyfish</td>
+				<td class="email">nathaniel_parrott@brown.edu</td>
+				</tr>
+			<tr class = "user_row">
+				<td class="name">Ashley Urrutia</td>
+				<td class="org">Spongebob for the Bay</td>
+				<td class="email">ashley_urrutia@brown.edu</td>
+				</tr>
+			<tr class = "user_row">
+				<td class="name">Yunny Chung</td>
+				<td class="org">Earth Lab User</td>
+				<td class="email">sung_yun_chung@brown.edu</td>
+				</tr>
+
+		</table>
+	</div>
+
+	<!-- Javascript stuff, will probably move to a separate file later -->
+	<script type="text/javascript">
+
+		/* 
+			Shows the input boxes where admin can enter new user info
+		*/
+		function showAddUserRow() {
+			$('#add_user_row').show();
+		}
+
+		/*
+			Adds a new user to the table
+		*/
+		function addUser(name, org, email){
+			$('#user_table').append(
+				"<tr class = \"user_row\">"+
+					"<td class=\"name\">"+name+"</td>"+
+					"<td class=\"org\">"+org+"</td>"+
+					"<td class=\"email\">"+email+"</td>"+
+				"</tr>"
+			);
+		}
+
+		/*
+			Called when form is submitted
+		*/
+		$('#add_user_form').submit(function(e){
+			e.preventDefault();
+			
+			//set variables
+			var name = $("[name='new_name']").val(); 
+			var org = $("[name='new_org']").val();
+			var email = $("[name='new_email']").val();
+
+			//add new row with new info
+			addUser(name, org, email);
+
+			//clear form values
+			$("[name='new_name']").val(""); 
+			$("[name='new_org']").val("");
+			$("[name='new_email']").val("");
+
+			//hide the input boxes
+			$('#add_user_row').hide();
+		});
+
+	</script>
+
+
+</body>
+
+</html>
