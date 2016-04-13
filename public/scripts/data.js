@@ -1,6 +1,9 @@
 Data = {
 	user: null,
 	token: null,
+	isLoggedIn: function() {
+		return !!token && !!user;
+	},
 	logIn: function(email, password, callback) {
 		/* 
 		email and password are strings
@@ -30,22 +33,21 @@ Data = {
 		localStorage.user = null;
 		localStorage.token = null;
 	},
-	getJellyfishForMap: function(latitude, longitude, callback) {
+	getJellyfishForMap: function(lat_min, lat_max, lon_min, lon_max, callback) {
 		/* callback is called w/ an array of jellyfish sightings nearby.
 		each sighting looks like this:
 		{
-			latitude: 45.485904,
-			longitude: -30.294834
+			"geometry": {"x": -71.39151019099995, "y": 41.78236268000006},
+			"name": "Moon Jelly"
 		}
+		'name' will be 'None' if there's a report of 'no jellyfish here'
 		*/
-		setTimeout(function() {
-			callback([
-				{latitude: 41.799005, longitude: -71.383581},
-				{latitude: 41.775966, longitude: -71.367702},
-				{latitude: 41.475001, longitude: -71.299896},
-				{latitude: 41.606129, longitude: -71.304703}
-			])
-		}, 300);
+		var params = {};
+		if (lat_min) params.lat_min = lat_min;
+		if (lat_max) params.lat_max = lat_max;
+		if (lon_min) params.lon_min = lon_min;
+		if (lon_max) params.lon_max = lon_max;
+		Data.get('/jellyfish/map', params, callback);
 	},
 	submitJellyfishSighting: function(data, callback) {
 		/*

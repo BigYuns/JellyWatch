@@ -18,6 +18,7 @@ import webapp2
 import users
 import json
 from google.appengine.ext import ndb
+import jellyfish
 
 def send_json(handler, response):
     handler.response.headers['Content-Type'] = 'application/json'
@@ -109,11 +110,21 @@ class ListUsersHandler(webapp2.RequestHandler):
         
         send_json(self, response)
 
+class JellyfishMapHandler(webapp2.RequestHandler):
+    def get(self):
+        kwargs = {}
+        for field in ['lat_min', 'lat_max', 'lon_min', 'lon_max']:
+            val = self.request.get(field)
+            if val:
+                kwargs[field] = float(val)
+        send_json(self, jellyfish.get_jellyfish(**kwargs))
+
 app = webapp2.WSGIApplication([
     ('/', MainHandler),
     ('/test', TestPageHandler),
     ('/users', ListUsersHandler),
     ('/users/update', CreateOrUpdateAccountHandler),
     ('/users/delete', DeleteUserHandler),
-    ('/users/login', LoginHandler)
+    ('/users/login', LoginHandler),
+    ('/jellyfish/map', JellyfishMapHandler)
 ], debug=True)
