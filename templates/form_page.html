@@ -12,7 +12,7 @@
     <link href='../public/stylesheets/form_style.css' rel='stylesheet' type='text/css'>
     
     <!-- Javascript -->
-    <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script> -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
 
 </head>
 
@@ -20,22 +20,24 @@
     
     <div id="header">
         <div id="prev">
-            <a href="">prev</a>
+            <a href="" id="prev_text">prev</a>
             </div>
         <div id="next">
-            <a href="">next</a>
+            <a href="" id="next_text">next</a>
             </div>
         <div id="page_title">Jellyfish</div>    
         <!-- <div id="logo">JELLYWATCH</div> -->
     </div>
     
+
+    <div id="form_div">
     <form id="form">
 
         <!-- #####################################
                 JELLYFISH QUESTIONS 
         ##################################### --> 
 
-        <div class="question_div" id="jellyfish_questions">
+        <div class="question_div visible" id="jellyfish_questions">
 
             <h4 class="question">How many of each species of jellyfish do you see?</h4>
 
@@ -51,7 +53,7 @@
                 <br><input type="radio" name="jelly1"> 51 - 100
                 <br><input type="radio" name="jelly1"> > 100
 
-                <p class="species_name">Cucumber or Basket Comb Jelly</p>
+                <p class="species_name">Cigar Jelly</p>
                 <img src="../public/img/Comb_Jelly.jpg" class="image">
                 <br><input type="radio" name="jelly2"> 1 - 10
                 <br><input type="radio" name="jelly2"> 11 - 49
@@ -191,17 +193,62 @@
     </div>
 
    <!-- #####################################
-            PHOTO, COMMENTS
+            PHOTO, COMMENTS, SUBMIT FORM
     ##################################### --> 
 
     <div class="question_div" id="photo_comments">
 
+        <h4 class="question">Attach up to two photos!</h4>
+                <input type="file" name="photo">
+        
+        <h4 class="question">Any last comments?</h4>
+                <input type="text" name="comments">
+
+        <input type="submit">
 
     </div>
 
-
     </form>
+    </div>
 
+
+
+    <!-- Showing/hiding divs -->
+    <script type='text/javascript'>
+
+        $(document).ready(function(){
+
+            $('#form').children().not(".visible").hide();
+
+        })
+
+        $('#next_text').click(function(e){
+            e.preventDefault();
+
+            $('.visible').next().toggle(function(){
+                $(this).toggleClass("visible");
+            });
+            
+            $('.visible').first().toggle(function(){
+                $(this).toggleClass("visible");
+            });
+
+        });
+
+        $('#prev_text').click(function(e){
+            e.preventDefault();
+
+            $('.visible').prev().toggle(function(){
+                $(this).toggleClass("visible");
+            });
+            
+            $('.visible').last().toggle(function(){
+                $(this).toggleClass("visible");
+            });
+            
+        });
+
+    </script>
     
 </body>
 
