@@ -119,6 +119,11 @@ class JellyfishMapHandler(webapp2.RequestHandler):
                 kwargs[field] = float(val)
         send_json(self, jellyfish.get_jellyfish(**kwargs))
 
+class JellyfishAddHandler(webapp2.RequestHandler):
+    def post(self):
+        success = jellyfish.Sighting.insert_json(json.loads(self.request.get('sighting'))) is not None
+        send_json(self, {"success": success})
+
 app = webapp2.WSGIApplication([
     ('/', MainHandler),
     ('/test', TestPageHandler),
@@ -126,5 +131,6 @@ app = webapp2.WSGIApplication([
     ('/users/update', CreateOrUpdateAccountHandler),
     ('/users/delete', DeleteUserHandler),
     ('/users/login', LoginHandler),
-    ('/jellyfish/map', JellyfishMapHandler)
+    ('/jellyfish/map', JellyfishMapHandler),
+    ('/jellyfish/add', JellyfishAddHandler)
 ], debug=True)
