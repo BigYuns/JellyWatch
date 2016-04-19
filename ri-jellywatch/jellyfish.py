@@ -2,30 +2,15 @@
 # -*- coding: utf-8 -*-
 
 
-"""
-the `sighting` dictionary looks like this:
-{
-    "lat": -74.048730,
-    "lng": 100.2932,
-    "species_counts": {"Comb Jelly": "5-10", "Moon jelly": "10-20"}, // other options are 'cucumber or basket comb jelly', 'lion’s mane', 'stinging sea nettle', 'crystal jelly', 'cross jelly', 'man of war', 'salps', 'freshwater jellyfish', 'other', 'i don’t know. see photos.' 
-    "nearby_species": ["Horseshoe crabs"],
-    "microalgae_blooms": ["Green Sea lettuce (Ulva)", "Red algae (Grateloupia)"], // (or ["None observed"])
-    "water_clarity": "Turbid",
-    "attached_seaweed": true,
-    "water_uses": ["Sunbathing", "Fishing from shore"] // (or ["No one is using the water"]) 
-}
-
-make sure to use the exact text names from the doc
-"""
-
-
 from google.appengine.ext import ndb
+from collections import defaultdict
+from csv import DictWriter
 
 jellyfish_names = ['comb jelly', 'cucumber or basket comb jelly', 'moon jelly', u'lion’s mane', 'stinging sea nettle', 'crystal jelly', 'cross jelly', 'man of war', 'salps', 'freshwater jellyfish', 'other', 'i don’t know. see photos.']
 
 class Sighting(ndb.Model):
     species_counts = ndb.JsonProperty() # dictionary of {"Jellyfish common name": "5-10"}, etc
-    date = ndb.DateTimeProperty(auto_now_add=True)
+    date_inserted = ndb.DateTimeProperty(auto_now_add=True)
     nearby_species = ndb.StringProperty(repeated=True) # array of nearby species choices=['horseshoe crabs']
     water_uses = ndb.StringProperty(repeated=True) # choices=['no one is using the water', 'sunbathing', 'swimming', 'fishing from shore', 'boating']
     
@@ -37,6 +22,9 @@ class Sighting(ndb.Model):
     
     photo_urls = ndb.StringProperty(repeated=True)
     
+    date = ndb.StringProperty()
+    time_of_day = ndb.StringProperty()
+    
     # location = ndb.GeoPtProperty()
     lat = ndb.FloatProperty()
     lng = ndb.FloatProperty()
@@ -47,11 +35,12 @@ class Sighting(ndb.Model):
         }
     
     def import_json(self, json_obj):
-        fields = ['species_counts', 'nearby_species', 'water_uses', 'water_clarity', 'attached_seaweed', 'microalgae_blooms', 'lat', 'lng']
+        fields = ['nearby_species', 'water_uses', 'water_clarity', 'weather', 'attached_seaweed', 'microalgae_blooms', 'lat', 'lng', 'date', 'time_of_day']
         for field in fields:
             val = json_obj.get(field)
             if isinstance(val, unicode) or isinstance(val, str): val = val.lower()
             setattr(self, field, json_obj.get(field))
+        self.species_counts = {k.lower(): v.lower() for k, v in json_obj['species_counts'].iteritems()}
     
     @classmethod
     def insert_json(cls, json_obj):
@@ -66,3 +55,38 @@ def get_jellyfish(lat_min=-1000, lat_max=1000, lon_min=-1000, lon_max=1000):
     matches = [m for m in matches if m.lng >= lon_min and m.lng <= lon_max]
     # Sighting.lng >= lon_min, Sighting.lng <= lon_max
     return [j.to_json() for j in matches]
+
+def write_csv(file):
+    repeating_string_fields = ['water_uses', 'nearby_species', 'microalgae_blooms']
+    single_fields = ['lat', 'lng', 'weather', 'attached_seaweed', 'date', 'time_of_day']
+    
+    jellyfish_names = set()
+    repeating_field_values = defaultdict(set)
+    
+    for sighting in Sighting.query().fetch():
+        for field in repeating_string_fields:
+            s = repeating_field_values[field]
+            for val in getattr(sighting, field):
+                s.add(val)
+        for name in sighting.species_counts.keys():
+            jellyfish_names.add(name)
+    
+    columns = list(single_fields)
+    columns += list(jellyfish_names)
+    for field in repeating_string_fields:
+        columns += [field + u'=' + val for val in list(repeating_field_values[field])]
+    
+    writer = DictWriter(file, columns)
+    writer.writeheader()
+    
+    colset = set(columns)
+    
+    for sighting in Sighting.query().fetch():
+        d = {field: unicode(getattr(sighting, field)) for field in single_fields}
+        for field in repeating_string_fields:
+            for val in repeating_field_values[field]:
+                d[field + u"=" + val] = "true" if val in getattr(sighting, field) else ""
+        for species, count in sighting.species_counts.iteritems():
+            d[species] = count
+        d = {k: v for k,v in d.iteritems() if k in colset}
+        writer.writerow(d)

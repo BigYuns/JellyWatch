@@ -124,6 +124,12 @@ class JellyfishAddHandler(webapp2.RequestHandler):
         success = jellyfish.Sighting.insert_json(json.loads(self.request.get('sighting'))) is not None
         send_json(self, {"success": success})
 
+class JellyfishCsvHandler(webapp2.RequestHandler):
+    def get(self):
+        self.response.headers['Content-Type'] = 'text/csv'
+        self.response.headers['Access-Control-Allow-Origin'] = '*'
+        jellyfish.write_csv(self.response)
+
 app = webapp2.WSGIApplication([
     ('/', MainHandler),
     ('/test', TestPageHandler),
@@ -132,5 +138,6 @@ app = webapp2.WSGIApplication([
     ('/users/delete', DeleteUserHandler),
     ('/users/login', LoginHandler),
     ('/jellyfish/map', JellyfishMapHandler),
-    ('/jellyfish/add', JellyfishAddHandler)
+    ('/jellyfish/add', JellyfishAddHandler),
+    ('/jellyfish/csv', JellyfishCsvHandler)
 ], debug=True)

@@ -96,7 +96,9 @@ Data = {
 		    "microalgae_blooms": ["Green Sea lettuce (Ulva)", "Red algae (Grateloupia)"], // (or ["None observed"])
 		    "water_clarity": "Turbid",
 		    "attached_seaweed": true,
-		    "water_uses": ["Sunbathing", "Fishing from shore"] // (or ["No one is using the water"]) 
+		    "water_uses": ["Sunbathing", "Fishing from shore"], // (or ["No one is using the water"]) 
+			"time_of_day": "11:15 AM",
+			"date": "4/19/2016"
 		}
 
 		make sure to use the exact text names from the doc! (https://docs.google.com/document/d/1jalNTCXnCwBzQID7wG-QqzzYb-k6u7sERvotj5f7ZD8/edit)
