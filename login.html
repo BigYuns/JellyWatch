@@ -2,16 +2,24 @@
 <html>
 <head>
     <link rel="stylesheet" href="style_login.css" type="text/css" />	
+    <script src="http://code.jquery.com/jquery-1.11.1.js"></script>
+
+    <script type="text/javascript" src="public/scripts/data.js"></script>
+
 </head>
 <body>
 	<div id = "JellyWatch">
-		<h1> JELLYWATCH</h2>
+		<h1> JELLYWATCH</h1><br>
+
+
 		<form id="form">
+<!-- 			<span id="login-err" style="color: red; display: none">Invalid Username or Password.</span><br>
+ -->
 	        <input type="text" id="username" name="username" placeholder="Username"> <br>
 	        <span id="username-err" style="color: red; display: none">Required Field.</span><br>
 	        <input type="password" id="pwd" name="pwd"placeholder="Password">
-	        <span id="pwd-err" style="color: red ; display: none">Required Field</span><br>
-	        <input type="submit" value="SIGN IN">
+	        <span id="pwd-err" style="color: red ; display: none">Required Field</span><br><br><br>
+	        <input type="submit"  id = "sub" value="SIGN IN">
    		</form>
 	</div>
 	<div id = "Info">
@@ -21,4 +29,59 @@
 		<p><a href="https://www.facebook.com/RIjellywatch">Facebook</a></p>
 	</div>
 </body>
+<script type="text/javascript">
+
+$(function() {
+
+    var submitBtn = document.getElementById('form');
+
+
+	var email = $("#username").val();
+	var password = $('#pwd').val();
+	$('form').submit(function(event){
+		validateUsrname();
+		validatePwd();
+		Data.logIn(email,password,function(resp){
+		console.log(resp);
+
+		if (resp.success == false){
+			console.log("invalid usrname");
+			document.getElementById("login-err").style.display = "block";
+		}
+		 else{
+            document.getElementById("login-err").style.display = "none";
+        }
+
+		});
+		
+	});
+
+	function validateUsrname(){
+        var usrname = document.getElementById('username');
+
+        if(usrname.value === null || usrname.value === ""){
+            document.getElementById("username-err").style.display = "block";
+        }
+        else{
+            document.getElementById("username-err").style.display = "none";
+        }
+     }
+
+     function validatePwd(){
+        var pswd = document.getElementById('pwd');
+        console.log(pswd.value);
+
+        var pswdlen = pswd.value.length;
+        if( pswdlen < 5 || pswdlen >20 ){
+            document.getElementById("pwd-err").style.display = "block";
+        }
+        else{
+            document.getElementById("pwd-err").style.display = "none";
+
+        }
+    }
+
+});
+
+</script>
 </html>

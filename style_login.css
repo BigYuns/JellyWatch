@@ -20,7 +20,7 @@ body{
 {
   position: absolute;
   margin: auto;
-  top: 350px;
+  top: 450px;
   right: 0;
   bottom: 0;
   left: 0;
@@ -31,6 +31,9 @@ body{
 
 }
 
+#sub{
+  padding-top: 50px;
+}
 a:link {
     text-decoration: none;
     color:white;
