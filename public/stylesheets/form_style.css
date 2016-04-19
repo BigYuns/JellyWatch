@@ -14,3 +14,9 @@
 .image {
     width: 100px;
     }
+
+.question{
+    font-size: 18px;
+    text-align: center;
+    font-weight: 400;
+}
