@@ -1,43 +1,92 @@
-# scary code that talks to the professors' scary server
-import urllib, urllib2, json
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
 
-JELLYFISH_NAME_MAP = {
-    7: "None",
-    1: "Comb Jelly",
-    2: "Moon Jelly",
-    3: "Lion's Mane",
-    4: "Singing Sea Nettle",
-    5: "Portuguese Man-o-War",
-    8: "Crystal Jellyfish",
-    9: "Sea Squirt",
-    6: "Other"
-}
 
-# http://quidditch.gis.brown.edu/arcgis_brown/rest/services/Jellyfish/Jellyfish_Sightings/FeatureServer/0/query?where=&objectIds=&time=&geometry=%7B%0D%0A%22xmin%22+%3A+-71.71953840599997%2C+%22ymin%22+%3A+41.316380485000025%2C+%22xmax%22+%3A+-71.21517891999997%2C+%22ymax%22+%3A+41.82090434500003%2C%0D%0A%22spatialReference%22+%3A+%7B%22wkid%22+%3A+4326%7D%0D%0A%7D&geometryType=esriGeometryEnvelope&inSR=&spatialRel=esriSpatialRelEnvelopeIntersects&distance=&units=esriSRUnit_Foot&relationParam=&outFields=&returnGeometry=true&maxAllowableOffset=&geometryPrecision=&outSR=&gdbVersion=&returnDistinctValues=false&returnIdsOnly=false&returnCountOnly=false&returnExtentOnly=false&orderByFields=&groupByFieldsForStatistics=&outStatistics=&returnZ=false&returnM=false&multipatchOption=&resultOffset=&resultRecordCount=&f=pjson
+from google.appengine.ext import ndb
+from collections import defaultdict
+from csv import DictWriter
 
-"""
-XMin: -71.71953840599997
-YMin: 41.316380485000025
-XMax: -71.21517891999997
-YMax: 41.82090434500003
-"""
+jellyfish_names = ['comb jelly', 'cucumber or basket comb jelly', 'moon jelly', u'lion’s mane', 'stinging sea nettle', 'crystal jelly', 'cross jelly', 'man of war', 'salps', 'freshwater jellyfish', 'other', 'i don’t know. see photos.']
 
-def process_feature(feature):
-    feature['name'] = JELLYFISH_NAME_MAP[int(feature['attributes']['CommonName'])]
-    return feature
+class Sighting(ndb.Model):
+    species_counts = ndb.JsonProperty() # dictionary of {"Jellyfish common name": "5-10"}, etc
+    date_inserted = ndb.DateTimeProperty(auto_now_add=True)
+    nearby_species = ndb.StringProperty(repeated=True) # array of nearby species choices=['horseshoe crabs']
+    water_uses = ndb.StringProperty(repeated=True) # choices=['no one is using the water', 'sunbathing', 'swimming', 'fishing from shore', 'boating']
+    
+    weather = ndb.StringProperty() # choices=['sunny', 'cloudy', 'overcast', 'rainy', 'snowy']
+    windy = ndb.StringProperty() # choices=['low', 'medium', 'high']
+    water_clarity = ndb.StringProperty() # choices=['clear', 'turbid']
+    attached_seaweed = ndb.BooleanProperty()
+    microalgae_blooms = ndb.StringProperty(repeated=True) # choices=['none observed', 'green sea lettuce (ulva)', 'red algae (grateloupia)', 'brown seaweed', 'other']
+    
+    photo_urls = ndb.StringProperty(repeated=True)
+    
+    date = ndb.StringProperty()
+    time_of_day = ndb.StringProperty()
+    
+    # location = ndb.GeoPtProperty()
+    lat = ndb.FloatProperty()
+    lng = ndb.FloatProperty()
+    
+    def to_json(self):
+        return {
+            "geometry": {"x": self.lat, "y": self.lng}
+        }
+    
+    def import_json(self, json_obj):
+        fields = ['nearby_species', 'water_uses', 'water_clarity', 'weather', 'attached_seaweed', 'microalgae_blooms', 'lat', 'lng', 'date', 'time_of_day']
+        for field in fields:
+            val = json_obj.get(field)
+            if isinstance(val, unicode) or isinstance(val, str): val = val.lower()
+            setattr(self, field, json_obj.get(field))
+        self.species_counts = {k.lower(): v.lower() for k, v in json_obj['species_counts'].iteritems()}
+    
+    @classmethod
+    def insert_json(cls, json_obj):
+        sighting = Sighting()
+        sighting.import_json(json_obj)
+        # TODO: fetch weather data
+        sighting.put()
+        return sighting
 
-def get_jellyfish(lat_min=-71.71953840599997, lat_max=-71.21517891999997, lon_min=41.316380485000025, lon_max=41.82090434500003):
-    geometry = {"xmin": lat_min, "xmax": lat_max, "ymin": lon_min, "ymax": lon_max, "spatialReference": 4326}
-    params = {
-        "geometryType": "esriGeometryEnvelope",
-        "geometry": geometry,
-        "spatialRel": "esriSpatialRelEnvelopeIntersects",
-        "f": "json"
-    }
-    url = "http://quidditch.gis.brown.edu/arcgis_brown/rest/services/Jellyfish/Jellyfish_Sightings/FeatureServer/0/query?" + urllib.urlencode(params)
-    response = json.load(urllib2.urlopen(url))
-    features = map(process_feature, response['features'])
-    return features
+def get_jellyfish(lat_min=-1000, lat_max=1000, lon_min=-1000, lon_max=1000):
+    matches = Sighting.query(ndb.AND(Sighting.lat >= lat_min, Sighting.lat <= lat_max)).fetch()
+    matches = [m for m in matches if m.lng >= lon_min and m.lng <= lon_max]
+    # Sighting.lng >= lon_min, Sighting.lng <= lon_max
+    return [j.to_json() for j in matches]
 
-if __name__ == '__main__':
-    print get_jellyfish()
+def write_csv(file):
+    repeating_string_fields = ['water_uses', 'nearby_species', 'microalgae_blooms']
+    single_fields = ['lat', 'lng', 'weather', 'attached_seaweed', 'date', 'time_of_day']
+    
+    jellyfish_names = set()
+    repeating_field_values = defaultdict(set)
+    
+    for sighting in Sighting.query().fetch():
+        for field in repeating_string_fields:
+            s = repeating_field_values[field]
+            for val in getattr(sighting, field):
+                s.add(val)
+        for name in sighting.species_counts.keys():
+            jellyfish_names.add(name)
+    
+    columns = list(single_fields)
+    columns += list(jellyfish_names)
+    for field in repeating_string_fields:
+        columns += [field + u'=' + val for val in list(repeating_field_values[field])]
+    
+    writer = DictWriter(file, columns)
+    writer.writeheader()
+    
+    colset = set(columns)
+    
+    for sighting in Sighting.query().fetch():
+        d = {field: unicode(getattr(sighting, field)) for field in single_fields}
+        for field in repeating_string_fields:
+            for val in repeating_field_values[field]:
+                d[field + u"=" + val] = "true" if val in getattr(sighting, field) else ""
+        for species, count in sighting.species_counts.iteritems():
+            d[species] = count
+        d = {k: v for k,v in d.iteritems() if k in colset}
+        writer.writerow(d)

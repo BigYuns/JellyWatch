@@ -85,6 +85,29 @@ Data = {
 		*/
 		Data.get('/users', {}, callback);
 	},
+	submitSighting: function(sighting, callback) {
+		/*
+		the `sighting` dictionary looks like this:
+		{
+		    "lat": -74.048730,
+		    "lng": 100.2932,
+		    "species_counts": {"Comb Jelly": "5-10", "Moon jelly": "10-20"}, // other options are 'cucumber or basket comb jelly', 'lion’s mane', 'stinging sea nettle', 'crystal jelly', 'cross jelly', 'man of war', 'salps', 'freshwater jellyfish', 'other', 'i don’t know. see photos.' 
+		    "nearby_species": ["Horseshoe crabs"],
+		    "microalgae_blooms": ["Green Sea lettuce (Ulva)", "Red algae (Grateloupia)"], // (or ["None observed"])
+		    "water_clarity": "Turbid",
+		    "attached_seaweed": true,
+		    "water_uses": ["Sunbathing", "Fishing from shore"], // (or ["No one is using the water"]) 
+			"time_of_day": "11:15 AM",
+			"date": "4/19/2016"
+		}
+
+		make sure to use the exact text names from the doc! (https://docs.google.com/document/d/1jalNTCXnCwBzQID7wG-QqzzYb-k6u7sERvotj5f7ZD8/edit)
+		
+		
+		the callback function gets a dictionary like this: {"success": true}
+		*/
+		post('/jellyfish/add', {sighting: JSON.stringify(sighting)}, callback);
+	},
 	get: function(url, params, callback) {
 		var http = new XMLHttpRequest();
 		var reqURL = Data._url + url + "?" + Data._serialize(params);
