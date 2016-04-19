@@ -193,10 +193,16 @@
     </div>
 
    <!-- #####################################
-            PHOTO, COMMENTS
+            PHOTO, COMMENTS, SUBMIT FORM
     ##################################### --> 
 
     <div class="question_div" id="photo_comments">
+
+        <h4 class="question">Attach up to two photos!</h4>
+                <input type="file" name="photo">
+        
+        <h4 class="question">Any last comments?</h4>
+                <input type="text" name="comments">
 
         <input type="submit">
 
@@ -226,6 +232,8 @@
             $('.visible').first().toggle(function(){
                 $(this).toggleClass("visible");
             });
+
+
 
         });
 
