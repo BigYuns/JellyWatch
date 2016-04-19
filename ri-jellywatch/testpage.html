@@ -30,6 +30,19 @@
 	<input type=submit>
 </form>
 
+<form method='POST' action='/jellyfish/add'>
+	<h2>Add jellyfish</h2>
+	<input name='sighting' value='{ "lat": -74.048730, "lng": 100.2932, "species_counts": {"Comb Jelly": "5-10", "Moon jelly": "10-20"}, "nearby_species": ["Horseshoe crabs"], "microalgae_blooms": ["Green Sea lettuce (Ulva)", "Red algae (Grateloupia)"], "water_clarity": "Turbid", "attached_seaweed": true, "water_uses": ["Sunbathing", "Fishing from shore"], "time_of_day": "11:15 AM", "date": "4/19/2016" }'/>
+	<input type=submit>
+</form>
+
+<form method='GET' action='/jellyfish/map'>
+	<h2>Jellyfish on map</h2>
+	<input type=submit>
+</form>
+
+<p><a href='/jellyfish/csv'>get CSV</a></p>
+
 <style>
 form input {
 	display: block;
