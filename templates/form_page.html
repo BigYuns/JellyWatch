@@ -145,13 +145,12 @@
     <div class="question_div" id="water_use_questions">
 
             <h4 class="question"> How are people using the water nearby?</h4>
-                <input type="checkbox"> No one is using the water
+                    <input type="checkbox" name="water_use" value="No one is using the water"> No one is using the water
                 <br><input type="checkbox" name="water_use" value="Sunbathing"> Sunbathing
                 <br><input type="checkbox" name="water_use" value="Swimming"> Swimming
                 <br><input type="checkbox" name="water_use" value="Fishing from shore"> Fishing from shore
                 <br><input type="checkbox" name="water_use" value="Boating"> Boating
                 <br><input type="checkbox" name="water_use" value="Harvesting shellfish"> Harvesting shellfish
-                <br>Other: <input type="text" name="water_use">  
 
     </div>
 
@@ -186,7 +185,7 @@
             <br><input type="checkbox" name="macroalgae" value="Green Sea Lettuce"> Green Sea Lettuce
             <br><input type="checkbox" name="macroalgae" value="Red Algae (Grateloupia)"> Red Algae (Grateloupia)
             <br><input type="checkbox" name="macroalgae" value="Brown Seaweed"> Brown Seaweed
-            <br><input type="text" name="macroalgae"> Other
+            <br>Other: <input type="text" name="macroalgae" id="macroalgae_other">
 
     </div>
 
@@ -211,6 +210,23 @@
 
    <!-- * * * * * * * * * * * * * * * * * 
             Javascript stuff
+
+
+        For Reference:
+
+        {
+            "lat": -74.048730,
+            "lng": 100.2932,
+            "species_counts": {"Comb Jelly": "5-10", "Moon jelly": "10-20"}, // other options are 'cucumber or basket comb jelly', 'lion’s mane', 'stinging sea nettle', 'crystal jelly', 'cross jelly', 'man of war', 'salps', 'freshwater jellyfish', 'other', 'i don’t know. see photos.' 
+            "nearby_species": ["Horseshoe crabs"],
+            "microalgae_blooms": ["Green Sea lettuce (Ulva)", "Red algae (Grateloupia)"], // (or ["None observed"])
+            "water_clarity": "Turbid",
+            "attached_seaweed": true,
+            "water_uses": ["Sunbathing", "Fishing from shore"], // (or ["No one is using the water"]) 
+            "time_of_day": "11:15 AM",
+            "date": "4/19/2016"
+        }
+
     * * * * * * * * * * * * * * * * * * --> 
 
     <script type='text/javascript'>
@@ -254,7 +270,69 @@
 
         $('#form').submit(function(event){
 
-            
+            // ######## NOTES ######## 
+            //
+            // 1. edit the jellyfish names in the python file
+            // 2. edit the microalgae blooms to be macroalgae
+            // 3. weather thing???
+            //
+            // #######################
+
+
+            event.preventDefault(); // just 4 checking stuff. delete later
+
+            var sighting = {};
+
+
+            var species_counts_obj = {}; 
+            var nearby_species_obj = [];
+
+            // Macroalgae? Microalgae?
+            var microalgae_blooms_obj = $("input[name=macroalgae]:checked").map(function(){
+                return this.value;
+            }).get();
+            microalgae_blooms_obj.push($('#macroalgae_other').val());
+
+            // Water Clarity
+            var water_clarity = $("input[name=water]:checked").val();
+
+            // Attached Seaweed
+            var attached_seaweed_val = $("input[name=seaweed]:checked").val();
+            var attached_seaweed;
+            if (attached_seaweed_val=="Yes"){
+                attached_seaweed = true;
+            } else if (attached_seaweed_val=="No"){
+                attached_seaweed = false;
+            } else { //nothing was checked
+            }
+
+            // Water Use
+            var water_uses = $("input[name=water_use]:checked").map(function(){
+                return this.value;
+            }).get();
+
+            // Time + Date
+            var today = new Date();
+            var hour = today.getHours() % 12 || 12;
+            var current_time = String(hour)+":"+String(today.getMinutes());
+            var current_date = String(today.getMonth())+"/"+String(today.getDate())+"/"+String(today.getFullYear());
+
+            // SIGHTING 
+            sighting["lat"] = 0; // where do i get this
+            sighting["long"] = 0; // where do i get this
+            sighting["species_counts"];
+            sighting["nearby_species"];
+            sighting["microalgae_blooms"] = microalgae_blooms_obj;
+            sighting["water_clarity"] = water_clarity;
+            sighting["attached_seaweed"] = attached_seaweed; 
+            sighting["water_uses"] = water_uses;
+            sighting["time_of_day"] = current_time;
+            sighting["date"] = current_date;
+
+            console.log(attached_seaweed);
+            console.log(sighting);
+
+
 
         });
 
