@@ -144,33 +144,3 @@ Data = {
 	}
 }
 Data._setup();
-
-function initialize(sites) {
-	console.log("sites + "+ sites); 
-	//console.log("initialize: lat "+ sites[0].latitude); 
-	//console.log("initialize: lng "+ sites[0].longitude); 
-	console.log(lat); 
-	console.log(lng); 
-  var myCenter= new google.maps.LatLng(lat,lng); 
-  var mapProp = {
-    center:myCenter,
-    zoom:5,
-    mapTypeId:google.maps.MapTypeId.ROADMAP
-  };
-  var map=new google.maps.Map(document.getElementById("googleMap"), mapProp);
-  var marker=new google.maps.Marker({
-    position:myCenter,
-    animation:google.maps.Animation.BOUNCE
-    });
-
-  marker.setMap(map);
-
-}
-if (window.google) {
-	google.maps.event.addDomListener(window, 'load', initialize);
-	var latitude = 41.8167681; 
-	var longitude = -71.3474485; 
-	Data.getJellyfishForMap(latitude,longitude,initialize); 
-	
-}
-
