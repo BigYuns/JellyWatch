@@ -38,14 +38,15 @@ class CreateOrUpdateAccountHandler(webapp2.RequestHandler):
         token = self.request.get('token')
         if users.is_admin(token):
             email = self.request.get('email')
-            password = self.request.get('password') # 'true' or 'false'
+            password = self.request.get('password')
             is_admin = self.request.get('is_admin') # 'true' or 'false'
-            is_organization = self.request.get('is_organization')
+            is_organization = self.request.get('is_organization') # 'true' or 'false'
             
             user = users.User.with_email(email)
             if user:
                 # update existing:
-                if password: user.pwd_hash = users.hash_pwd(password)
+                if email and email != '': user.email = email
+                if password and password != '': user.pwd_hash = users.hash_pwd(password)
                 if is_admin is not None: user.is_admin = is_admin == 'true'
                 if is_organization is not None: user.is_organization = is_organization == 'true'
                 message = 'Updated user'
