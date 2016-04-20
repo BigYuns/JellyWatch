@@ -133,8 +133,8 @@
         <h4 class="question">Do you see any of these species of marine animal nearby?</h4>
             <p class="species_name">Horseshoe Crabs</p>
             <img src="../public/img/Comb_Jelly.jpg" class="image">
-            <br><input type="radio" name="marine1"> Yes
-            <br><input type="radio" name="marine1"> No
+            <br><input type="radio" name="horseshoe" value="Yes"> Yes
+            <br><input type="radio" name="horseshow" value="No"> No
 
     </div> 
 
@@ -146,12 +146,12 @@
 
             <h4 class="question"> How are people using the water nearby?</h4>
                 <input type="checkbox"> No one is using the water
-                <br><input type="checkbox"> Sunbathing
-                <br><input type="checkbox"> Swimming
-                <br><input type="checkbox"> Fishing from shore
-                <br><input type="checkbox"> Boating
-                <br><input type="checkbox"> Harvesting shellfish
-                <br>Other: <input type="text">  
+                <br><input type="checkbox" name="water_use" value="Sunbathing"> Sunbathing
+                <br><input type="checkbox" name="water_use" value="Swimming"> Swimming
+                <br><input type="checkbox" name="water_use" value="Fishing from shore"> Fishing from shore
+                <br><input type="checkbox" name="water_use" value="Boating"> Boating
+                <br><input type="checkbox" name="water_use" value="Harvesting shellfish"> Harvesting shellfish
+                <br>Other: <input type="text" name="water_use">  
 
     </div>
 
@@ -162,30 +162,30 @@
     <div class="question_div" id="environment_questions">
 
        <h4 class="question">How's the weather? </h4>
-                <input type="radio" name="weather"> Sunny
-            <br><input type="radio" name="weather"> Cloudy
-            <br><input type="radio" name="weather"> Overcast 
-            <br><input type="radio" name="weather"> Rainy
-            <br><input type="radio" name="weather"> Snowy
+                <input type="radio" name="weather" value="Sunny"> Sunny
+            <br><input type="radio" name="weather" value="Cloudy"> Cloudy
+            <br><input type="radio" name="weather" value="Overcast"> Overcast 
+            <br><input type="radio" name="weather" value="Rainy"> Rainy
+            <br><input type="radio" name="weather" value="Snowy"> Snowy
 
         <h4 class="question">How windy is it? </h4>
-                <input type="radio" name="wind"> Low
-            <br><input type="radio" name="wind"> Medium
-            <br><input type="radio" name="wind"> High
+                <input type="radio" name="wind" value="Low"> Low
+            <br><input type="radio" name="wind" value="Medium"> Medium
+            <br><input type="radio" name="wind" value="High"> High
 
         <h4 class="question">How clear is the water? </h4>
-                <input type="radio" name="water"> Clear
-            <br><input type="radio" name="water"> Turbid
+                <input type="radio" name="water" value="Clear"> Clear
+            <br><input type="radio" name="water" value="Turbid"> Turbid
 
         <h4 class="question">Do you see attached seaweed, typical on rocky shore? </h4>
-                <input type="radio" name="seaweed"> Yes
-            <br><input type="radio" name="seaweed"> No
+                <input type="radio" name="seaweed" value="Yes"> Yes
+            <br><input type="radio" name="seaweed" value="No"> No
 
         <h4 class="question">Do you see unattached macroalgae blooms? </h4>
-                <input type="checkbox" name="macroalgae"> None observed
-            <br><input type="checkbox" name="macroalgae"> Green Sea Lettuce
-            <br><input type="checkbox" name="macroalgae"> Red Algae (Grateloupia)
-            <br><input type="checkbox" name="macroalgae"> Brown Seaweed
+                <input type="checkbox" name="macroalgae" value="None observed"> None observed
+            <br><input type="checkbox" name="macroalgae" value="Green Sea Lettuce"> Green Sea Lettuce
+            <br><input type="checkbox" name="macroalgae" value="Red Algae (Grateloupia)"> Red Algae (Grateloupia)
+            <br><input type="checkbox" name="macroalgae" value="Brown Seaweed"> Brown Seaweed
             <br><input type="text" name="macroalgae"> Other
 
     </div>
@@ -254,7 +254,7 @@
 
         $('#form').submit(function(event){
 
-
+            
 
         });
 
