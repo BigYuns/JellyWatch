@@ -2,7 +2,7 @@ Data = {
 	user: null,
 	token: null,
 	isLoggedIn: function() {
-		return !!token && !!user;
+		return !!Data.token && !!Data.user;
 	},
 	logIn: function(email, password, callback) {
 		/* 
@@ -49,18 +49,6 @@ Data = {
 		if (lon_max) params.lon_max = lon_max;
 		Data.get('/jellyfish/map', params, callback);
 	},
-	submitJellyfishSighting: function(data, callback) {
-		/*
-		callback(success) is called with true/false
-		data looks like this:
-		{
-			
-		}
-		*/
-		setTimeout(function() {
-			callback(true);
-		}, 300);
-	},
 	// ADMIN FUNCTIONS:
 	createOrUpdateAccount: function(email, password, isAdmin, isOrganizationalAccount, callback) {
 		// callback returns true or false, for success or not
@@ -106,7 +94,7 @@ Data = {
 		
 		the callback function gets a dictionary like this: {"success": true}
 		*/
-		post('/jellyfish/add', {sighting: JSON.stringify(sighting)}, callback);
+		post('/jellyfish/add', {sighting: JSON.stringify(sighting), token: Data.token}, callback);
 	},
 	get: function(url, params, callback) {
 		var http = new XMLHttpRequest();
@@ -178,9 +166,11 @@ function initialize(sites) {
   marker.setMap(map);
 
 }
-google.maps.event.addDomListener(window, 'load', initialize);
-
-var latitude = 41.8167681; 
-var longitude = -71.3474485; 
-Data.getJellyfishForMap(latitude,longitude,initialize); 
+if (window.google) {
+	google.maps.event.addDomListener(window, 'load', initialize);
+	var latitude = 41.8167681; 
+	var longitude = -71.3474485; 
+	Data.getJellyfishForMap(latitude,longitude,initialize); 
+	
+}
 

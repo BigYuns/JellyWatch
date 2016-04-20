@@ -14,6 +14,8 @@
     
     <!-- Javascript/JQUERY -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+	
+	<script src='../public/scripts/data.js'></script>
 
     <!-- Temporary styling, will move this to a css file later -->
     <style>
@@ -46,70 +48,91 @@
 
 			<!-- Row of Column Labels -->
 			<tr id = "label_row"> 
-				<td class="name label">Name</td>
-				<td class="org label">Organization</td>
 				<td class="email label">Email</td>
+				<td class="password label">Password</td>
+				<td class="org label">Is organization</td>
+				<td class="admin label">Is admin</td>
 				<td class="buttons"> <!-- Column for Buttons --> </td>
 				</tr>
 
 			<!-- Add User -->
 			<tr id = "add_user_row">
 			<form id = "add_user_form">
-				<td><input type="text" class="name" name="new_name"></input></td>	
-				<td><input type="text" class="org" name="new_org"></input></td>	
 				<td><input type="text" class="email" name="new_email"></input></td>	
-				<td><input type="submit" id="submit_new_user"></input></td>
+				<td><input type="text" class="password" name="new_password"></input></td>	
+				<td><input type="checkbox" class="org" name="new_org"></input></td>	
+				<td><input type="checkbox" class="org" name="new_admin"></input></td>
+				<td><input type="submit" id="submit_new_user"></input> <input type="button" value="Cancel" onClick="cancelAddUser()"></input></td>
 				</form>
-				</tr>
-
-			<!-- Sample Users -->
-			<tr class = "user_row">
-				<td class="name">Koko Nakajima</td>
-				<td class="org">Jellyfish Enthusiasts</td>
-				<td class="email">koko_nakajima@brown.edu</td>
-				</tr>
-			<tr class = "user_row">
-				<td class="name">Nate Parrott</td>
-				<td class="org">Actual Jellyfish</td>
-				<td class="email">nathaniel_parrott@brown.edu</td>
-				</tr>
-			<tr class = "user_row">
-				<td class="name">Ashley Urrutia</td>
-				<td class="org">Spongebob for the Bay</td>
-				<td class="email">ashley_urrutia@brown.edu</td>
-				</tr>
-			<tr class = "user_row">
-				<td class="name">Yunny Chung</td>
-				<td class="org">Earth Lab User</td>
-				<td class="email">sung_yun_chung@brown.edu</td>
-				</tr>
-
+			</tr>
+			
 		</table>
 	</div>
 
 	<!-- Javascript stuff, will probably move to a separate file later -->
 	<script type="text/javascript">
-
+		
 		/* 
 			Shows the input boxes where admin can enter new user info
 		*/
 		function showAddUserRow() {
 			$('#add_user_row').show();
+			$("input[name=new_email]").attr('disabled', false);
 		}
-
+		
+		function cancelAddUser() {
+			$('#add_user_row').hide();
+		}
+		
 		/*
-			Adds a new user to the table
+			Reloads data from the server
 		*/
-		function addUser(name, org, email){
-			$('#user_table').append(
-				"<tr class = \"user_row\">"+
-					"<td class=\"name\">"+name+"</td>"+
-					"<td class=\"org\">"+org+"</td>"+
-					"<td class=\"email\">"+email+"</td>"+
-				"</tr>"
-			);
+		function reload() {
+			Data.listUsers(function(callback) {
+				if (callback.message) {
+					alert(callback.message);
+				} else {
+					// show users:
+					$('#user_table .user').remove();
+					callback.users.forEach(function(user) {
+						var email = $(document.createElement("td")).addClass('email').text(user.email);
+						var pwd = $(document.createElement("td")).addClass('password').text('******');
+						var isOrg = $(document.createElement("td")).addClass('org').append($(document.createElement('input')).attr({type: 'checkbox', checked: user.is_organization}).css('pointer-events', 'none'));	
+						var isAdmin = $(document.createElement("td")).addClass('admin').append($(document.createElement('input')).attr({type: 'checkbox', checked: user.is_admin}).css('pointer-events', 'none'));
+						
+						var buttons = $(document.createElement('td'));
+						var edit = $(document.createElement("button")).text("Edit").click(function() {
+							editUser(user);
+						}).appendTo(buttons);
+						var deleteButton = $(document.createElement("button")).text("Delete").click(function() {
+							deleteUser(user.email);
+						}).appendTo(buttons);
+						
+						var row = $(document.createElement('tr')).append([email, pwd, isOrg, isAdmin, buttons]).addClass('user');
+						row.appendTo("#user_table");
+						
+					})
+				}
+			})
 		}
-
+		
+		function deleteUser(email) {
+			if (window.confirm("Are you sure you want to delete " + email + "?")) {
+				Data.deleteAccount(email, function(success) {
+					reload();
+				})
+			}
+		}
+		
+		function editUser(user) {
+			showAddUserRow();
+			$("input[name=new_email]").attr('disabled', 'disabled');
+			$("[name='new_email']").val(user.email);
+			$("[name='new_org']").attr('checked', user.is_organization);
+			$("[name='new_admin']").attr('checked', user.is_admin);
+			$("[name='new_password']").val("");
+		}
+		
 		/*
 			Called when form is submitted
 		*/
@@ -117,21 +140,27 @@
 			e.preventDefault();
 			
 			//set variables
-			var name = $("[name='new_name']").val(); 
-			var org = $("[name='new_org']").val();
-			var email = $("[name='new_email']").val();
-
-			//add new row with new info
-			addUser(name, org, email);
-
-			//clear form values
-			$("[name='new_name']").val(""); 
-			$("[name='new_org']").val("");
-			$("[name='new_email']").val("");
+			var email = $("[name='new_email']").val(); 
+			var isOrg = $("[name='new_org']").is(':checked');
+			var isAdmin = $("[name='new_admin']").is(':checked');
+			var password = $("[name='new_password']").val();
+			
+			Data.createOrUpdateAccount(email, password, isAdmin, isOrg, function(success) {
+				reload();
+			})
+			
+			/*
+function(email, password, isAdmin, isOrganizationalAccount, callback) {
+		// callback returns true or false, for success or not
+		// if the username already exists, we'll update it
+		// only admins can call this
+			*/
 
 			//hide the input boxes
 			$('#add_user_row').hide();
 		});
+		
+		reload();
 
 	</script>
 
