@@ -78,7 +78,7 @@ class DeleteUserHandler(webapp2.RequestHandler):
             else:
                 response = {"success": False, "message": "No user with this email found"}
         else:
-            response = {"success": False, "message": "Only adins can delete users"}
+            response = {"success": False, "message": "Only admins can delete users"}
         
         send_json(self, response)
 
