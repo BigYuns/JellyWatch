@@ -3,17 +3,17 @@
     padding: 20px;
     font-size: 13px;
     padding-top: 100px;
-    }
+}
 
 .qty { /* for button increasing/decreasing quantity*/
     width: 40px;
     height: 25px;
     text-align: center;
-    }
+}
 
 .image {
     width: 75%;
-    }
+}
 
 .question{
     font-size: 18px;
@@ -25,7 +25,11 @@
     font-size: 16px;
 }
 
-/* Grid Stuff*/
+.comments{
+}
+
+
+/* Grid Stuff... */
 
 /*  SECTIONS  */
 .section {
@@ -39,7 +43,7 @@
     display: block;
     float:left;
     margin: 1% 0 1% 1.6%;
-    text-align: center; /*choices shouldn't be centered aligned*/
+    text-align: center; /*choices shouldn't be center aligned*/
 }
 .col:first-child { margin-left: 0; }
 

@@ -223,18 +223,16 @@
                 <input type="file" name="photo">
         
         <h4 class="question">Any last comments?</h4>
-                <input type="text" name="comments">
+                <input type="text" name="comments" class="comments">
 
-        <input type="submit">
+        <br><input type="submit">
 
     </div>
 
     </form>
     </div>
 
-   <!-- * * * * * * * * * * * * * * * * * 
-            Javascript stuff - move?
-    * * * * * * * * * * * * * * * * * * --> 
+   <!-- JAVASCRIPT STUFF --> 
 
     <script type='text/javascript'>
 
@@ -268,19 +266,21 @@
 
 
         // ######################################
-        //          Send Form Data
+        // Send Form Data
+        //
+        //
+        // NOTES 
+        //
+        // 1. edit the jellyfish names in the python file
+        // 2. edit the microalgae blooms to be macroalgae
+        // 3. weather thing???
+        // 4. move fonts into css file? idk
+        // 5. what do i do abt the none thing
+        // 
+        //
         // ######################################
 
         $('#form').submit(function(event){
-
-            // NOTES 
-            //
-            // 1. edit the jellyfish names in the python file
-            // 2. edit the microalgae blooms to be macroalgae
-            // 3. weather thing???
-            // 4. move fonts into css file? idk
-            // 
-
 
             event.preventDefault(); // just 4 checking stuff. delete later
 
@@ -289,11 +289,6 @@
             // *********** Jellyfish Species Counts *********** 
 
             var species_counts = {};
-            // var i;
-            // for (i=0; i<$('div.jellyfish').length;i++){
-            //     species_counts[i] = "cats";
-            // };
-
             $('div.jellyfish').each(function(){
                 var jelly_name = $(this).children('p').text();
                 if ($(this).children('input:checked').length>0){
@@ -301,8 +296,6 @@
                     species_counts[jelly_name] = count;
                 };
             });
-
-            // console.log(species_counts);
 
             // *********** Nearby Species *********** 
 
@@ -378,9 +371,12 @@
             sighting["time_of_day"] = current_time;
             sighting["date"] = current_date;
 
+
+            //Data.submitSighting(sighting, function(){
+
+            //})????
+
             console.log(sighting);
-
-
 
         });
 
