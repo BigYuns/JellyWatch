@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Jellyfish</title>
+    <title>Record a Sighting!</title>
     
     <!-- Fonts -->
     <link href='https://fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/css'>
@@ -34,94 +34,120 @@
     <div id="form_div">
     <form id="form">
 
-        <!-- #####################################
-                JELLYFISH QUESTIONS 
-        ##################################### --> 
+    <!-- #####################################
+            JELLYFISH QUESTIONS 
+    ##################################### --> 
 
-        <div class="question_div visible" id="jellyfish_questions">
+    <div class="question_div visible" id="jellyfish_questions">
 
-            <h4 class="question">How many of each species of jellyfish do you see?</h4>
+        <h4 class="question">How many of each species of jellyfish do you see?</h4>
 
-                <br><input type="radio" name="none"> None
+            <br><input type="radio" name="none"> None
 
-                <!-- Jellyfish Species -->
+            <!-- Jellyfish Species -->
 
-                <p class="species_name">Comb Jelly</p>
-                <img src="../public/img/Comb_Jelly.jpg" class="image">
-                <br><input type="radio" name="comb" value="1 - 10"> 1 - 10
-                <br><input type="radio" name="comb" value="11 - 49"> 11 - 49
-                <br><input type="radio" name="comb" value="51 - 100"> 51 - 100
-                <br><input type="radio" name="comb" value=">100"> > 100
+            <div class="section group">
+                <div class="col span_1_of_3">
+                    <p class="species_name">Comb Jelly</p>
+                    <img src="../public/img/Comb_Jelly.jpg" class="image">
+                    <br><input type="radio" name="jelly1" value="1 - 10"> 1 - 10
+                    <br><input type="radio" name="jelly1" value="11 - 49"> 11 - 49
+                    <br><input type="radio" name="jelly1" value="51 - 100"> 51 - 100
+                    <br><input type="radio" name="jelly1" value=">100"> > 100
+                </div>
+                <div class="col span_1_of_3">
+                    <p class="species_name">Cigar Jelly</p>
+                    <img src="../public/img/Comb_Jelly.jpg" class="image">
+                    <br><input type="radio" name="cigar" value="1 - 10"> 1 - 10
+                    <br><input type="radio" name="cigar" value="11 - 49"> 11 - 49
+                    <br><input type="radio" name="cigar" value="51 - 100"> 51 - 100
+                    <br><input type="radio" name="cigar" value=">100"> > 100
+                </div>
+                <div class="col span_1_of_3">
+                    <p class="species_name">Moon Jelly</p>
+                    <img src="../public/img/Comb_Jelly.jpg" class="image">
+                    <br><input type="radio" name="moon" value="1 - 10"> 1 - 10
+                    <br><input type="radio" name="moon" value="11 - 49"> 11 - 49
+                    <br><input type="radio" name="moon" value="51 - 100"> 51 - 100
+                    <br><input type="radio" name="moon" value=">100"> > 100
+                </div>
+            </div>
 
-                <p class="species_name">Cigar Jelly</p>
-                <img src="../public/img/Comb_Jelly.jpg" class="image">
-                <br><input type="radio" name="cigar" value="1 - 10"> 1 - 10
-                <br><input type="radio" name="cigar" value="11 - 49"> 11 - 49
-                <br><input type="radio" name="cigar" value="51 - 100"> 51 - 100
-                <br><input type="radio" name="cigar" value=">100"> > 100
+            <div class="section group">
+                <div class="col span_1_of_3">
+                    <p class="species_name">Lion's Mane</p>
+                    <img src="../public/img/Comb_Jelly.jpg" class="image">
+                    <br><input type="radio" name="lions_mane" value="1 - 10"> 1 - 10
+                    <br><input type="radio" name="lions_mane" value="11 - 49"> 11 - 49
+                    <br><input type="radio" name="lions_mane" value="51 - 100"> 51 - 100
+                    <br><input type="radio" name="lions_mane" value=">100"> > 100
+                </div>
+                <div class="col span_1_of_3">
+                    <p class="species_name">Stinging Sea Nettle</p>
+                    <img src="../public/img/Comb_Jelly.jpg" class="image">
+                    <br><input type="radio" name="stinging" value="1 - 10"> 1 - 10
+                    <br><input type="radio" name="stinging" value="11 - 49"> 11 - 49
+                    <br><input type="radio" name="stinging" value="51 - 100"> 51 - 100
+                    <br><input type="radio" name="stinging" value=">100"> > 100
+                </div>
+                <div class="col span_1_of_3">
+                    <p class="species_name">Crystal Jelly</p>
+                    <img src="../public/img/Comb_Jelly.jpg" class="image">
+                    <br><input type="radio" name="crystal" value="1 - 10"> 1 - 10
+                    <br><input type="radio" name="crystal" value="11 - 49"> 11 - 49
+                    <br><input type="radio" name="crystal" value="51 - 100"> 51 - 100
+                    <br><input type="radio" name="crystal" value=">100"> > 100
+                </div>
+            </div>
 
-                <p class="species_name">Moon Jelly</p>
-                <img src="../public/img/Comb_Jelly.jpg" class="image">
-                <br><input type="radio" name="moon" value="1 - 10"> 1 - 10
-                <br><input type="radio" name="moon" value="11 - 49"> 11 - 49
-                <br><input type="radio" name="moon" value="51 - 100"> 51 - 100
-                <br><input type="radio" name="moon" value=">100"> > 100
+            <div class="section group">
+                <div class="col span_1_of_3">
+                    <p class="species_name">Cross Jelly</p>
+                    <img src="../public/img/Comb_Jelly.jpg" class="image">
+                    <br><input type="radio" name="cross" value="1 - 10"> 1 - 10
+                    <br><input type="radio" name="cross" value="11 - 49"> 11 - 49
+                    <br><input type="radio" name="cross" value="51 - 100"> 51 - 100
+                    <br><input type="radio" name="cross" value=">100"> > 100
+                </div>
+                <div class="col span_1_of_3">
+                    <p class="species_name">Man of War</p>
+                    <img src="../public/img/Comb_Jelly.jpg" class="image">
+                    <br><input type="radio" name="man_of_war" value="1 - 10"> 1 - 10
+                    <br><input type="radio" name="man_of_war" value="11 - 49"> 11 - 49
+                    <br><input type="radio" name="man_of_war" value="51 - 100"> 51 - 100
+                    <br><input type="radio" name="man_of_war" value=">100"> > 100
+                </div>
+                <div class="col span_1_of_3">
+                    <p class="species_name">Salps</p>
+                    <img src="../public/img/Comb_Jelly.jpg" class="image">
+                    <br><input type="radio" name="salps" value="1 - 10"> 1 - 10
+                    <br><input type="radio" name="salps" value="11 - 49"> 11 - 49
+                    <br><input type="radio" name="salps" value="51 - 100"> 51 - 100
+                    <br><input type="radio" name="salps" value=">100"> > 100
+                </div>
+            </div>
 
-                <p class="species_name">Lion's Mane</p>
-                <img src="../public/img/Comb_Jelly.jpg" class="image">
-                <br><input type="radio" name="lions_mane" value="1 - 10"> 1 - 10
-                <br><input type="radio" name="lions_mane" value="11 - 49"> 11 - 49
-                <br><input type="radio" name="lions_mane" value="51 - 100"> 51 - 100
-                <br><input type="radio" name="lions_mane" value=">100"> > 100
+            <div class="section group">
+                <div class="col span_1_of_3">
+                    <p class="species_name">Freshwater Jellyfish</p>
+                    <img src="../public/img/Comb_Jelly.jpg" class="image">
+                    <br><input type="radio" name="freshwater" value="1 - 10"> 1 - 10
+                    <br><input type="radio" name="freshwater" value="11 - 49"> 11 - 49
+                    <br><input type="radio" name="freshwater" value="51 - 100"> 51 - 100
+                    <br><input type="radio" name="freshwater" value=">100"> > 100
+                </div>
+                <div class="col span_1_of_3">
+                    <p class="species_name">Other (See Photos)</p>
+                    <img src="../public/img/Comb_Jelly.jpg" class="image">
+                    <br><input type="radio" name="other" value="1 - 10"> 1 - 10
+                    <br><input type="radio" name="other" value="11 - 49"> 11 - 49
+                    <br><input type="radio" name="other" value="51 - 100"> 51 - 100
+                    <br><input type="radio" name="other" value=">100"> > 100
+                </div>
+                <div class="col span_1_of_3">
 
-                <p class="species_name">Stinging Sea Nettle</p>
-                <img src="../public/img/Comb_Jelly.jpg" class="image">
-                <br><input type="radio" name="stinging" value="1 - 10"> 1 - 10
-                <br><input type="radio" name="stinging" value="11 - 49"> 11 - 49
-                <br><input type="radio" name="stinging" value="51 - 100"> 51 - 100
-                <br><input type="radio" name="stinging" value=">100"> > 100
-
-                <p class="species_name">Crystal Jelly</p>
-                <img src="../public/img/Comb_Jelly.jpg" class="image">
-                <br><input type="radio" name="crystal" value="1 - 10"> 1 - 10
-                <br><input type="radio" name="crystal" value="11 - 49"> 11 - 49
-                <br><input type="radio" name="crystal" value="51 - 100"> 51 - 100
-                <br><input type="radio" name="crystal" value=">100"> > 100
-
-                <p class="species_name">Cross Jelly</p>
-                <img src="../public/img/Comb_Jelly.jpg" class="image">
-                <br><input type="radio" name="cross" value="1 - 10"> 1 - 10
-                <br><input type="radio" name="cross" value="11 - 49"> 11 - 49
-                <br><input type="radio" name="cross" value="51 - 100"> 51 - 100
-                <br><input type="radio" name="cross" value=">100"> > 100
-
-                <p class="species_name">Man of War</p>
-                <img src="../public/img/Comb_Jelly.jpg" class="image">
-                <br><input type="radio" name="man_of_war" value="1 - 10"> 1 - 10
-                <br><input type="radio" name="man_of_war" value="11 - 49"> 11 - 49
-                <br><input type="radio" name="man_of_war" value="51 - 100"> 51 - 100
-                <br><input type="radio" name="man_of_war" value=">100"> > 100
-
-                <p class="species_name">Salps</p>
-                <img src="../public/img/Comb_Jelly.jpg" class="image">
-                <br><input type="radio" name="salps" value="1 - 10"> 1 - 10
-                <br><input type="radio" name="salps" value="11 - 49"> 11 - 49
-                <br><input type="radio" name="salps" value="51 - 100"> 51 - 100
-                <br><input type="radio" name="salps" value=">100"> > 100
-
-                <p class="species_name">Freshwater Jellyfish</p>
-                <img src="../public/img/Comb_Jelly.jpg" class="image">
-                <br><input type="radio" name="freshwater" value="1 - 10"> 1 - 10
-                <br><input type="radio" name="freshwater" value="11 - 49"> 11 - 49
-                <br><input type="radio" name="freshwater" value="51 - 100"> 51 - 100
-                <br><input type="radio" name="freshwater" value=">100"> > 100
-            
-                <p class="species_name">Other (See Photos)</p>
-                <img src="../public/img/Comb_Jelly.jpg" class="image">
-                <br><input type="radio" name="other" value="1 - 10"> 1 - 10
-                <br><input type="radio" name="other" value="11 - 49"> 11 - 49
-                <br><input type="radio" name="other" value="51 - 100"> 51 - 100
-                <br><input type="radio" name="other" value=">100"> > 100
+                </div>
+            </div>
     </div> 
 
    <!-- #####################################
@@ -130,11 +156,15 @@
 
     <div class="question_div" id="marine_animals_questions">
 
+        <!-- <h4 class="question">Do you see any of these species of marine animal nearby?</h4> -->
+            <!-- <p class="species_name">Horseshoe Crabs</p> -->
+            <!-- <img src="../public/img/Comb_Jelly.jpg" class="image"> -->
+            <!-- <br><input type="radio" name="horseshoe" value="Yes"> Yes -->
+            <!-- <br><input type="radio" name="horseshoe" value="No"> No -->
+
         <h4 class="question">Do you see any of these species of marine animal nearby?</h4>
-            <p class="species_name">Horseshoe Crabs</p>
             <img src="../public/img/Comb_Jelly.jpg" class="image">
-            <br><input type="radio" name="horseshoe" value="Yes"> Yes
-            <br><input type="radio" name="horseshow" value="No"> No
+            <br><input type="checkbox" name="marine" value="Horseshoe Crab">Horseshoe Crab
 
     </div> 
 
@@ -209,29 +239,14 @@
     </div>
 
    <!-- * * * * * * * * * * * * * * * * * 
-            Javascript stuff
-
-
-        For Reference:
-
-        {
-            "lat": -74.048730,
-            "lng": 100.2932,
-            "species_counts": {"Comb Jelly": "5-10", "Moon jelly": "10-20"}, // other options are 'cucumber or basket comb jelly', 'lion’s mane', 'stinging sea nettle', 'crystal jelly', 'cross jelly', 'man of war', 'salps', 'freshwater jellyfish', 'other', 'i don’t know. see photos.' 
-            "nearby_species": ["Horseshoe crabs"],
-            "microalgae_blooms": ["Green Sea lettuce (Ulva)", "Red algae (Grateloupia)"], // (or ["None observed"])
-            "water_clarity": "Turbid",
-            "attached_seaweed": true,
-            "water_uses": ["Sunbathing", "Fishing from shore"], // (or ["No one is using the water"]) 
-            "time_of_day": "11:15 AM",
-            "date": "4/19/2016"
-        }
-
+            Javascript stuff - move?
     * * * * * * * * * * * * * * * * * * --> 
 
     <script type='text/javascript'>
 
+        // ######################################
         // Show & hide divs based on next/prev button clicks
+        // ######################################
 
         $(document).ready(function(){
 
@@ -266,37 +281,51 @@
         });
 
 
-        // Send Form Data
+        // ######################################
+        //          Send Form Data
+        // ######################################
 
         $('#form').submit(function(event){
 
-            // ######## NOTES ######## 
+            // NOTES 
             //
             // 1. edit the jellyfish names in the python file
             // 2. edit the microalgae blooms to be macroalgae
             // 3. weather thing???
-            //
-            // #######################
+            // 4. move fonts into css file? idk
+            // 
 
 
             event.preventDefault(); // just 4 checking stuff. delete later
 
             var sighting = {};
 
+            // *********** Jellyfish Species Counts *********** 
 
-            var species_counts_obj = {}; 
-            var nearby_species_obj = [];
+            var species_counts = {};
 
-            // Macroalgae? Microalgae?
+            // *********** Nearby Species *********** 
+
+            var nearby_species = $("input[name=marine]:checked").map(function(){
+                return this.value;
+            }).get();
+
+            // *********** Macroalgae *********** 
+
             var microalgae_blooms_obj = $("input[name=macroalgae]:checked").map(function(){
                 return this.value;
             }).get();
-            microalgae_blooms_obj.push($('#macroalgae_other').val());
 
-            // Water Clarity
+            if ($('#macroalgae_other').val()!=""){
+                microalgae_blooms_obj.push($('#macroalgae_other').val());
+            }
+
+            // *********** Water Clarity *********** 
+
             var water_clarity = $("input[name=water]:checked").val();
 
-            // Attached Seaweed
+            // *********** Attached Seaweed *********** 
+
             var attached_seaweed_val = $("input[name=seaweed]:checked").val();
             var attached_seaweed;
             if (attached_seaweed_val=="Yes"){
@@ -306,22 +335,42 @@
             } else { //nothing was checked
             }
 
-            // Water Use
+            // *********** Water Use *********** 
+
             var water_uses = $("input[name=water_use]:checked").map(function(){
                 return this.value;
             }).get();
 
-            // Time + Date
+            // *********** Time + Date *********** 
+
             var today = new Date();
             var hour = today.getHours() % 12 || 12;
-            var current_time = String(hour)+":"+String(today.getMinutes());
-            var current_date = String(today.getMonth())+"/"+String(today.getDate())+"/"+String(today.getFullYear());
+            
+            var ampm; //format AM/PM
+            if (today.getHours()<12){
+                ampm = " AM";
+            } else {
+                ampm = " PM";
+            };
 
-            // SIGHTING 
+            var minutes; //format minutes
+            if (today.getMinutes()<10){
+                minutes="0"+String(today.getMinutes());
+            } else {
+                minutes=String(today.getMinutes());
+            }
+
+            var current_time = String(hour)+":"+minutes+ampm;
+            var current_date = String(today.getMonth()+1)+"/"+String(today.getDate())+"/"+String(today.getFullYear());
+
+            // * * * * * * * * * * * * * * * * * * * * * * * 
+            //          Putting it All Together 
+            // * * * * * * * * * * * * * * * * * * * * * * *  
+
             sighting["lat"] = 0; // where do i get this
             sighting["long"] = 0; // where do i get this
             sighting["species_counts"];
-            sighting["nearby_species"];
+            sighting["nearby_species"] = nearby_species;
             sighting["microalgae_blooms"] = microalgae_blooms_obj;
             sighting["water_clarity"] = water_clarity;
             sighting["attached_seaweed"] = attached_seaweed; 
@@ -329,7 +378,7 @@
             sighting["time_of_day"] = current_time;
             sighting["date"] = current_date;
 
-            console.log(attached_seaweed);
+            console.log(nearby_species);
             console.log(sighting);
 
 
