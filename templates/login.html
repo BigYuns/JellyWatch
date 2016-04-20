@@ -1,0 +1,88 @@
+<!DOCTYPE html> 
+<html>
+<head>
+    <link href='../public/stylesheets/login_style.css' rel='stylesheet' type='text/css'>
+    <script src="http://code.jquery.com/jquery-1.11.1.js"></script>
+
+    <script type="text/javascript" src="public/scripts/data.js"></script>
+
+</head>
+<body>
+	<div id = "JellyWatch">
+		<h1> JELLYWATCH</h1><br>
+			<!-- <p id="login-err" > Invalid Username or Password.</p><br> -->
+
+
+		<form id="form">
+
+	        <input type="text" id="username" name="username" placeholder="Username"> <br>
+	        <span id="username-err" style="color: red; display: none">Required Field.</span><br>
+	        <input type="password" id="pwd" name="pwd"placeholder="Password">
+	        <span id="pwd-err" style="color: red ; display: none">Required Field</span><br><br><br>
+	        <input type="submit"  id = "sub" value="SIGN IN">
+   		</form>
+	</div>
+	<div id = "Info">
+		<p><a href="http://www.google.com">Field Guide</a></p>
+		<h4>CONTACT US:</h4>
+		<p><a href="http://quidditch.gis.brown.edu/Jellyfish_RI/index.html">Rhode Island JellyFish</a></p>
+		<p><a href="https://www.facebook.com/RIjellywatch">Facebook</a></p>
+	</div>
+</body>
+<script type="text/javascript">
+
+$(function() {
+	// document.getElementById("login-err").style.visibility = "hidden";
+
+
+    var submitBtn = document.getElementById('form');
+	$('form').submit(function(event){
+		var email = $("#username").val();
+		var password = $('#pwd').val();
+		// validateUsrname();
+		// validatePwd();
+		event.preventDefault();
+		Data.logIn(email,password,function(resp){
+		console.log(resp);
+
+		if (resp.success == false){
+			console.log("invalid usrname");
+			alert("Invalid Password or Username");
+			// document.getElementById("login-err").style.display = "block";
+		}
+		else{
+            // document.getElementById("login-err").style.display = "none";
+        }
+
+		});		
+	});
+
+	function validateUsrname(){
+        var usrname = document.getElementById('username');
+        if(usrname.value === null || usrname.value === ""){
+            document.getElementById("username-err").style.visibility = "none";
+            return false
+        }
+        else{
+            document.getElementById("username-err").style.visibility = "hidden";
+            return true
+        }
+     }
+
+     function validatePwd(){
+        var pswd = document.getElementById('pwd');
+        console.log(pswd.value);
+        var pswdlen = pswd.value.length;
+        if( pswdlen < 5 || pswdlen >20 ){
+            document.getElementById("pwd-err").style.display = "block";
+        }
+        else{
+            document.getElementById("pwd-err").style.display = "none";
+
+        }
+    }
+
+});
+
+</script>
+</html>
