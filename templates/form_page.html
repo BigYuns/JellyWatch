@@ -21,10 +21,10 @@
     
     <div id="header">
         <div id="prev">
-            <a href="" id="prev_text">prev</a>
+            <a href="" id="prev_text">go back</a>
             </div>
         <div id="next">
-            <a href="" id="next_text">next</a>
+            <a href="" id="next_text">continue</a>
             </div>
         <!-- <div id="page_title"></div> -->
         <div id="logo">JELLYWATCH</div>
@@ -244,22 +244,33 @@
             $('#form').children().not(".visible").hide();
         })
 
-        $('#next_text').click(function(e){
-            e.preventDefault();
-            $('.visible').next().toggle(function(){
-                $(this).toggleClass("visible");
-            });
-            $('.visible').first().toggle(function(){
-                $(this).toggleClass("visible");
-            });
-        });
-
         $('#prev_text').click(function(e){
             e.preventDefault();
+            if ($('.visible').attr('id')=="jellyfish_questions"){
+                //go to MAP
+                window.location.href="map.html"
+            } else if ($('.visible').attr('id')=="photo_comments"){
+                $('#next_text').show();
+            }; 
             $('.visible').prev().toggle(function(){
                 $(this).toggleClass("visible");
             });
             $('.visible').last().toggle(function(){
+                $(this).toggleClass("visible");
+            });
+        });
+
+
+        $('#next_text').click(function(e){
+            e.preventDefault();
+            $('.visible').next().toggle(function(){
+                $(this).toggleClass("visible");
+                if ($(this).attr('id')=="photo_comments"){
+                    //hide the next button
+                    $('#next_text').hide();
+                };
+            });
+            $('.visible').first().toggle(function(){
                 $(this).toggleClass("visible");
             });
         });
