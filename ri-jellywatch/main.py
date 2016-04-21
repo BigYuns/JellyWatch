@@ -27,7 +27,7 @@ def send_json(handler, response):
 
 class MainHandler(webapp2.RequestHandler):
     def get(self):
-        self.response.write("hey")
+        self.redirect('/templates/index.html')
 
 class TestPageHandler(webapp2.RequestHandler):
     def get(self):
