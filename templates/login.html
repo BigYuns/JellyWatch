@@ -51,7 +51,7 @@ $(function() {
 			// document.getElementById("login-err").style.display = "block";
 		}
 		else{
-			window.location.href="map.html"
+			window.location.href="index.html"
 
             // document.getElementById("login-err").style.display = "none";
         }
@@ -83,6 +83,10 @@ $(function() {
 
         }
     }
+	
+	if (Data.isLoggedIn()) {
+		location.href = 'index.html';
+	}
 
 });
 
