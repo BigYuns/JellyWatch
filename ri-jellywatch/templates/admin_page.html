@@ -16,6 +16,8 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
 	
 	<script src='../public/scripts/data.js'></script>
+	
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
 
     <!-- Temporary styling, will move this to a css file later -->
     <style>
@@ -58,8 +60,8 @@
 			<!-- Add User -->
 			<tr id = "add_user_row">
 			<form id = "add_user_form">
-				<td><input type="text" class="email" name="new_email"></input></td>	
-				<td><input type="text" class="password" name="new_password"></input></td>	
+				<td><input type="text" class="email" name="new_email" autocapitalize="off" autocorrect="off"></input></td>	
+				<td><input type="text" class="password" name="new_password" autocapitalize="off" autocorrect="off"></input></td>	
 				<td><input type="checkbox" class="org" name="new_org"></input></td>	
 				<td><input type="checkbox" class="org" name="new_admin"></input></td>
 				<td><input type="submit" id="submit_new_user"></input> <input type="button" value="Cancel" onClick="cancelAddUser()"></input></td>
