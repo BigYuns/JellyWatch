@@ -248,7 +248,6 @@
         // ######################################
 
         $(document).ready(function(){
-            $('#form').children().not(".visible").hide();
             $('#success').hide();
         })
 
@@ -257,21 +256,15 @@
             if ($('.visible').attr('id')=="jellyfish_questions"){
                 //go to MAP
                 window.location.href="index.html"
-            } else if ($('.visible').attr('id')=="photo_comments"){
-                $('#next_text').show();
-            }; 
-            $('.visible').prev().toggle(function(){
-                $(this).toggleClass("visible");
-            });
-            $('.visible').last().toggle(function(){
-                $(this).toggleClass("visible");
-            });
+            }
+            $('#next_text').show();
+            $('.visible').toggleClass('visible').prev().toggleClass('visible');
         });
 
 
         $('#next_text').click(function(e){
             e.preventDefault();
-            $('.visible').next().toggle(function(){
+            /*$('.visible').next().toggle(function(){
                 $(this).toggleClass("visible");
                 if ($(this).attr('id')=="photo_comments"){
                     //hide the next button
@@ -280,7 +273,12 @@
             });
             $('.visible').first().toggle(function(){
                 $(this).toggleClass("visible");
-            });
+            });*/
+			$('.visible').first().toggleClass('visible').next().toggleClass('visible');
+			if ($('.visible').attr('id') == 'photo_comments') {
+                // hide the next button
+                $('#next_text').hide();
+			}
         });
 
 

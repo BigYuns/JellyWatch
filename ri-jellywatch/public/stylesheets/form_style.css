@@ -32,6 +32,9 @@
     max-width: 90%;
     margin: 0 auto;
 }
+.question_div:not(.visible) {
+	display: none;
+}
 
 #success{
     background-color: black;
