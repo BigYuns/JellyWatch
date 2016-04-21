@@ -5,6 +5,7 @@
 from google.appengine.ext import ndb
 from collections import defaultdict
 from csv import DictWriter
+import weather
 
 jellyfish_names = ['comb jelly', 'cucumber or basket comb jelly', 'moon jelly', u'lion’s mane', 'stinging sea nettle', 'crystal jelly', 'cross jelly', 'man of war', 'salps', 'freshwater jellyfish', 'other', 'i don’t know. see photos.']
 
@@ -14,11 +15,13 @@ class Sighting(ndb.Model):
     nearby_species = ndb.StringProperty(repeated=True) # array of nearby species choices=['horseshoe crabs']
     water_uses = ndb.StringProperty(repeated=True) # choices=['no one is using the water', 'sunbathing', 'swimming', 'fishing from shore', 'boating']
     
-    weather = ndb.StringProperty() # choices=['sunny', 'cloudy', 'overcast', 'rainy', 'snowy']
-    windy = ndb.StringProperty() # choices=['low', 'medium', 'high']
+    weather = ndb.StringProperty() # choices=['sunny', 'cloudy', 'overcast', 'rainy', 'snowy', 'other']
+    wind_speed = ndb.FloatProperty() # meters/sec
+    temperature = ndb.FloatProperty() # celsius
     water_clarity = ndb.StringProperty() # choices=['clear', 'turbid']
     attached_seaweed = ndb.BooleanProperty()
     microalgae_blooms = ndb.StringProperty(repeated=True) # choices=['none observed', 'green sea lettuce (ulva)', 'red algae (grateloupia)', 'brown seaweed', 'other']
+    location_name = ndb.StringProperty()
     
     photo_urls = ndb.StringProperty(repeated=True)
     
@@ -46,7 +49,7 @@ class Sighting(ndb.Model):
     def insert_json(cls, json_obj):
         sighting = Sighting()
         sighting.import_json(json_obj)
-        # TODO: fetch weather data
+        weather.add_weather_to_sighting(sighting)
         sighting.put()
         return sighting
 
@@ -58,7 +61,7 @@ def get_jellyfish(lat_min=-1000, lat_max=1000, lon_min=-1000, lon_max=1000):
 
 def write_csv(file):
     repeating_string_fields = ['water_uses', 'nearby_species', 'microalgae_blooms']
-    single_fields = ['lat', 'lng', 'weather', 'attached_seaweed', 'date', 'time_of_day']
+    single_fields = ['lat', 'lng', 'weather', 'wind_speed', 'attached_seaweed', 'date', 'time_of_day', 'location_name', 'temperature']
     
     jellyfish_names = set()
     repeating_field_values = defaultdict(set)
