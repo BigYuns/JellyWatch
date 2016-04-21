@@ -29,7 +29,10 @@
         <div id="logo">JELLYWATCH</div>
     </div>
 	
-	<div id="googleMap"></div>
+	<div id='mapContainer'>
+		<div id="googleMap"></div>
+		<img id=bubble src='../public/img/RecordSighting.svg' onClick='recordSighting()'/>
+	</div>
 	
 	<div id='menu' style='display: none'>
 		<p><a href='#' onClick='closeMenu()'>Close</a></p>
@@ -55,6 +58,10 @@
 	function logOut() {
 		Data.logOut()
 		location.href = 'login.html';
+	}
+	
+	function recordSighting() {
+		location.href = 'form_page.html#' + MapPos.lat + ',' + MapPos.lng;
 	}
 	
 	google.maps.event.addDomListener(window, 'load', initMap);
