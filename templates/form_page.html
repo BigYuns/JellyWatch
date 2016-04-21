@@ -237,7 +237,12 @@
    <!-- JAVASCRIPT STUFF --> 
 
     <script type='text/javascript'>
-
+		
+   if (!location.hash) location.href = 'index.html'
+	   var hash = location.hash.substring(1)
+	   var lat = parseFloat(hash.split(',')[0])
+	   var lng = parseFloat(hash.split(',')[1])
+		
         // ######################################
         // Show & hide divs based on next/prev button clicks
         // ######################################
@@ -251,7 +256,7 @@
             e.preventDefault();
             if ($('.visible').attr('id')=="jellyfish_questions"){
                 //go to MAP
-                window.location.href="map.html"
+                window.location.href="index.html"
             } else if ($('.visible').attr('id')=="photo_comments"){
                 $('#next_text').show();
             }; 
@@ -374,8 +379,8 @@
             //          Putting it All Together 
             // * * * * * * * * * * * * * * * * * * * * * * *  
 
-            sighting["lat"] = 0; // where do i get this
-            sighting["long"] = 0; // where do i get this
+            sighting["lat"] = lat;
+            sighting["lng"] = lng;
             sighting["species_counts"] = species_counts;
             sighting["nearby_species"] = nearby_species;
             sighting["microalgae_blooms"] = microalgae_blooms_obj;
