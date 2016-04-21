@@ -3,7 +3,10 @@
 //i am going to create a map; get four corrner coordinates of the function 
 // passs in the function 
 //checking compatability by testing for the presence of the geolocation object:
-var index_check = new Set(); 
+var index_check = new Set();
+
+MapPos = null;
+
 function initMap() {
   // Try HTML5 geolocation.
   if (navigator.geolocation) {
@@ -13,16 +16,21 @@ function initMap() {
         lng: position.coords.longitude
       };//pos
       var mapOptions = {
-        zoom: 10,
+        zoom: 13,
         center: pos,
         mapTypeId: google.maps.MapTypeId.ROADMAP
       };//maptOptions
       var map = new google.maps.Map(document.getElementById('googleMap'), mapOptions); 
-      var infoWindow = new google.maps.InfoWindow({map: map});
+      
+	  MapPos = pos;
+	  
+	  /*var infoWindow = new google.maps.InfoWindow({map: map});
       infoWindow.setPosition(pos);
-      infoWindow.setContent('Current Location');
+      infoWindow.setContent('Current Location');*/
+	  
       map.setCenter(pos);
       google.maps.event.addListener(map, 'bounds_changed', function(){
+		MapPos = {lat: map.getCenter().lat(), lng: map.getCenter().lng()}
         var lat_min = map.getBounds().R.R; 
         var lat_max = map.getBounds().R.j; 
         var lon_min = map.getBounds().j.j; 
