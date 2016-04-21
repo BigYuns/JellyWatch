@@ -6,4 +6,5 @@ html, body, #googleMap {
 }
 #googleMap {
     position: relative;
+    margin-top: 80px;
 }
