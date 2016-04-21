@@ -6,6 +6,7 @@ from google.appengine.ext import ndb
 from collections import defaultdict
 from csv import DictWriter
 import weather
+import users
 
 jellyfish_names = ['comb jelly', 'cucumber or basket comb jelly', 'moon jelly', u'lion’s mane', 'stinging sea nettle', 'crystal jelly', 'cross jelly', 'man of war', 'salps', 'freshwater jellyfish', 'other', 'i don’t know. see photos.']
 
@@ -23,6 +24,9 @@ class Sighting(ndb.Model):
     microalgae_blooms = ndb.StringProperty(repeated=True) # choices=['none observed', 'green sea lettuce (ulva)', 'red algae (grateloupia)', 'brown seaweed', 'other']
     location_name = ndb.StringProperty()
     
+    user_email = ndb.StringProperty()
+    user_name = ndb.StringProperty()
+    
     photo_urls = ndb.StringProperty(repeated=True)
     
     date = ndb.StringProperty()
@@ -38,7 +42,7 @@ class Sighting(ndb.Model):
         }
     
     def import_json(self, json_obj):
-        fields = ['nearby_species', 'water_uses', 'water_clarity', 'weather', 'attached_seaweed', 'microalgae_blooms', 'lat', 'lng', 'date', 'time_of_day']
+        fields = ['nearby_species', 'water_uses', 'water_clarity', 'weather', 'attached_seaweed', 'microalgae_blooms', 'lat', 'lng', 'date', 'time_of_day', 'user_name']
         for field in fields:
             val = json_obj.get(field)
             if isinstance(val, unicode) or isinstance(val, str): val = val.lower()
@@ -46,8 +50,10 @@ class Sighting(ndb.Model):
         self.species_counts = {k.lower(): v.lower() for k, v in json_obj['species_counts'].iteritems()}
     
     @classmethod
-    def insert_json(cls, json_obj):
+    def insert_json(cls, json_obj, token):
         sighting = Sighting()
+        user = users.user_for_token(token)
+        sighting.user_email = user.key.id()
         sighting.import_json(json_obj)
         weather.add_weather_to_sighting(sighting)
         sighting.put()
@@ -61,7 +67,7 @@ def get_jellyfish(lat_min=-1000, lat_max=1000, lon_min=-1000, lon_max=1000):
 
 def write_csv(file):
     repeating_string_fields = ['water_uses', 'nearby_species', 'microalgae_blooms']
-    single_fields = ['lat', 'lng', 'weather', 'wind_speed', 'attached_seaweed', 'date', 'time_of_day', 'location_name', 'temperature']
+    single_fields = ['user_email', 'user_name', 'lat', 'lng', 'weather', 'wind_speed', 'attached_seaweed', 'date', 'time_of_day', 'location_name', 'temperature']
     
     jellyfish_names = set()
     repeating_field_values = defaultdict(set)

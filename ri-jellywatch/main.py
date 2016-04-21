@@ -122,7 +122,9 @@ class JellyfishMapHandler(webapp2.RequestHandler):
 
 class JellyfishAddHandler(webapp2.RequestHandler):
     def post(self):
-        success = jellyfish.Sighting.insert_json(json.loads(self.request.get('sighting'))) is not None
+        token = self.request.get('token')
+        j = json.loads(self.request.get('sighting'))
+        success = jellyfish.Sighting.insert_json(j, token) is not None
         send_json(self, {"success": success})
 
 class JellyfishCsvHandler(webapp2.RequestHandler):

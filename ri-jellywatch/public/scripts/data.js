@@ -20,6 +20,11 @@ Data = {
 					Data.user = resp.user;
 					localStorage.token = Data.token;
 					localStorage.user = JSON.stringify(Data.user);
+					if (resp.user.is_organization) {
+						localStorage.name = prompt("What's your name?");
+					} else {
+						localStorage.name = null;
+					}
 				}
 				callback(resp);
 			} else {
@@ -32,6 +37,7 @@ Data = {
 		Data.token = null;
 		localStorage.user = null;
 		localStorage.token = null;
+		localStorage.name = null;
 	},
 	getJellyfishForMap: function(lat_min, lat_max, lon_min, lon_max, callback) {
 		/* callback is called w/ an array of jellyfish sightings nearby.
@@ -94,6 +100,7 @@ Data = {
 		
 		the callback function gets a dictionary like this: {"success": true}
 		*/
+		sighting.user_name = localStorage.name;
 		Data.post('/jellyfish/add', {sighting: JSON.stringify(sighting), token: Data.token}, callback);
 	},
 	get: function(url, params, callback) {
