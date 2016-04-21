@@ -94,7 +94,7 @@ Data = {
 		
 		the callback function gets a dictionary like this: {"success": true}
 		*/
-		post('/jellyfish/add', {sighting: JSON.stringify(sighting), token: Data.token}, callback);
+		Data.post('/jellyfish/add', {sighting: JSON.stringify(sighting), token: Data.token}, callback);
 	},
 	get: function(url, params, callback) {
 		var http = new XMLHttpRequest();

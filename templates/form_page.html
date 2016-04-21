@@ -287,7 +287,7 @@
         // 3. weather thing???
         // 4. move fonts into css file? idk
         // 5. what do i do abt the none thing
-        // 
+        // 6. need to add photo + comment functionality thing? 
         //
         // ######################################
 
@@ -383,11 +383,11 @@
             sighting["date"] = current_date;
 
 
-            //Data.submitSighting(sighting, function(){
-
-            //})????
-
-            console.log(sighting);
+            Data.submitSighting(sighting, function(response){
+                if (response["success"] == true){
+                    console.log("it worked? maybe");
+                };
+            });
 
         });
 
