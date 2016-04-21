@@ -1,7 +1,6 @@
 <!DOCTYPE html> 
 <html>
 <head>
-
 	<!-- Fonts -->
     <link href='https://fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/css'>
     <link href='https://fonts.googleapis.com/css?family=Rubik' rel='stylesheet' type='text/css'>
@@ -12,7 +11,7 @@
     <!-- Javascript -->
     <script src="http://code.jquery.com/jquery-1.11.1.js"></script>
     <script type="text/javascript" src="../public/scripts/data.js"></script>
-
+    <script type="text/javascript" src="../public/scripts/login.js"></script>
 </head>
 <body>
 	<div id = "JellyWatch">
@@ -33,66 +32,4 @@
 		<p><a href="https://www.facebook.com/RIjellywatch">Facebook</a></p>
 	</div>
 </body>
-<script type="text/javascript">
-
-$(function() {
-	// document.getElementById("login-err").style.visibility = "hidden";
-
-
-    var submitBtn = document.getElementById('form');
-	$('form').submit(function(event){
-		var email = $("#username").val();
-		var password = $('#pwd').val();
-		// validateUsrname();
-		// validatePwd();
-		event.preventDefault();
-		Data.logIn(email,password,function(resp){
-		console.log(resp);
-
-		if (resp.success == false){
-			console.log("invalid usrname");
-			alert("Invalid Password or Username");
-			// document.getElementById("login-err").style.display = "block";
-		}
-		else{
-			window.location.href="index.html"
-
-            // document.getElementById("login-err").style.display = "none";
-        }
-
-		});		
-	});
-
-	function validateUsrname(){
-        var usrname = document.getElementById('username');
-        if(usrname.value === null || usrname.value === ""){
-            document.getElementById("username-err").style.visibility = "none";
-            return false
-        }
-        else{
-            document.getElementById("username-err").style.visibility = "hidden";
-            return true
-        }
-     }
-
-     function validatePwd(){
-        var pswd = document.getElementById('pwd');
-        console.log(pswd.value);
-        var pswdlen = pswd.value.length;
-        if( pswdlen < 5 || pswdlen >20 ){
-            document.getElementById("pwd-err").style.display = "block";
-        }
-        else{
-            document.getElementById("pwd-err").style.display = "none";
-
-        }
-    }
-	
-	if (Data.isLoggedIn()) {
-		location.href = 'index.html';
-	}
-
-});
-
-</script>
 </html>
