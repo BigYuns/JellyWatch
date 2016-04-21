@@ -234,7 +234,16 @@
         </form>
     </div>
 
-    <div id="success">u succeeded congrats</div>
+    <!-- #####################################
+        Displayed on Form Submit Success
+    ##################################### --> 
+
+    <div id="success">
+        <div id="success_blue">
+            <div id="mascot"></div>
+            <span id="thanks"> Thanks for helping us study and preserve the Bay!</span>
+        </div>
+    </div>
 
    <!-- JAVASCRIPT STUFF --> 
 
@@ -256,8 +265,7 @@
         $('#prev_text').click(function(e){
             e.preventDefault();
             if ($('.visible').attr('id')=="jellyfish_questions"){
-                //go to MAP
-                window.location.href="index.html"
+                window.location.href="index.html" // go to MAP
             }
             $('#next_text').show();
             $('.visible').toggleClass('visible').prev().toggleClass('visible');
@@ -272,7 +280,6 @@
                 $('#next_text').hide();
 			}
         });
-
 
         // ######################################
         // Send Form Data
@@ -384,13 +391,10 @@
 
 
             Data.submitSighting(sighting, function(response){
-                
-                // move this stuff into the if statement
-                $('#photo_comments').hide();
-                $('#success').show();
 
                 if (response["success"] == true){
-                    
+                    $('#photo_comments').hide();
+                    $('#success').show();
                 };
             });
 
