@@ -83,9 +83,12 @@
 		</table>
 	</div>
 	</div>
+	
+	<form action='/jellyfish/csv' method='POST'><input id='csv_token' type='hidden' name='token'/><input type=submit value="Download sightings as CSV"/></form>
 
 	<!-- Javascript stuff, will probably move to a separate file later -->
 	<script type="text/javascript">
+		if (!Data.isLoggedIn()) location.href = 'login.html';
 		
 		/* 
 			Shows the input boxes where admin can enter new user info
@@ -98,6 +101,8 @@
 		function cancelAddUser() {
 			$('#add_user_row').hide();
 		}
+		
+		$("#csv_token").val(Data.token);
 		
 		/*
 			Reloads data from the server
