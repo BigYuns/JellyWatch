@@ -1,10 +1,18 @@
 #content{
-	width: 96%;
-	max-width: 800px;
-	margin: auto;
+	width: 80%;
+	margin: 0 auto;
 	padding-top: 80px;
 }
 
-td:first-child {
-	padding-left: 0;
+table {
+	margin: 0 auto;
 }
+
+td:first-child {
+	padding-left: 5;
+}
+
+
+tr:nth-child(even) {
+	background: #dbdbdb;
+};

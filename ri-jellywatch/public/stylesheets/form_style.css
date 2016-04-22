@@ -1,6 +1,20 @@
+.jellyfish, .nearby_species {
+	width: 150px;
+	max-width: 100%;
+	display: inline-block;
+	margin: 10px;
+}
+
+#jellyfish_questions {
+	text-align: center;
+}
+
+#marine_animals_questions {
+	text-align: center;
+}
+
 #form {
     line-height: 1.8;
-    padding: 20px;
     font-size: 13px;
     padding-top: 100px;
 }
@@ -12,7 +26,7 @@
 }
 
 .image {
-    width: 75%;
+    width: 100%;
 }
 
 .question{
@@ -25,11 +39,15 @@
     font-size: 16px;
 }
 
+.jellyfish .image {
+	display: block;
+}
+
 .comments{
 }
 
 .question_div{
-    max-width: 90%;
+    max-width: 100%;
     margin: 0 auto;
 }
 .question_div:not(.visible) {
@@ -70,6 +88,7 @@
     margin-top: 60%;
 }
 
+<<<<<<< HEAD
 #myImg{
    display: none;
    height: 40%;
@@ -83,30 +102,16 @@
     clear: both;
     padding: 0px;
     margin: 0px;
+=======
+#water_use_questions {
+	text-align: center;
+>>>>>>> 218bdc230063b383a25933d7488f2e5046dce5e9
 }
-
-/*  COLUMN SETUP  */
-.col {
-    display: block;
-    float:left;
-    margin: 1% 0 1% 1.6%;
-    text-align: center; /*choices shouldn't be center aligned*/
+.uses {
+	display: inline-block;
+	text-align: left;
+	line-height: 2;
 }
-.col:first-child { margin-left: 0; }
-
-/*  GROUPING  */
-.group:before,
-.group:after { content:""; display:table; }
-.group:after { clear:both;}
-.group { zoom:1; /* For IE 6/7 */ }
-
-/*  GRID OF THREE  */
-.span_3_of_3 { width: 100%; }
-.span_2_of_3 { width: 66.13%; }
-.span_1_of_3 { width: 32.26%; }
-
-/*  GO FULL WIDTH BELOW 480 PIXELS */
-@media only screen and (max-width: 480px) {
-    .col {  margin: 1% 0 1% 0%; }
-    .span_3_of_3, .span_2_of_3, .span_1_of_3 { width: 100%; }
+.uses input {
+	font-size: 2em;
 }

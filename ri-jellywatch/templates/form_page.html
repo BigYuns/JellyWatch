@@ -13,9 +13,7 @@
     
     <!-- Javascript -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
-    <script type="text/javascript" src="../public/scripts/data.js"></script>
-    <!--<script type="text/javascript" src="../public/scripts/form_page.js"></script>-->
-	
+    <script type="text/javascript" src="../public/scripts/data.js"></script>	
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
 
 </head>
@@ -45,111 +43,101 @@
 
             <h4 class="question">How many of each species of jellyfish do you see?</h4>
 
-                <br><input type="radio" name="none"> None
+                <input type="radio" name="none" id='none'> <label for=none>I don't see any jellyfish or salps</label>
+				<br/>
 
                 <!-- Jellyfish Species -->
 
-                <div class="section group">
-                    <div class="col span_1_of_3 jellyfish">
-                        <p class="species_name">Comb Jelly</p>
-                        <img src="../public/img/Comb_Jelly.jpg" class="image">
-                        <br><input type="radio" name="comb" value="1 - 10"> 1 - 10
-                        <br><input type="radio" name="comb" value="11 - 49"> 11 - 49
-                        <br><input type="radio" name="comb" value="51 - 100"> 51 - 100
-                        <br><input type="radio" name="comb" value=">100"> > 100
-                    </div>
-                    <div class="col span_1_of_3 jellyfish">
-                        <p class="species_name">Cigar Jelly</p>
-                        <img src="../public/img/Cigar_Jelly.jpg" class="image">
-                        <br><input type="radio" name="cigar" value="1 - 10"> 1 - 10
-                        <br><input type="radio" name="cigar" value="11 - 49"> 11 - 49
-                        <br><input type="radio" name="cigar" value="51 - 100"> 51 - 100
-                        <br><input type="radio" name="cigar" value=">100"> > 100
-                    </div>
-                    <div class="col span_1_of_3 jellyfish">
-                        <p class="species_name">Moon Jelly</p>
-                        <img src="../public/img/Moon_Jelly.jpg" class="image">
-                        <br><input type="radio" name="moon" value="1 - 10"> 1 - 10
-                        <br><input type="radio" name="moon" value="11 - 49"> 11 - 49
-                        <br><input type="radio" name="moon" value="51 - 100"> 51 - 100
-                        <br><input type="radio" name="moon" value=">100"> > 100
-                    </div>
+                <div class="col span_1_of_3 jellyfish">
+                    <p class="species_name">Comb Jelly</p>
+                    <img src="../public/img/Comb_Jelly.jpg" class="image">
+                    <input type="radio" name="comb" value="1 - 10">     <label>1 - 10</label>
+                    <input type="radio" name="comb" value="11 - 49">    <label> 11 - 49</label> <br>
+                    <input type="radio" name="comb" value="51 - 100">   <label> 51 - 100</label>
+                    <input type="radio" name="comb" value=">100">       <label>100+</label>
+                </div>
+                <div class="col span_1_of_3 jellyfish">
+                    <p class="species_name">Cigar Jelly</p>
+                    <img src="../public/img/Cigar_Jelly.jpg" class="image">
+                    <input type="radio" name="cigar" value="1 - 10">     <label>1 - 10</label>
+                    <input type="radio" name="cigar" value="11 - 49">   <label>11 - 49</label> <br>
+                    <input type="radio" name="cigar" value="51 - 100">  <label> 51 - 100</label>
+                    <input type="radio" name="cigar" value=">100">      <label>100+</label>
+                </div>
+                <div class="col span_1_of_3 jellyfish">
+                    <p class="species_name">Moon Jelly</p>
+                    <img src="../public/img/Moon_Jelly.jpg" class="image">
+                    <input type="radio" name="moon" value="1 - 10">      <label>1 - 10</label>
+                    <input type="radio" name="moon" value="11 - 49">     <label> 11 - 49</label> <br>
+                    <input type="radio" name="moon" value="51 - 100">    <label> 51 - 100</label>
+                    <input type="radio" name="moon" value=">100">        <label>100+</label>
                 </div>
 
-                <div class="section group">
-                    <div class="col span_1_of_3 jellyfish">
-                        <p class="species_name">Lion's Mane</p>
-                        <img src="../public/img/Lions_Mane_Jelly.jpg" class="image">
-                        <br><input type="radio" name="lions_mane" value="1 - 10"> 1 - 10
-                        <br><input type="radio" name="lions_mane" value="11 - 49"> 11 - 49
-                        <br><input type="radio" name="lions_mane" value="51 - 100"> 51 - 100
-                        <br><input type="radio" name="lions_mane" value=">100"> > 100
-                    </div>
-                    <div class="col span_1_of_3 jellyfish">
-                        <p class="species_name">Stinging Sea Nettle</p>
-                        <img src="../public/img/Stinging_Sea_Nettle_Jelly.jpg" class="image">
-                        <br><input type="radio" name="stinging" value="1 - 10"> 1 - 10
-                        <br><input type="radio" name="stinging" value="11 - 49"> 11 - 49
-                        <br><input type="radio" name="stinging" value="51 - 100"> 51 - 100
-                        <br><input type="radio" name="stinging" value=">100"> > 100
-                    </div>
-                    <div class="col span_1_of_3 jellyfish">
-                        <p class="species_name">Crystal Jelly</p>
-                        <img src="../public/img/Crystal_Jelly.jpg" class="image">
-                        <br><input type="radio" name="crystal" value="1 - 10"> 1 - 10
-                        <br><input type="radio" name="crystal" value="11 - 49"> 11 - 49
-                        <br><input type="radio" name="crystal" value="51 - 100"> 51 - 100
-                        <br><input type="radio" name="crystal" value=">100"> > 100
-                    </div>
+                <div class="col span_1_of_3 jellyfish">
+                    <p class="species_name">Lion's Mane</p>
+                    <img src="../public/img/Lions_Mane_Jelly.jpg" class="image">
+                    <input type="radio" name="lions_mane" value="1 - 10">     <label>1 - 10</label>
+                    <input type="radio" name="lions_mane" value="11 - 49">    <label> 11 - 49</label> <br>
+                    <input type="radio" name="lions_mane" value="51 - 100">   <label> 51 - 100</label>
+                    <input type="radio" name="lions_mane" value=">100">       <label>100+</label>
+                </div>
+                <div class="col span_1_of_3 jellyfish">
+                    <p class="species_name">Stinging Sea Nettle</p>
+                    <img src="../public/img/Stinging_Sea_Nettle_Jelly.jpg" class="image">
+                    <input type="radio" name="stinging" value="1 - 10">     <label>1 - 10</label>
+                    <input type="radio" name="stinging" value="11 - 49">    <label> 11 - 49</label> <br>
+                    <input type="radio" name="stinging" value="51 - 100">   <label> 51 - 100</label>
+                    <input type="radio" name="stinging" value=">100">       <label>100+</label>
+                </div>
+                <div class="col span_1_of_3 jellyfish">
+                    <p class="species_name">Crystal Jelly</p>
+                    <img src="../public/img/Crystal_Jelly.jpg" class="image">
+                    <input type="radio" name="crystal" value="1 - 10">     <label>1 - 10</label>
+                    <input type="radio" name="crystal" value="11 - 49">    <label> 11 - 49</label> <br>
+                    <input type="radio" name="crystal" value="51 - 100">   <label> 51 - 100</label>
+                    <input type="radio" name="crystal" value=">100">       <label>100+</label>
                 </div>
 
-                <div class="section group">
-                    <div class="col span_1_of_3 jellyfish">
-                        <p class="species_name">Cross Jelly</p>
-                        <img src="../public/img/Cross_Jelly.jpg" class="image">
-                        <br><input type="radio" name="cross" value="1 - 10"> 1 - 10
-                        <br><input type="radio" name="cross" value="11 - 49"> 11 - 49
-                        <br><input type="radio" name="cross" value="51 - 100"> 51 - 100
-                        <br><input type="radio" name="cross" value=">100"> > 100
-                    </div>
-                    <div class="col span_1_of_3 jellyfish">
-                        <p class="species_name">Man o' War</p>
-                        <img src="../public/img/Man_o'_War_Jelly.jpeg" class="image">
-                        <br><input type="radio" name="man_of_war" value="1 - 10"> 1 - 10
-                        <br><input type="radio" name="man_of_war" value="11 - 49"> 11 - 49
-                        <br><input type="radio" name="man_of_war" value="51 - 100"> 51 - 100
-                        <br><input type="radio" name="man_of_war" value=">100"> > 100
-                    </div>
-                    <div class="col span_1_of_3 jellyfish">
-                        <p class="species_name">Salps</p>
-                        <img src="../public/img/Salps.jpg" class="image">
-                        <br><input type="radio" name="salps" value="1 - 10"> 1 - 10
-                        <br><input type="radio" name="salps" value="11 - 49"> 11 - 49
-                        <br><input type="radio" name="salps" value="51 - 100"> 51 - 100
-                        <br><input type="radio" name="salps" value=">100"> > 100
-                    </div>
+                <div class="col span_1_of_3 jellyfish">
+                    <p class="species_name">Cross Jelly</p>
+                    <img src="../public/img/Cross_Jelly.jpg" class="image">
+                    <input type="radio" name="cross" value="1 - 10">     <label>1 - 10</label>
+                    <input type="radio" name="cross" value="11 - 49">    <label> 11 - 49</label> <br>
+                    <input type="radio" name="cross" value="51 - 100">   <label> 51 - 100</label>
+                    <input type="radio" name="cross" value=">100">       <label>100+</label>
+                </div>
+                <div class="col span_1_of_3 jellyfish">
+                    <p class="species_name">Man o' War</p>
+                    <img src="../public/img/Man_o'_War_Jelly.jpeg" class="image">
+                    <input type="radio" name="man_of_war" value="1 - 10">   <label>1 - 10</label>
+                    <input type="radio" name="man_of_war" value="11 - 49">  <label> 11 - 49</label> <br>
+                    <input type="radio" name="man_of_war" value="51 - 100"> <label> 51 - 100</label>
+                    <input type="radio" name="man_of_war" value=">100">     <label>100+</label>
+                </div>
+                <div class="col span_1_of_3 jellyfish">
+                    <p class="species_name">Salps</p>
+                    <img src="../public/img/Salps.jpg" class="image">
+                    <input type="radio" name="salps" value="1 - 10">    <label>1 - 10</label>
+                    <input type="radio" name="salps" value="11 - 49">   <label> 11 - 49</label> <br>
+                    <input type="radio" name="salps" value="51 - 100">  <label> 51 - 100</label>
+                    <input type="radio" name="salps" value=">100">      <label>100+</label>
                 </div>
 
-                <div class="section group">
-                    <div class="col span_1_of_3 jellyfish">
-                        <p class="species_name">Freshwater Jellyfish</p>
-                        <img src="../public/img/Freshwater_Jelly.jpg" class="image">
-                        <br><input type="radio" name="freshwater" value="1 - 10"> 1 - 10
-                        <br><input type="radio" name="freshwater" value="11 - 49"> 11 - 49
-                        <br><input type="radio" name="freshwater" value="51 - 100"> 51 - 100
-                        <br><input type="radio" name="freshwater" value=">100"> > 100
-                    </div>
-                    <div class="col span_1_of_3 jellyfish">
-                        <p class="species_name">Other (See Photos)</p>
-                        <img src="../public/img/Other.jpg" class="image">
-                        <br><input type="radio" name="other" value="1 - 10"> 1 - 10
-                        <br><input type="radio" name="other" value="11 - 49"> 11 - 49
-                        <br><input type="radio" name="other" value="51 - 100"> 51 - 100
-                        <br><input type="radio" name="other" value=">100"> > 100
-                    </div>
-                    <div class="col span_1_of_3">
-
-                    </div>
+                <div class="col span_1_of_3 jellyfish">
+                    <p class="species_name">Freshwater Jellyfish</p>
+                    <img src="../public/img/Freshwater_Jelly.jpg" class="image">
+                    <input type="radio" name="freshwater" value="1 - 10">  <label>1 - 10</label>
+                    <input type="radio" name="freshwater" value="11 - 49"> <label> 11 - 49</label> <br>
+                    <input type="radio" name="freshwater" value="51 - 100"><label> 51 - 100</label>
+                    <input type="radio" name="freshwater" value=">100">    <label>100+</label>
+                </div>
+                <div class="col span_1_of_3 jellyfish">
+                    <p class="species_name">Other (See Photos)</p>
+                    <img src="../public/img/Other.jpg" class="image">
+                    <input type="radio" name="other" value="1 - 10">  <label>1 - 10</label>
+                    <input type="radio" name="other" value="11 - 49"> <label> 11 - 49</label> <br>
+                    <input type="radio" name="other" value="51 - 100"><label> 51 - 100</label>
+                    <input type="radio" name="other" value=">100">    <label>100+</label>
                 </div>
         </div> 
 
@@ -160,8 +148,11 @@
         <div class="question_div" id="marine_animals_questions">
 
             <h4 class="question">Do you see any of these species of marine animal nearby?</h4>
-                <img src="../public/img/Comb_Jelly.jpg" class="image">
-                <br><input type="checkbox" name="marine" value="Horseshoe Crab">Horseshoe Crab
+			
+            <div class="col span_1_of_3 nearby_species">
+                <img src="../public/img/Horseshoe_Crab.jpg" class="image">
+                <p class="species_name"><input type="checkbox" name="marine" value="Horseshoe Crab" id='crab'> <label for='crab'>Horseshoe Crab</label></p>
+            </div>
 
         </div> 
 
@@ -172,12 +163,14 @@
         <div class="question_div" id="water_use_questions">
 
                 <h4 class="question"> How are people using the water nearby?</h4>
-                        <input type="checkbox" name="water_use" value="No one is using the water"> No one is using the water
-                    <br><input type="checkbox" name="water_use" value="Sunbathing"> Sunbathing
-                    <br><input type="checkbox" name="water_use" value="Swimming"> Swimming
-                    <br><input type="checkbox" name="water_use" value="Fishing from shore"> Fishing from shore
-                    <br><input type="checkbox" name="water_use" value="Boating"> Boating
-                    <br><input type="checkbox" name="water_use" value="Harvesting shellfish"> Harvesting shellfish
+				<div class='uses'>
+                       <input type="checkbox" name="water_use" value="No one is using the water"> No one is using the water<br>
+                       <input type="checkbox" name="water_use" value="Sunbathing"> Sunbathing<br>
+                       <input type="checkbox" name="water_use" value="Swimming"> Swimming<br>
+                       <input type="checkbox" name="water_use" value="Fishing from shore"> Fishing from shore<br>
+                       <input type="checkbox" name="water_use" value="Boating"> Boating<br>
+                       <input type="checkbox" name="water_use" value="Harvesting shellfish"> Harvesting shellfish
+				 </div>
 
         </div>
 
@@ -186,18 +179,6 @@
         ##################################### --> 
 
         <div class="question_div" id="environment_questions">
-
-           <h4 class="question">How's the weather? </h4>
-                    <input type="radio" name="weather" value="Sunny"> Sunny
-                <br><input type="radio" name="weather" value="Cloudy"> Cloudy
-                <br><input type="radio" name="weather" value="Overcast"> Overcast 
-                <br><input type="radio" name="weather" value="Rainy"> Rainy
-                <br><input type="radio" name="weather" value="Snowy"> Snowy
-
-            <h4 class="question">How windy is it? </h4>
-                    <input type="radio" name="wind" value="Low"> Low
-                <br><input type="radio" name="wind" value="Medium"> Medium
-                <br><input type="radio" name="wind" value="High"> High
 
             <h4 class="question">How clear is the water? </h4>
                     <input type="radio" name="water" value="Clear"> Clear
@@ -275,8 +256,13 @@
             if ($('.visible').attr('id')=="jellyfish_questions"){
                 window.location.href="index.html" // go to MAP
             }
+            if ($('.visible').attr('id') == 'photo_comments') {
+                // hide the next button
+                window.location.href="index.html"
+            }
             $('#next_text').show();
             $('.visible').toggleClass('visible').prev().toggleClass('visible');
+            
         });
 
 
@@ -288,6 +274,17 @@
                 $('#next_text').hide();
 			}
         });
+		
+		
+		// ######################
+		// Add unique IDs to all the jellyfish radio buttons and set the 'for' property on the labels
+		var prevId = 0;
+		$('.jellyfish label').each(function(i, label) {
+			var id = 'radio-' + prevId;
+			$(label).prev().attr('id', id);
+			$(label).attr('for', id);
+			prevId++;
+		});
 
         // ######################################
         // Send Form Data
@@ -380,6 +377,15 @@
             var current_time = String(hour)+":"+minutes+ampm;
             var current_date = String(today.getMonth()+1)+"/"+String(today.getDate())+"/"+String(today.getFullYear());
 
+             // *********** Comments *********** 
+            var text = $('#photo_comments').find('input[name="comments"]').val();
+            var comment_input;
+            if (text){
+                comment_input = text;
+            }
+            else{
+                comment_input = "None";
+            }
             // * * * * * * * * * * * * * * * * * * * * * * * 
             //          Putting it All Together 
             // * * * * * * * * * * * * * * * * * * * * * * *  
@@ -395,9 +401,9 @@
             sighting["time_of_day"] = current_time;
             sighting["date"] = current_date;
             sighting["photo_url"] = url; 
+            sighting["comment_input"] = comment_input;
 
             Data.submitSighting(sighting, function(response){
-
                 if (response["success"] == true){
                     $('#photo_comments').hide();
                     $('#success').show();
