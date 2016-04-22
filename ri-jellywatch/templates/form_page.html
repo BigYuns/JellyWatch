@@ -251,8 +251,13 @@
             if ($('.visible').attr('id')=="jellyfish_questions"){
                 window.location.href="index.html" // go to MAP
             }
+            if ($('.visible').attr('id') == 'photo_comments') {
+                // hide the next button
+                window.location.href="index.html"
+            }
             $('#next_text').show();
             $('.visible').toggleClass('visible').prev().toggleClass('visible');
+            
         });
 
 
