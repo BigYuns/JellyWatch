@@ -1,4 +1,4 @@
-.jellyfish {
+.jellyfish, .nearby_species {
 	width: 150px;
 	max-width: 100%;
 	display: inline-block;
@@ -6,6 +6,10 @@
 }
 
 #jellyfish_questions {
+	text-align: center;
+}
+
+#marine_animals_questions {
 	text-align: center;
 }
 
@@ -84,3 +88,14 @@
     margin-top: 60%;
 }
 
+#water_use_questions {
+	text-align: center;
+}
+.uses {
+	display: inline-block;
+	text-align: left;
+	line-height: 2;
+}
+.uses input {
+	font-size: 2em;
+}

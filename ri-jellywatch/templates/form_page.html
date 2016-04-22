@@ -149,8 +149,11 @@
         <div class="question_div" id="marine_animals_questions">
 
             <h4 class="question">Do you see any of these species of marine animal nearby?</h4>
+			
+            <div class="col span_1_of_3 nearby_species">
                 <img src="../public/img/Comb_Jelly.jpg" class="image">
-                <br><input type="checkbox" name="marine" value="Horseshoe Crab">Horseshoe Crab
+                <p class="species_name"><input type="checkbox" name="marine" value="Horseshoe Crab" id='crab'> <label for='crab'>Horseshoe Crab</label></p>
+            </div>
 
         </div> 
 
@@ -161,12 +164,14 @@
         <div class="question_div" id="water_use_questions">
 
                 <h4 class="question"> How are people using the water nearby?</h4>
-                        <input type="checkbox" name="water_use" value="No one is using the water"> No one is using the water
-                    <br><input type="checkbox" name="water_use" value="Sunbathing"> Sunbathing
-                    <br><input type="checkbox" name="water_use" value="Swimming"> Swimming
-                    <br><input type="checkbox" name="water_use" value="Fishing from shore"> Fishing from shore
-                    <br><input type="checkbox" name="water_use" value="Boating"> Boating
-                    <br><input type="checkbox" name="water_use" value="Harvesting shellfish"> Harvesting shellfish
+				<div class='uses'>
+                       <input type="checkbox" name="water_use" value="No one is using the water"> No one is using the water<br>
+                       <input type="checkbox" name="water_use" value="Sunbathing"> Sunbathing<br>
+                       <input type="checkbox" name="water_use" value="Swimming"> Swimming<br>
+                       <input type="checkbox" name="water_use" value="Fishing from shore"> Fishing from shore<br>
+                       <input type="checkbox" name="water_use" value="Boating"> Boating<br>
+                       <input type="checkbox" name="water_use" value="Harvesting shellfish"> Harvesting shellfish
+				 </div>
 
         </div>
 
