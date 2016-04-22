@@ -151,7 +151,7 @@
             <h4 class="question">Do you see any of these species of marine animal nearby?</h4>
 			
             <div class="col span_1_of_3 nearby_species">
-                <img src="../public/img/Comb_Jelly.jpg" class="image">
+                <img src="../public/img/Horseshoe_Crab.jpg" class="image">
                 <p class="species_name"><input type="checkbox" name="marine" value="Horseshoe Crab" id='crab'> <label for='crab'>Horseshoe Crab</label></p>
             </div>
 
@@ -180,18 +180,6 @@
         ##################################### --> 
 
         <div class="question_div" id="environment_questions">
-
-           <h4 class="question">How's the weather? </h4>
-                    <input type="radio" name="weather" value="Sunny"> Sunny
-                <br><input type="radio" name="weather" value="Cloudy"> Cloudy
-                <br><input type="radio" name="weather" value="Overcast"> Overcast 
-                <br><input type="radio" name="weather" value="Rainy"> Rainy
-                <br><input type="radio" name="weather" value="Snowy"> Snowy
-
-            <h4 class="question">How windy is it? </h4>
-                    <input type="radio" name="wind" value="Low"> Low
-                <br><input type="radio" name="wind" value="Medium"> Medium
-                <br><input type="radio" name="wind" value="High"> High
 
             <h4 class="question">How clear is the water? </h4>
                     <input type="radio" name="water" value="Clear"> Clear
@@ -237,6 +225,7 @@
         <div id="success_blue">
             <div id="mascot"></div>
             <span id="thanks"> Thanks for helping us study and preserve the Bay!</span>
+            
         </div>
     </div>
 
@@ -378,6 +367,15 @@
             var current_time = String(hour)+":"+minutes+ampm;
             var current_date = String(today.getMonth()+1)+"/"+String(today.getDate())+"/"+String(today.getFullYear());
 
+             // *********** Comments *********** 
+            var text = $('#photo_comments').find('input[name="comments"]').val();
+            var comment_input;
+            if (text){
+                comment_input = text;
+            }
+            else{
+                comment_input = "None";
+            }
             // * * * * * * * * * * * * * * * * * * * * * * * 
             //          Putting it All Together 
             // * * * * * * * * * * * * * * * * * * * * * * *  
@@ -392,6 +390,7 @@
             sighting["water_uses"] = water_uses;
             sighting["time_of_day"] = current_time;
             sighting["date"] = current_date;
+            sighting["comment_input"] = comment_input;
 
             //need to add comments and photos n stuff
 
