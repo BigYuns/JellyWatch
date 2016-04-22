@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>Administrator Page</title>
+
+	<!-- Fonts -->
+    <link href='https://fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Rubik' rel='stylesheet' type='text/css'>
+
+    <!-- Stylin -->
+    <link href='../public/stylesheets/header_style.css' rel='stylesheet' type='text/css'>
+    <link href='../public/stylesheets/view_data.css' rel='stylesheet' type='text/css'>
+    
+    <!-- Javascript/JQUERY -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+	
+	<script src='../public/scripts/data.js'></script>
+	
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+</head>
+
+<body>
+	<div id="header">
+        <div id="prev">
+            <a href="admin_page.html" id="prev_text">go back</a>
+            </div>
+        <div id="next">
+            <a href="" id="next_text"></a>
+            </div>
+        <!-- <div id="page_title"></div> -->
+        <div id="logo">JELLYWATCH</div>
+    </div>
+
+    <div id="content">
+
+		<h2>Recent Jellyfish sightings</h2>
+		
+		<form action='/jellyfish/csv' method='POST'><input id='csv_token' type='hidden' name='token'/><input type=submit value="Download all sightings as a CSV"/></form>
+		
+		<br/>
+		
+		<table>
+			<thead><tr></tr></thead>
+			<tbody></tbody>
+		</table>
+	
+	</div>
+	
+	<script>
+	$("#csv_token").val(Data.token);
+	
+	Data.getRecentSightings(function(data) {
+		data.headings.forEach(function(name) {
+			$('thead tr').append($(document.createElement('td')).text(name))
+		})
+		data.sightings.forEach(function(sighting) {
+			var row = $(document.createElement('tr'));
+			data.headings.forEach(function(name, i) {
+				row.append($(document.createElement('td')).text(sighting[name]))
+			});
+			$('tbody').append(row)
+		})
+	})
+	</script>
+</body>
+</html>

@@ -88,8 +88,24 @@
     margin-top: 60%;
 }
 
+<<<<<<< HEAD
+#myImg{
+   display: none;
+   height: 40%;
+   width: 40%;
+}
+
+/* Grid Stuff... */
+
+/*  SECTIONS  */
+.section {
+    clear: both;
+    padding: 0px;
+    margin: 0px;
+=======
 #water_use_questions {
 	text-align: center;
+>>>>>>> 218bdc230063b383a25933d7488f2e5046dce5e9
 }
 .uses {
 	display: inline-block;
