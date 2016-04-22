@@ -122,14 +122,20 @@ class JellyfishMapHandler(webapp2.RequestHandler):
 
 class JellyfishAddHandler(webapp2.RequestHandler):
     def post(self):
-        success = jellyfish.Sighting.insert_json(json.loads(self.request.get('sighting'))) is not None
+        token = self.request.get('token')
+        j = json.loads(self.request.get('sighting'))
+        success = jellyfish.Sighting.insert_json(j, token) is not None
         send_json(self, {"success": success})
 
 class JellyfishCsvHandler(webapp2.RequestHandler):
-    def get(self):
-        self.response.headers['Content-Type'] = 'text/csv'
-        self.response.headers['Access-Control-Allow-Origin'] = '*'
-        jellyfish.write_csv(self.response)
+    def post(self):
+        if users.is_admin(self.request.get('token')):
+            self.response.headers['Content-Type'] = 'text/csv'
+            self.response.headers['Access-Control-Allow-Origin'] = '*'
+            self.response.headers['Content-Disposition'] = 'attachment; filename=JellywatchSightings.csv;'
+            jellyfish.write_csv(self.response)
+        else:
+            self.response.write("Only admins can download the CSV")
 
 app = webapp2.WSGIApplication([
     ('/', MainHandler),

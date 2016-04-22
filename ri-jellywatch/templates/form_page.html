@@ -14,6 +14,8 @@
     <!-- Javascript -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
     <script type="text/javascript" src="../public/scripts/data.js"></script>
+	
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
 
 </head>
 
@@ -232,7 +234,17 @@
         </form>
     </div>
 
-    <div id="success">u succeeded congrats</div>
+    <!-- #####################################
+        Displayed on Form Submit Success
+    ##################################### --> 
+
+    <div id="success">
+        <div id="success_blue">
+            <div id="mascot"></div>
+            <span id="thanks"> Thanks for helping us study and preserve the Bay!</span>
+            
+        </div>
+    </div>
 
    <!-- JAVASCRIPT STUFF --> 
 
@@ -248,41 +260,27 @@
         // ######################################
 
         $(document).ready(function(){
-            $('#form').children().not(".visible").hide();
             $('#success').hide();
         })
 
         $('#prev_text').click(function(e){
             e.preventDefault();
             if ($('.visible').attr('id')=="jellyfish_questions"){
-                //go to MAP
-                window.location.href="index.html"
-            } else if ($('.visible').attr('id')=="photo_comments"){
-                $('#next_text').show();
-            }; 
-            $('.visible').prev().toggle(function(){
-                $(this).toggleClass("visible");
-            });
-            $('.visible').last().toggle(function(){
-                $(this).toggleClass("visible");
-            });
+                window.location.href="index.html" // go to MAP
+            }
+            $('#next_text').show();
+            $('.visible').toggleClass('visible').prev().toggleClass('visible');
         });
 
 
         $('#next_text').click(function(e){
             e.preventDefault();
-            $('.visible').next().toggle(function(){
-                $(this).toggleClass("visible");
-                if ($(this).attr('id')=="photo_comments"){
-                    //hide the next button
-                    $('#next_text').hide();
-                };
-            });
-            $('.visible').first().toggle(function(){
-                $(this).toggleClass("visible");
-            });
+			$('.visible').first().toggleClass('visible').next().toggleClass('visible');
+			if ($('.visible').attr('id') == 'photo_comments') {
+                // hide the next button
+                $('#next_text').hide();
+			}
         });
-
 
         // ######################################
         // Send Form Data
@@ -394,13 +392,10 @@
 
 
             Data.submitSighting(sighting, function(response){
-                
-                // move this stuff into the if statement
-                $('#photo_comments').hide();
-                $('#success').show();
 
                 if (response["success"] == true){
-                    
+                    $('#photo_comments').hide();
+                    $('#success').show();
                 };
             });
 

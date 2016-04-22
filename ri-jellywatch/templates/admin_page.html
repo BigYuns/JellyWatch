@@ -16,6 +16,8 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
 	
 	<script src='../public/scripts/data.js'></script>
+	
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
 
     <!-- Temporary styling, will move this to a css file later -->
     <style>
@@ -36,6 +38,18 @@
 </head>
 
 <body>
+	<div id="header">
+        <div id="prev">
+            <a href="index.html" id="prev_text">go back</a>
+            </div>
+        <div id="next">
+            <a href="" id="next_text"></a>
+            </div>
+        <!-- <div id="page_title"></div> -->
+        <div id="logo">JELLYWATCH</div>
+    </div>
+
+    <div id="content">
 
 	<h2>Registered Users</h2>
 
@@ -58,8 +72,8 @@
 			<!-- Add User -->
 			<tr id = "add_user_row">
 			<form id = "add_user_form">
-				<td><input type="text" class="email" name="new_email"></input></td>	
-				<td><input type="text" class="password" name="new_password"></input></td>	
+				<td><input type="text" class="email" name="new_email" autocapitalize="off" autocorrect="off"></input></td>	
+				<td><input type="text" class="password" name="new_password" autocapitalize="off" autocorrect="off"></input></td>	
 				<td><input type="checkbox" class="org" name="new_org"></input></td>	
 				<td><input type="checkbox" class="org" name="new_admin"></input></td>
 				<td><input type="submit" id="submit_new_user"></input> <input type="button" value="Cancel" onClick="cancelAddUser()"></input></td>
@@ -68,9 +82,12 @@
 			
 		</table>
 	</div>
+	<form action='/jellyfish/csv' method='POST'><input id='csv_token' type='hidden' name='token'/><input type=submit value="Download sightings as CSV"/></form>
+	</div>
 
 	<!-- Javascript stuff, will probably move to a separate file later -->
 	<script type="text/javascript">
+		if (!Data.isLoggedIn()) location.href = 'login.html';
 		
 		/* 
 			Shows the input boxes where admin can enter new user info
@@ -83,6 +100,8 @@
 		function cancelAddUser() {
 			$('#add_user_row').hide();
 		}
+		
+		$("#csv_token").val(Data.token);
 		
 		/*
 			Reloads data from the server
