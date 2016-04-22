@@ -361,6 +361,15 @@
             var current_time = String(hour)+":"+minutes+ampm;
             var current_date = String(today.getMonth()+1)+"/"+String(today.getDate())+"/"+String(today.getFullYear());
 
+             // *********** Comments *********** 
+            var text = $('#photo_comments').find('input[name="comments"]').val();
+            var comment_input;
+            if (text){
+                comment_input = text;
+            }
+            else{
+                comment_input = "None";
+            }
             // * * * * * * * * * * * * * * * * * * * * * * * 
             //          Putting it All Together 
             // * * * * * * * * * * * * * * * * * * * * * * *  
@@ -375,6 +384,7 @@
             sighting["water_uses"] = water_uses;
             sighting["time_of_day"] = current_time;
             sighting["date"] = current_date;
+            sighting["comment_input"] = comment_input;
 
             //need to add comments and photos n stuff
 
