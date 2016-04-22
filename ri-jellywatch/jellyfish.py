@@ -27,6 +27,7 @@ class Sighting(ndb.Model):
     user_email = ndb.StringProperty()
     user_name = ndb.StringProperty()
     
+    comment_input = ndb.TextProperty()
     photo_urls = ndb.StringProperty(repeated=True)
     
     date = ndb.StringProperty()
@@ -42,7 +43,7 @@ class Sighting(ndb.Model):
         }
     
     def import_json(self, json_obj):
-        fields = ['nearby_species', 'water_uses', 'water_clarity', 'weather', 'attached_seaweed', 'microalgae_blooms', 'lat', 'lng', 'date', 'time_of_day', 'user_name']
+        fields = ['nearby_species', 'water_uses', 'water_clarity', 'weather', 'attached_seaweed', 'microalgae_blooms', 'lat', 'lng', 'date', 'time_of_day', 'user_name', 'comment_input']
         for field in fields:
             val = json_obj.get(field)
             if isinstance(val, unicode) or isinstance(val, str): val = val.lower()
@@ -65,9 +66,10 @@ def get_jellyfish(lat_min=-1000, lat_max=1000, lon_min=-1000, lon_max=1000):
     # Sighting.lng >= lon_min, Sighting.lng <= lon_max
     return [j.to_json() for j in matches]
 
-def write_csv(file):
+
+def get_sightings(limit=None):
     repeating_string_fields = ['water_uses', 'nearby_species', 'microalgae_blooms']
-    single_fields = ['user_email', 'user_name', 'lat', 'lng', 'weather', 'wind_speed', 'attached_seaweed', 'date', 'time_of_day', 'location_name', 'temperature']
+    single_fields = ['user_email', 'user_name', 'lat', 'lng', 'weather', 'wind_speed', 'attached_seaweed', 'date', 'time_of_day', 'location_name', 'temperature', 'comment_input']
     
     jellyfish_names = set()
     repeating_field_values = defaultdict(set)
@@ -85,12 +87,10 @@ def write_csv(file):
     for field in repeating_string_fields:
         columns += [field + u'=' + val for val in list(repeating_field_values[field])]
     
-    writer = DictWriter(file, columns)
-    writer.writeheader()
-    
     colset = set(columns)
+    sightings = []
     
-    for sighting in Sighting.query().fetch():
+    for sighting in Sighting.query().order(-Sighting.date_inserted).fetch(limit=limit):
         d = {field: unicode(getattr(sighting, field)) for field in single_fields}
         for field in repeating_string_fields:
             for val in repeating_field_values[field]:
@@ -98,4 +98,17 @@ def write_csv(file):
         for species, count in sighting.species_counts.iteritems():
             d[species] = count
         d = {k: v for k,v in d.iteritems() if k in colset}
-        writer.writerow(d)
+        sightings.append(d)
+    
+    return columns, sightings
+
+def write_csv(file):
+    headings, sightings = get_sightings()
+    writer = DictWriter(file, headings)
+    writer.writeheader()
+    for sighting in sightings:
+        writer.writerow(sighting)
+
+# headings, sightings = jellyfish.get_recent()
+def get_recent():
+    return get_sightings(limit=20)

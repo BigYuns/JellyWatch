@@ -118,6 +118,9 @@ Data = {
 		}
 		http.send(null);
 	},
+	getRecentSightings: function(callback) {
+		Data.get('/jellyfish/recent', {}, callback);
+	},
 	post: function(url, params, callback) {
 		var http = new XMLHttpRequest();
 		var reqURL = Data._url + url;
@@ -141,8 +144,8 @@ Data = {
 	     str.push(encodeURIComponent(p) + "=" + encodeURIComponent(obj[p]));
 	  return str.join("&");
 	},
-	_url: "https://ri-jellywatch.appspot.com",
-	// _url: 'http://localhost:19080',
+	// _url: "https://ri-jellywatch.appspot.com",
+	_url: 'http://localhost:19080',
 	_setup: function() {
 		if (localStorage.user && localStorage.token) {
 			Data.token = localStorage.token;

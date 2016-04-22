@@ -137,6 +137,18 @@ class JellyfishCsvHandler(webapp2.RequestHandler):
         else:
             self.response.write("Only admins can download the CSV")
 
+class RecentJellyfishHandler(webapp2.RequestHandler):
+    def get(self):
+        token = self.request.get('token')
+        response = {}
+        if users.is_admin(token):
+            headings, sightings = jellyfish.get_recent()
+            response = {"headings": headings, "sightings": sightings}
+        else:
+            response = {"message": "Only admins can see the list of users"}
+        
+        send_json(self, response)
+
 app = webapp2.WSGIApplication([
     ('/', MainHandler),
     ('/test', TestPageHandler),
@@ -146,5 +158,6 @@ app = webapp2.WSGIApplication([
     ('/users/login', LoginHandler),
     ('/jellyfish/map', JellyfishMapHandler),
     ('/jellyfish/add', JellyfishAddHandler),
-    ('/jellyfish/csv', JellyfishCsvHandler)
+    ('/jellyfish/csv', JellyfishCsvHandler),
+    ('/jellyfish/recent', RecentJellyfishHandler)
 ], debug=True)
