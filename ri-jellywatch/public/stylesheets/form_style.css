@@ -88,7 +88,6 @@
     margin-top: 60%;
 }
 
-<<<<<<< HEAD
 #myImg{
    display: none;
    height: 40%;
@@ -102,10 +101,10 @@
     clear: both;
     padding: 0px;
     margin: 0px;
-=======
+}
+
 #water_use_questions {
 	text-align: center;
->>>>>>> 218bdc230063b383a25933d7488f2e5046dce5e9
 }
 .uses {
 	display: inline-block;
@@ -115,3 +114,15 @@
 .uses input {
 	font-size: 2em;
 }
+/*.button {
+    background-color: #4CAF50;
+    border: none;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+}*/
