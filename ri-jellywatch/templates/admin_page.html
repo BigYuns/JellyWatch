@@ -108,7 +108,9 @@
 			Reloads data from the server
 		*/
 		function reload() {
+
 			Data.listUsers(function(callback) {
+				if(callback!=null){
 				if (callback.message) {
 					alert(callback.message);
 				} else {
@@ -133,7 +135,10 @@
 						
 					})
 				}
+			}
 			})
+
+			
 		}
 		
 		function deleteUser(email) {
@@ -166,6 +171,7 @@
 			var password = $("[name='new_password']").val();
 			
 			Data.createOrUpdateAccount(email, password, isAdmin, isOrg, function(success) {
+				console.log("called"); 
 				reload();
 			})
 			
