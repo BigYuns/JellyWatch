@@ -7,6 +7,7 @@ from collections import defaultdict
 from csv import DictWriter
 import weather
 import users
+import photo
 
 jellyfish_names = ['comb jelly', 'cucumber or basket comb jelly', 'moon jelly', u'lion’s mane', 'stinging sea nettle', 'crystal jelly', 'cross jelly', 'man of war', 'salps', 'freshwater jellyfish', 'other', 'i don’t know. see photos.']
 
@@ -49,6 +50,8 @@ class Sighting(ndb.Model):
             if isinstance(val, unicode) or isinstance(val, str): val = val.lower()
             setattr(self, field, json_obj.get(field))
         self.species_counts = {k.lower(): v.lower() for k, v in json_obj['species_counts'].iteritems()}
+        if json_obj.get('photo_url'):
+            self.photo_urls = [photo.store_photo(json_obj.get('photo_url'))]
     
     @classmethod
     def insert_json(cls, json_obj, token):
@@ -73,6 +76,7 @@ def get_sightings(limit=None):
     
     jellyfish_names = set()
     repeating_field_values = defaultdict(set)
+    max_photo_fields = 0
     
     for sighting in Sighting.query().fetch():
         for field in repeating_string_fields:
@@ -81,11 +85,13 @@ def get_sightings(limit=None):
                 s.add(val)
         for name in sighting.species_counts.keys():
             jellyfish_names.add(name)
+        max_photo_fields = max(max_photo_fields, len(sighting.photo_urls))
     
     columns = list(single_fields)
     columns += list(jellyfish_names)
     for field in repeating_string_fields:
         columns += [field + u'=' + val for val in list(repeating_field_values[field])]
+    columns += ['photo_{0}'.format(i+1) for i in xrange(max_photo_fields)]
     
     colset = set(columns)
     sightings = []
@@ -97,6 +103,12 @@ def get_sightings(limit=None):
                 d[field + u"=" + val] = "true" if val in getattr(sighting, field) else ""
         for species, count in sighting.species_counts.iteritems():
             d[species] = count
+        
+        for i in xrange(max_photo_fields):
+            d['photo_{0}'.format(i+1)] = 'https://ri-jellywatch.appspot.com' + sighting.photo_urls[i] if i < len(sighting.photo_urls) else None
+        
+        if d.get('user_name') == 'null': d['user_name'] = ""
+        
         d = {k: v for k,v in d.iteritems() if k in colset}
         sightings.append(d)
     
