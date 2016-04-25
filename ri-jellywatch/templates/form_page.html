@@ -350,9 +350,14 @@
             if (id=='none'){
                 $('#jellyfish_questions label').css('background-color', unselected_color);
                 $('#label-none').css('background-color', selected_color); 
+                $('.jellyfish input[type="radio"]').each(function(){
+                    $(this).prop('checked', false);
+                });
+                $('#label-none').prop('checked', true);
             } else {
                 $('#label-none').css('background-color', unselected_color);
                 $('#label-'+id).css('background-color', selected_color); //changes the color of the selected button
+                $('#label-none').prop('checked', false);
             }
         });
 
