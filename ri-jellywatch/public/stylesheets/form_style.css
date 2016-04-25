@@ -85,8 +85,7 @@
     color: white;
     text-align: center;
     position: relative;
-    margin-top: 60%;
-}
+    margin-top: 60%;}
 
 #myImg{
    display: none;
@@ -125,4 +124,49 @@
     font-size: 16px;
     margin: 4px 2px;
     cursor: pointer;
+}
+
+#success {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    min-width: 100%;
+    min-height: 100%;
+    width: auto;
+    height: auto;
+    z-index: -100;
+    -webkit-transform: translateX(-50%) translateY(-50%);
+    transform: translateX(-50%) translateY(-50%);
+    background: url(http://i.giphy.com/2K8GaJPVJlbzi.gif) no-repeat;
+    background-size: cover;
+    opacity: 0.6;
+}
+
+.convo{
+    height: 22em;
+    position: relative;
+    padding-top: 10%;
+    padding-bottom: 20%; 
+}
+
+.typed-cursor{
+    opacity: 1;
+    -webkit-animation: blink 0.7s infinite;
+    -moz-animation: blink 0.7s infinite;
+    animation: blink 0.7s infinite;
+}
+@keyframes blink{
+    0% { opacity:1; }
+    50% { opacity:0; }
+    100% { opacity:1; }
+}
+@-webkit-keyframes blink{
+    0% { opacity:1; }
+    50% { opacity:0; }
+    100% { opacity:1; }
+}
+@-moz-keyframes blink{
+    0% { opacity:1; }
+    50% { opacity:0; }
+    100% { opacity:1; }
 }

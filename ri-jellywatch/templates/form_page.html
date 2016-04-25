@@ -14,8 +14,11 @@
     <!-- Javascript -->
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
     <script type="text/javascript" src="../public/scripts/data.js"></script>
-    <script type="text/javascript" src="../public/scripts/resize-image.js"></script>	
-	
+    <script type="text/javascript" src="../public/scripts/resize-image.js"></script>
+    <script type="text/javascript" src="../public/scripts/jquery.js"></script>
+    <script type="text/javascript" src="../public/scripts/typed.js"></script>
+
+
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
 
 </head>
@@ -226,14 +229,22 @@
     <!-- #####################################
         Displayed on Form Submit Success
     ##################################### --> 
+    <div id = "success" style="position: fixed; z-index: -99; width: 100%; height: 100%">
+       <div class="convo">
+           <span class="element" style="color:yellow"></span>
+       </div>
+    
+    </div>
 
-    <div id="success">
+
+
+  <!--   <div id="success">
         <div id="success_blue">
             <div id="mascot"><img src='../public/img/jelly.png'></div>
             <span id="thanks"> Thanks for helping us study and preserve the Bay!</span>
             
         </div>
-    </div>
+    </div> -->
 
    <!-- JAVASCRIPT STUFF --> 
 
@@ -422,6 +433,14 @@
             }
         });
     });
+
+            $(function(){
+                $(".element").typed({
+                    strings: ["hello this  is jelly fish team"],
+                    typeSpeed: 0
+                });
+            });
+
     </script>
 </body>
 
