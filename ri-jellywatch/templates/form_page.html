@@ -13,7 +13,9 @@
     
     <!-- Javascript -->
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
-    <script type="text/javascript" src="../public/scripts/data.js"></script>	
+    <script type="text/javascript" src="../public/scripts/data.js"></script>
+    <script type="text/javascript" src="../public/scripts/resize-image.js"></script>	
+	
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
 
 </head>
@@ -413,19 +415,13 @@
     $(function () {
         $(":file").change(function () {
             if (this.files && this.files[0]) {
-                var reader = new FileReader();
-                reader.onload = imageIsLoaded;
-
-                reader.readAsDataURL(this.files[0]);
-                document.getElementById("myImg").style.display="block"
+				resizeImageFileForUpload(this.files[0], function(imgUrl) {
+					$("#myImg").css('display', 'block').attr('src', imgUrl);
+					url = imgUrl;
+				})
             }
         });
     });
-
-    function imageIsLoaded(e) {
-        $('#myImg').attr('src', e.target.result);
-        url = e.target.result; 
-    };
     </script>
 </body>
 

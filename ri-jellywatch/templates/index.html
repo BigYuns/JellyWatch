@@ -43,11 +43,13 @@
 		<img id=bubble src='../public/img/RecordSighting.svg' onClick='recordSighting()'/>
 	</div>
 	
-	<div id='menu' style='display: none'>
-		<div>
-			<p><a href='#' onClick='logOut()'>Log Out</a></p>
-			<p><a href='https://www.facebook.com/RIjellywatch'>RI Jellywatch on Facebook</a></p>
-			<p><a href='#' onClick='closeMenu()'>Back to Map</a></p>
+	<div id='menu' class='dismiss' style='display: none'>
+		<div class='dismiss'>
+			<div id='box'>
+				<p><a href='#' onClick='logOut()'>Log Out</a></p>
+				<p><a href='https://www.facebook.com/RIjellywatch'>RI Jellywatch on Facebook</a></p>
+				<p><a href='#' onClick='closeMenu()'>Back to Map</a></p>
+			</div>
 		</div>
 	</div>
 	<script>
@@ -64,6 +66,12 @@
 	function closeMenu() {
 		$("#menu").hide();
 	}
+	
+	$('#menu').click(function(e) {
+		if ($(e.target).hasClass('dismiss')) {
+			closeMenu();
+		}
+	})
 
 	function logOut() {
 		Data.logOut()
