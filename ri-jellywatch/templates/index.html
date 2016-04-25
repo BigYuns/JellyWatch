@@ -40,9 +40,12 @@
 	
 	<div id='mapContainer'>
 		<div id="googleMap"></div>
-		<img id=bubble src='../public/img/RecordSighting.svg' onClick='recordSighting()'/>
+		<div class= "imgbox">
+			<img id="bubble" src='../public/img/RecordSighting.svg' onmouseover = "this.src = '../public/img/RecordSightingHover.svg'" onmouseout = "this.src='../public/img/RecordSighting.svg'" onClick='recordSighting()' />
+		</div>
 	</div>
 	
+
 	<div id='menu' style='display: none'>
 		<div>
 			<p><a href='#' onClick='logOut()'>Log Out</a></p>
@@ -50,6 +53,7 @@
 			<p><a href='#' onClick='closeMenu()'>Back to Map</a></p>
 		</div>
 	</div>
+
 	<script>
 	if (Data.isLoggedIn()) {
 		document.getElementById('next_text').style.display = (Data.user && Data.user.is_admin) ? 'block' : 'none';
@@ -72,8 +76,10 @@
 
 	function recordSighting() {
 		location.href = 'form_page.html#' + MapPos.lat + ',' + MapPos.lng;
+
 	}
 	google.maps.event.addDomListener(window, 'load', initMap);
+
 	</script>
 </body>
 </html>

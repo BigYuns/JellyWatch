@@ -41,3 +41,10 @@ html, body, #mapContainer, #googleMap {
 	bottom: 50%;
 	z-index: 10;
 }
+
+.imgbox:hover{
+	background-image: url("../img/RecordSightingHover.svg");
+
+}
+
+
