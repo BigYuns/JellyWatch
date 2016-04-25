@@ -1,12 +1,13 @@
 from google.appengine.ext import ndb
 import urlparse
+import webapp2
 
 class Photo(ndb.Model):
     mime = ndb.StringProperty()
     data = ndb.BlobProperty()
     
     @classmethod
-    def from_data_uri(cls, uri):
+    def from_data_uri(cls, url):
         up = urlparse.urlparse(url)
         head, data = up.path.split(',', 1)
         bits = head.split(';')
@@ -25,9 +26,15 @@ class Photo(ndb.Model):
         return p
     
     def get_url(self):
-        return '/photo?id=' + self.key.id()
+        return '/photo?id=' + self.key.urlsafe()
 
-def upload_photo(photo_url):
+def store_photo(photo_url):
     p = Photo.from_data_uri(photo_url)
     p.put()
     return p.get_url()
+
+class ServePhotoHandler(webapp2.RequestHandler):
+    def get(self):
+        p = ndb.Key(urlsafe=self.request.get('id')).get()
+        self.response.headers['Content-Type'] = p.mime.encode('utf-8')
+        self.response.write(p.data)
