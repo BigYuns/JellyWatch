@@ -25,6 +25,13 @@ body {
 /*    position: absolute;
     left: 50%;*/
     }
+#logo a {
+		text-decoration: none;
+		color: inherit;
+	}
+#logo a:hover {
+		text-decoration: underline;
+	}
 
 #page_title {
     padding-top: 30px;
