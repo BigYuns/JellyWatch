@@ -132,7 +132,7 @@
 
 
 #jellyfish_questions input[type="radio"]{
-    display: none;
+    /*display: none;*/
 }
 #marine_animals_questions input[type="radio"]{
     display: none;
