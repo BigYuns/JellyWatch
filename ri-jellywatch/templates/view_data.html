@@ -57,7 +57,12 @@
 		data.sightings.forEach(function(sighting) {
 			var row = $(document.createElement('tr'));
 			data.headings.forEach(function(name, i) {
-				row.append($(document.createElement('td')).text(sighting[name]))
+				var val = sighting[name];
+				var content = $(document.createElement('span')).text(val);
+				if (name.indexOf('photo_') == 0) {
+					content = $(document.createElement('a')).attr('href', val).text(val);
+				}
+				row.append($(document.createElement('td')).append(content));
 			});
 			$('tbody').append(row)
 		})

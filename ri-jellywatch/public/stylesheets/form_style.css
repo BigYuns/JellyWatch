@@ -114,19 +114,21 @@
 .uses input {
 	font-size: 2em;
 }
-.button {
-    background-color: #4CAF50;
+.radio_label {
+    background-color: gray;
     border: none;
     color: white;
-    padding: 15px 15px;
+    padding: 7px 10px;
     text-align: center;
     text-decoration: none;
     display: table;
     font-size: 16px;
-    margin: 4px 2px;
-    cursor: pointer;
+    margin: 5px auto;
+    cursor: pointer;   
+    font-family: Rubik;
 }
 
+<<<<<<< HEAD
 /*.squaredTwo {
     width: 28px;
     height: 28px;
@@ -201,3 +203,8 @@
 }
 
 */
+=======
+#jellyfish_questions input[type="radio"]{
+    display: none;
+}
+>>>>>>> 582b6294ac9de492f395514d3eb8aa4e196ee5fe

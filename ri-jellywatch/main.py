@@ -19,6 +19,7 @@ import users
 import json
 from google.appengine.ext import ndb
 import jellyfish
+import photo
 
 def send_json(handler, response):
     handler.response.headers['Content-Type'] = 'application/json'
@@ -159,5 +160,6 @@ app = webapp2.WSGIApplication([
     ('/jellyfish/map', JellyfishMapHandler),
     ('/jellyfish/add', JellyfishAddHandler),
     ('/jellyfish/csv', JellyfishCsvHandler),
-    ('/jellyfish/recent', RecentJellyfishHandler)
+    ('/jellyfish/recent', RecentJellyfishHandler),
+    ('/photo', photo.ServePhotoHandler)
 ], debug=True)
