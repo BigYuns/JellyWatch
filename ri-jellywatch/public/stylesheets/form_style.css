@@ -130,5 +130,5 @@
 }
 
 #jellyfish_questions input[type="radio"]{
-    display: none;
+    visibility: hidden;
 }
