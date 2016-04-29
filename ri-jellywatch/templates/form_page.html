@@ -344,7 +344,7 @@
 
 		// Add unique IDs to all the jellyfish radio buttons and set the 'for' property on the labels
 		var prevId = 0;
-		$('.jellyfish label').each(function(i, label) {
+		$('.jellyfish label, .nearby_species label').each(function(i, label) {
 			var id = 'radio-' + prevId;
             var label_id = 'label-'+id;
 			$(label).prev().attr('id', id);
@@ -353,7 +353,7 @@
 			prevId++;
 		});
 
-        // Change selected button's color
+        // Change selected button's color (for jellyfish)
         // NOTE: NEED TO MAKE SURE THIS DOESN'T SCREW UP OTHER PAGES' STUFF
         $('#jellyfish_questions input[type="radio"]').click(function(){
             var name = $(this).attr('name');
@@ -372,14 +372,29 @@
                 $('.jellyfish input[type="radio"]').each(function(){
                     $(this).prop('checked', false);
                 });
-                $('#label-none').prop('checked', true);
+                $('#none').prop('checked', true);
             } else {
                 $('#label-none').css('background-color', unselected_color);
                 $('#label-none').css('color', 'black');
                 $('#label-'+id).css('background-color', selected_color); //changes color
                 $('#label-'+id).css('color', 'white');
-                $('#label-none').prop('checked', false);
+                $('#none').prop('checked', false);
             }
+        });
+
+        // Change selected button's color (for nearby marine species)
+        $('#marine_animals_questions input[type="radio"]').click(function(){
+            var name = $(this).attr('name');
+            var id = $(this).attr('id');
+            var unselected_color = '#D1D1D1';
+            var selected_color = '#5052FC';
+            $('[name='+name+']').each(function(){ //changes the colors of the rest of the buttons
+                $(this).next().css('background-color', unselected_color);
+                $(this).next().css('color', 'black');
+            });
+            $('#label-'+id).css('background-color', selected_color); //changes color
+            $('#label-'+id).css('color', 'white');
+
         });
 
 
