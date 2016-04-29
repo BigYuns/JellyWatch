@@ -349,21 +349,26 @@
         $('#jellyfish_questions input[type="radio"]').click(function(){
             var name = $(this).attr('name');
             var id = $(this).attr('id');
-            var unselected_color = 'gray';
-            var selected_color = 'orange';
+            var unselected_color = '#D1D1D1';
+            var selected_color = '#5052FC';
             $('[name='+name+']').each(function(){ //changes the colors of the rest of the buttons
                 $(this).next().css('background-color', unselected_color);
+                $(this).next().css('color', 'black');
             });
             if (id=='none'){
                 $('#jellyfish_questions label').css('background-color', unselected_color);
+                $('#jellyfish_questions label').css('color', 'black');
                 $('#label-none').css('background-color', selected_color); 
+                $('#label-none').css('color', 'white'); 
                 $('.jellyfish input[type="radio"]').each(function(){
                     $(this).prop('checked', false);
                 });
                 $('#label-none').prop('checked', true);
             } else {
                 $('#label-none').css('background-color', unselected_color);
-                $('#label-'+id).css('background-color', selected_color); //changes the color of the selected button
+                $('#label-none').css('color', 'black');
+                $('#label-'+id).css('background-color', selected_color); //changes color
+                $('#label-'+id).css('color', 'white');
                 $('#label-none').prop('checked', false);
             }
         });
