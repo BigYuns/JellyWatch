@@ -34,6 +34,11 @@
     text-align: center;
     font-weight: 400;
 }
+.question2{
+    font-size: 18px;
+    text-align: left;
+    font-weight: 400;
+}
 
 .species_name{
     font-size: 16px;
@@ -104,7 +109,31 @@
 }
 
 #water_use_questions {
-	text-align: center;
+    width: 300px;
+	text-align: left;
+}
+#water_use_questions  .question{
+    text-align: left;
+}
+#environment_questions{
+    width: 300px;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: left;
+}
+#environment_questions .question{
+    margin-left: auto;
+    margin-right: auto;
+    text-align: left;
+
+}
+
+#photo_comments{
+    width: 200px;
+    text-align: left;
+}
+#photo_comments .question{
+    text-align: left;
 }
 .uses {
 	display: inline-block;
