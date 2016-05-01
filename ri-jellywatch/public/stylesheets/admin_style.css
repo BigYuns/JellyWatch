@@ -1,11 +1,13 @@
 #content{
-	width: 80%;
+	width: 50%;
 	margin: 0 auto;
 	padding-top: 80px;
 }
 
 table {
-	margin: 0 auto;
+	/*width: 90%;*/
+	/*margin: 0 auto;*/
+	padding-bottom: 10px;
 }
 
 td:first-child {
@@ -15,4 +17,56 @@ td:first-child {
 
 tr:nth-child(even) {
 	background: #dbdbdb;
-};
+}
+table button {
+	/*width: 80%;
+	margin: 0 auto;*/
+	color: black;
+	padding: 5px 10px;
+    text-align: center;
+    text-decoration: none;
+    font-size: 12px;
+    margin: 0 auto;
+    cursor: pointer;   
+    font-family: Rubik;
+    /*width: 20%;*/
+    background: #D1D1D1;
+    /*box-shadow: 4px 3px 4px 0px rgba(0,0,0,0.50);*/
+}
+#users{
+	/*width: 80%;*/
+	margin: 0 auto;
+	/*padding-top: 80px;*/
+}
+
+
+#content .button{
+	color: black;
+	/*padding: 5px 10px;*/
+    text-align: center;
+    text-decoration: none;
+    font-size: 12px;
+/*    margin: 0 auto;
+*/    cursor: pointer;   
+    font-family: Rubik;
+    /*width: 20%;*/
+    background: #D1D1D1;
+/*    box-shadow: 4px 3px 4px 0px rgba(0,0,0,0.50);
+*/
+}
+#add_user_div .button{
+	box-shadow: 4px 3px 4px 0px rgba(0,0,0,0.50);
+}
+#content .csvbutton{
+	color: black;
+	padding: 5px 10px;
+    text-align: center;
+    text-decoration: none;
+    font-size: 12px;
+    margin: 0 auto;
+    cursor: pointer;   
+    font-family: Rubik;
+    width: 25%;
+    background: #D1D1D1;
+    box-shadow: 4px 3px 4px 0px rgba(0,0,0,0.50);
+}
