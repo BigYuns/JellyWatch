@@ -109,13 +109,31 @@
 }
 
 #water_use_questions {
-	text-align: center;
+    width: 300px;
+	text-align: left;
+}
+#water_use_questions  .question{
+    text-align: left;
 }
 #environment_questions{
-    text-align: center;
+    width: 300px;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: left;
 }
+#environment_questions .question{
+    margin-left: auto;
+    margin-right: auto;
+    text-align: left;
+
+}
+
 #photo_comments{
-    text-align: center;
+    width: 200px;
+    text-align: left;
+}
+#photo_comments .question{
+    text-align: left;
 }
 .uses {
 	display: inline-block;
