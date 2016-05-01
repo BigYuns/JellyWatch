@@ -115,21 +115,26 @@
 	font-size: 2em;
 }
 .radio_label {
-    background-color: gray;
-    border: none;
-    color: white;
+
+    color: black;
     padding: 5px 10px;
     text-align: center;
     text-decoration: none;
     display: table;
     font-size: 16px;
-    margin: 5px auto;
+    margin: 10px auto;
     cursor: pointer;   
     font-family: Rubik;
     width: 50%;
+    background: #D1D1D1;
+    box-shadow: 4px 3px 4px 0px rgba(0,0,0,0.50);
 }
 
 
 #jellyfish_questions input[type="radio"]{
     display: none;
+}
+#marine_animals_questions input[type="radio"]{
+    display: none;
+
 }
