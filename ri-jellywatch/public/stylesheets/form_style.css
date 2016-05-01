@@ -159,12 +159,15 @@
     background: #D1D1D1;
     box-shadow: 4px 3px 4px 0px rgba(0,0,0,0.50);
 }
-#jellyfish_questions input[type="radio"]{
-    display: none;
-}
+#jellyfish_questions input[type="radio"],
 #marine_animals_questions input[type="radio"]{
     display: none;
 }
+#environment_questions input[type="radio"] {
+    display: none;
+}
+
+/*checkbox stuff*/
 .box {
     float:left;
     margin-right: 10px;
@@ -176,9 +179,16 @@
     text-align: center;
 }
 .checked {
-    background: orange;
+    background: #5052FC;
 }
-
-#checkbox-0{
+.check{
+    position: relative;
+    display: none;
+    top: -3px;
+    width: 13px;
+    height: 13px;
+}
+#water_use_questions input[type="checkbox"],
+#environment_questions input[type="checkbox"]{
     display:none;
 }
