@@ -16,10 +16,10 @@ function initMap() {
 	var map = new google.maps.Map(document.getElementById('googleMap'), mapOptions); 
     google.maps.event.addListener(map, 'bounds_changed', function(){
 	MapPos = {lat: map.getCenter().lat(), lng: map.getCenter().lng()}
-      var lat_min = map.getBounds().R.R; 
-      var lat_max = map.getBounds().R.j; 
-      var lon_min = map.getBounds().j.j; 
-      var lon_max = map.getBounds().j.R;
+      var lat_min = map.getBounds().getSouthWest().lat(); 
+      var lat_max = map.getBounds().getNorthEast().lat(); 
+      var lon_min = map.getBounds().getSouthWest().lng(); 
+      var lon_max = map.getBounds().getNorthEast().lng();
      
       Data.getJellyfishForMap(lat_min, lat_max, lon_min, lon_max, function(data){
         //problem: whenever a user moves the map around, the maker is newly created. 

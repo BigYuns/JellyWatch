@@ -41,7 +41,8 @@ class Sighting(ndb.Model):
     
     def to_json(self):
         return {
-            "geometry": {"x": self.lat, "y": self.lng}
+            "geometry": {"x": self.lat, "y": self.lng},
+            "jellyfish": self.species_counts if self.species_counts else {}
         }
     
     def import_json(self, json_obj):
