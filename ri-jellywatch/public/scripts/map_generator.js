@@ -36,9 +36,31 @@ function initMap() {
               map: map,
               draggable:false,
               optimized: false, 
-			  position: {lat: data[i].geometry.x, lng: data[i].geometry.y}
+			  position: {lat: data[i].geometry.x, lng: data[i].geometry.y},
+				icon: iconForJellyfish(data[i])
               //icon: icon
             });//jellyMarker
+			(function(sighting) {
+				jellyMarker.addListener('click', function() {
+					var content = $("<dl></dl>");
+					Object.keys(sighting.jellyfish).forEach(function(jellyType) {
+						content.append($("<dt></dt>").text(jellyType));
+						content.append($("<dd></dd>").text(sighting.jellyfish[jellyType]));
+					});
+					
+					content.append($("<dt></dt>").text("Date"));
+					content.append($("<dd></dd>").text(sighting.date));
+					
+					content.append($("<dt></dt>").text("Created by"));
+					content.append($("<dd></dd>").text(sighting.user));
+					content.find("dt").css('font-weight', 'bold');
+					
+					var w = new google.maps.InfoWindow({
+						content: $(content).html()
+					})
+				    w.open(map, jellyMarker);
+				})
+			})(data[i]);
             jellyMarker.setMap(map); 
             index_check.add(i); 
           }//if

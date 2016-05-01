@@ -114,7 +114,7 @@ class ListUsersHandler(webapp2.RequestHandler):
 
 class JellyfishMapHandler(webapp2.RequestHandler):
     def get(self):
-        kwargs = {}
+        kwargs = {"limit": 60}
         for field in ['lat_min', 'lat_max', 'lon_min', 'lon_max']:
             val = self.request.get(field)
             if val:

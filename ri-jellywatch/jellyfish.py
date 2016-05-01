@@ -42,7 +42,9 @@ class Sighting(ndb.Model):
     def to_json(self):
         return {
             "geometry": {"x": self.lat, "y": self.lng},
-            "jellyfish": self.species_counts if self.species_counts else {}
+            "jellyfish": self.species_counts if self.species_counts else {},
+            "date": u"{0} at {1}".format(self.date, self.time_of_day),
+            "user": u"{0} from {1}".format(self.user_name, self.user_email) if self.user_name and self.user_name != 'null' else self.user_email
         }
     
     def import_json(self, json_obj):
@@ -65,10 +67,12 @@ class Sighting(ndb.Model):
         sighting.put()
         return sighting
 
-def get_jellyfish(lat_min=-1000, lat_max=1000, lon_min=-1000, lon_max=1000):
+def get_jellyfish(lat_min=-1000, lat_max=1000, lon_min=-1000, lon_max=1000, limit=100):
     matches = Sighting.query(ndb.AND(Sighting.lat >= lat_min, Sighting.lat <= lat_max)).fetch()
     matches = [m for m in matches if m.lng >= lon_min and m.lng <= lon_max]
     # Sighting.lng >= lon_min, Sighting.lng <= lon_max
+    matches.sort(key=lambda x: x.date_inserted, reverse=True)
+    matches = matches[:min(limit, len(matches))]
     return [j.to_json() for j in matches]
 
 def sanitize_column_name(name):

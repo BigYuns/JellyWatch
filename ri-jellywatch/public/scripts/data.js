@@ -144,8 +144,8 @@ Data = {
 	     str.push(encodeURIComponent(p) + "=" + encodeURIComponent(obj[p]));
 	  return str.join("&");
 	},
-	_url: "https://ri-jellywatch.appspot.com",
-	// _url: 'http://localhost:19080',
+	// _url: "https://ri-jellywatch.appspot.com",
+	_url: 'http://localhost:19080',
 	_setup: function() {
 		if (localStorage.user && localStorage.token) {
 			Data.token = localStorage.token;
