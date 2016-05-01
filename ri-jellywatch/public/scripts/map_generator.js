@@ -36,8 +36,7 @@ function initMap() {
               map: map,
               draggable:false,
               optimized: false, 
-              position: {lat: data[i].geometry.x, lng: data[i].geometry.y},
-              animation:google.maps.Animation.BOUNCE
+			  position: {lat: data[i].geometry.x, lng: data[i].geometry.y}
               //icon: icon
             });//jellyMarker
             jellyMarker.setMap(map); 
