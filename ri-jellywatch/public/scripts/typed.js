@@ -21,7 +21,6 @@
 // THE SOFTWARE.
 
 
-
 !function($){
 
     "use strict";
@@ -57,9 +56,6 @@
         // current string based on current values[] array position 
         self.string = self.strings[self.arrayPos];
 
-        // number to stop backspacing on.
-        // default 0, can change depending on how many chars
-        // you want to remove at the time
         self.stopNum = 0;
 
         // number in which to stop going through array
@@ -223,3 +219,4 @@ $(function () {
         callback: function () { $(this) }
     });
 });
+
