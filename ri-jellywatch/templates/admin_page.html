@@ -53,8 +53,11 @@
 
 	<h2>Registered Users</h2>
 
-	<button id="add_user" onclick="showAddUserRow()">Add User</button>
+	<div id = "add_user_div">
 
+		<button class ="button" id="add_user" onclick="showAddUserRow()">Add User</button>
+
+	</div>
 	<div id="users">
 
 		<!-- Table of Users -->
@@ -76,13 +79,13 @@
 				<td><input type="text" class="password" name="new_password" autocapitalize="off" autocorrect="off"></input></td>	
 				<td><input type="checkbox" class="org" name="new_org"></input></td>	
 				<td><input type="checkbox" class="org" name="new_admin"></input></td>
-				<td><input type="submit" id="submit_new_user"></input> <input type="button" value="Cancel" onClick="cancelAddUser()"></input></td>
+				<td><input class = "button" type="submit" id="submit_new_user"></input> <input class= "button" type="button" value="Cancel" onClick="cancelAddUser()"></input></td>
 				</form>
 			</tr>
 			
 		</table>
 	</div>
-	<form action='/jellyfish/csv' method='POST'><input id='csv_token' type='hidden' name='token'/><input type=submit value="Download sightings as CSV"/></form>
+	<form action='/jellyfish/csv' method='POST'><input id='csv_token' type='hidden' name='token'/><input class= "csvbutton" type=submit value="Download sightings as CSV"/></form>
 	
 	</div>
 
