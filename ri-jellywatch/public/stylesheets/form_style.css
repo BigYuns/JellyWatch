@@ -135,16 +135,17 @@
 #photo_comments .question{
     text-align: left;
 }
-.uses {
+.uses, 
+.environment {
 	display: inline-block;
 	text-align: left;
 	line-height: 2;
 }
-.uses input {
+.uses input,
+.environment input {
 	font-size: 2em;
 }
 .radio_label {
-
     color: black;
     padding: 5px 10px;
     text-align: center;
@@ -158,12 +159,26 @@
     background: #D1D1D1;
     box-shadow: 4px 3px 4px 0px rgba(0,0,0,0.50);
 }
-
-
 #jellyfish_questions input[type="radio"]{
     display: none;
 }
 #marine_animals_questions input[type="radio"]{
     display: none;
+}
+.box {
+    float:left;
+    margin-right: 10px;
+    border: 2px solid #979797;
+    border-radius: 3px;
+    width: 15px;
+    height: 15px;
+    text-decoration: none;
+    text-align: center;
+}
+.checked {
+    background: orange;
+}
 
+#checkbox-0{
+    display:none;
 }

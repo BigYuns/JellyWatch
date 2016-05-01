@@ -218,16 +218,23 @@
 
         <div class="question_div" id="water_use_questions">
 
-                <h4 class="question"> How are people using the water nearby?</h4>
-				<div class='uses'>
-                       <input type="checkbox" name="water_use" value="No one is using the water" id='water-use-none'> <label for='water-use-none'>No one is using the water</label><br>
-                       <input type="checkbox" name="water_use" value="Sunbathing" id='water-use-sunbathing'> <label for='water-use-sunbathing'>Sunbathing</label><br>
-                       <input type="checkbox" name="water_use" value="Swimming" id='water-use-swimming'> <label for='water-use-swimming'>Swimming</label><br>
-                       <input type="checkbox" name="water_use" value="Fishing from shore" id='water-use-fishing'> <label for='water-use-fishing'>Fishing from shore</label><br>
-                       <input type="checkbox" name="water_use" value="Boating" id='water-use-boating'> <label for='water-use-boating'>Boating</label><br>
-                       <input type="checkbox" name="water_use" value="Harvesting shellfish" id='water-use-harvesting'> <label for='water-use-harvesting'>Harvesting shellfish</label><br>
-                       <input type="checkbox" name="water_use" value="Oyster lease" id='water-use-oyster-lease'> <label for='water-use-oyster-lease'>Oyster lease</label>
-				 </div>
+            <h4 class="question"> How are people using the water nearby?</h4>
+			<div class='uses'>
+                <input type="checkbox" name="water_use" value="No one is using the water">
+                    <label class='checkbox_label'><div class='box'></div></label>No one is using the water<br>
+                <input type="checkbox" name="water_use" value="Sunbathing"> 
+                    <label class='checkbox_label'><div class='box'></div></label>Sunbathing<br>
+                <input type="checkbox" name="water_use" value="Swimming"> 
+                    <label class='checkbox_label'><div class='box'></div></label>Swimming<br>
+                <input type="checkbox" name="water_use" value="Fishing from shore"> 
+                    <label class='checkbox_label'><div class='box'></div></label>Fishing from shore<br>
+                <input type="checkbox" name="water_use" value="Boating"> 
+                    <label class='checkbox_label'><div class='box'></div></label>Boating<br>
+                <input type="checkbox" name="water_use" value="Harvesting shellfish"> 
+                    <label class='checkbox_label'><div class='box'></div></label>Harvesting shellfish<br>
+                <input type="checkbox" name="water_use" value="Oyster lease"> 
+                    <label class='checkbox_label'><div class='box'></div></label>Oyster lease
+			</div>
 
         </div>
 
@@ -238,27 +245,29 @@
         <div class="question_div" id="environment_questions">
 
             <h4 class="question">How clear is the water? </h4>
-            <div class='uses'>
-                    <input type="radio" name="water" value="Clear"> Clear
-                <br><input type="radio" name="water" value="Turbid"> Turbid
+            <div class='environment'>
+                    <input type="radio" name="water" value="Clear">Clear
+                <br><input type="radio" name="water" value="Turbid">Turbid
             </div>
 
             <h4 class="question">Do you see attached seaweed, typical on rocky shore? </h4>
-            <div class='uses'>
-                    <input type="radio" name="seaweed" value="Yes"> Yes
-                <br><input type="radio" name="seaweed" value="No"> No
+            <div class='environment'>
+                    <input type="radio" name="seaweed" value="Yes">Yes
+                <br><input type="radio" name="seaweed" value="No">No
             </div>
 
             <h4 class="question">Do you see unattached macroalgae blooms? </h4>
-            <div class='uses'>
-
-                    <input type="checkbox" name="macroalgae" value="None observed"> None observed
-                <br><input type="checkbox" name="macroalgae" value="Green Sea Lettuce"> Green Sea Lettuce
-                <br><input type="checkbox" name="macroalgae" value="Red Algae (Grateloupia)"> Red Algae (Grateloupia)
-                <br><input type="checkbox" name="macroalgae" value="Brown Seaweed"> Brown Seaweed
-                <br>Other: <input type="text" name="macroalgae" id="macroalgae_other">
+            <div class='environment'>
+                    <input type="checkbox" name="macroalgae" value="None observed"> 
+                        <label class='checkbox_label'>None observed</label><br>
+                    <input type="checkbox" name="macroalgae" value="Green Sea Lettuce"> 
+                        <label class='checkbox_label'>Green Sea Lettuce</label><br>
+                    <input type="checkbox" name="macroalgae" value="Red Algae (Grateloupia)">
+                        <label class='checkbox_label'>Red Algae (Grateloupia)</label><br>
+                    <input type="checkbox" name="macroalgae" value="Brown Seaweed">
+                        <label class='checkbox_label'>Brown Seaweed</label><br>
+                    Other: <input type="text" name="macroalgae" id="macroalgae_other">
             </div>
-
 
         </div>
 
@@ -342,7 +351,7 @@
         // Radio Button Stuff
         // ######################################
 
-		// Add unique IDs to all the jellyfish radio buttons and set the 'for' property on the labels
+		// Add unique IDs to all the jellyfish and marine species radio buttons and set the 'for' property on the labels
 		var prevId = 0;
 		$('.jellyfish label, .nearby_species label').each(function(i, label) {
 			var id = 'radio-' + prevId;
@@ -396,6 +405,26 @@
             $('#label-'+id).css('color', 'white');
 
         });
+
+        // ######################################
+        // Checkbox Stuff
+        // ######################################
+
+        // Add unique IDs to all the checkboxes and set the 'for' property on the labels
+        var prevId = 0;
+        $('.uses label, .environment label').each(function(i, label) {
+            var id = 'checkbox-' + prevId;
+            var label_id = 'label-'+id;
+            $(label).prev().attr('id', id);
+            $(label).attr('for', id);
+            $(label).attr('id', label_id)
+            prevId++;
+        });
+
+
+        $('input[type="checkbox"]').click(function(){
+            $(this).next().children().toggleClass('checked');
+        })
 
 
         // ######################################
