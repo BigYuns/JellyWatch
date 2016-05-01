@@ -125,7 +125,6 @@
     margin-left: auto;
     margin-right: auto;
     text-align: left;
-
 }
 
 #photo_comments{
@@ -137,13 +136,9 @@
 }
 .uses, 
 .environment {
-	display: inline-block;
+	/*display: inline-block;*/
 	text-align: left;
-	line-height: 2;
-}
-.uses input,
-.environment input {
-	font-size: 2em;
+	/*line-height: 3;*/
 }
 .radio_label {
     color: black;
@@ -157,7 +152,9 @@
     font-family: Rubik;
     width: 50%;
     background: #D1D1D1;
-    box-shadow: 4px 3px 4px 0px rgba(0,0,0,0.50);
+    /*box-shadow: 4px 3px 4px 0px rgba(0,0,0,0.50);*/
+    /*border: 3px solid #b5b5b5;*/
+    border-radius: 5px;
 }
 #jellyfish_questions input[type="radio"],
 #marine_animals_questions input[type="radio"]{
@@ -171,22 +168,33 @@
 .box {
     float:left;
     margin-right: 10px;
-    border: 2px solid #979797;
+    border: 4px solid #979797;
     border-radius: 3px;
-    width: 15px;
-    height: 15px;
-    text-decoration: none;
+    width: 30px;
+    height: 30px;
+    display: block;
+    /*text-decoration: none;*/
     text-align: center;
+    /*background-color: orange;*/
 }
 .checked {
     background: #5052FC;
 }
+.checkbox_label{
+    display: block;
+    margin: 4px;
+}
+.checkbox_label span{
+    position: relative;
+    top: 7px;
+}
+
 .check{
     position: relative;
     display: none;
-    top: -3px;
-    width: 13px;
-    height: 13px;
+    top: 10%;
+    width: 80%;
+    height: 80%;
 }
 #water_use_questions input[type="checkbox"],
 #environment_questions input[type="checkbox"]{
