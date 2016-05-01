@@ -8,6 +8,7 @@ from csv import DictWriter
 import weather
 import users
 import photo
+import re
 
 jellyfish_names = ['comb jelly', 'cucumber or basket comb jelly', 'moon jelly', u'lion’s mane', 'stinging sea nettle', 'crystal jelly', 'cross jelly', 'man of war', 'salps', 'freshwater jellyfish', 'other', 'i don’t know. see photos.']
 
@@ -69,10 +70,16 @@ def get_jellyfish(lat_min=-1000, lat_max=1000, lon_min=-1000, lon_max=1000):
     # Sighting.lng >= lon_min, Sighting.lng <= lon_max
     return [j.to_json() for j in matches]
 
+def sanitize_column_name(name):
+    name = name.replace(' ', '_')
+    return "".join(re.split(r"[^a-zA-Z0-9_]+", name))
 
 def get_sightings(limit=None):
     repeating_string_fields = ['water_uses', 'nearby_species', 'microalgae_blooms']
     single_fields = ['user_email', 'user_name', 'lat', 'lng', 'weather', 'wind_speed', 'attached_seaweed', 'date', 'time_of_day', 'location_name', 'temperature', 'comment_input']
+    
+    def repeating_string_column_name(field_name, field_val):
+        return field_name.upper() + u"_" + field_val.lower()
     
     jellyfish_names = set()
     repeating_field_values = defaultdict(set)
@@ -90,7 +97,7 @@ def get_sightings(limit=None):
     columns = list(single_fields)
     columns += list(jellyfish_names)
     for field in repeating_string_fields:
-        columns += [field + u'=' + val for val in list(repeating_field_values[field])]
+        columns += [repeating_string_column_name(field, val) for val in list(repeating_field_values[field])]
     columns += ['photo_{0}'.format(i+1) for i in xrange(max_photo_fields)]
     
     colset = set(columns)
@@ -100,7 +107,7 @@ def get_sightings(limit=None):
         d = {field: unicode(getattr(sighting, field)) for field in single_fields}
         for field in repeating_string_fields:
             for val in repeating_field_values[field]:
-                d[field + u"=" + val] = "true" if val in getattr(sighting, field) else ""
+                d[repeating_string_column_name(field, val)] = "true" if val in getattr(sighting, field) else ""
         for species, count in sighting.species_counts.iteritems():
             d[species] = count
         
@@ -109,8 +116,10 @@ def get_sightings(limit=None):
         
         if d.get('user_name') == 'null': d['user_name'] = ""
         
-        d = {k: v for k,v in d.iteritems() if k in colset}
+        d = {sanitize_column_name(k): v for k,v in d.iteritems() if k in colset}
         sightings.append(d)
+    
+    columns = map(sanitize_column_name, columns)
     
     return columns, sightings
 

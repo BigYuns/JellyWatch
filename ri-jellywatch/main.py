@@ -138,6 +138,13 @@ class JellyfishCsvHandler(webapp2.RequestHandler):
         else:
             self.response.write("Only admins can download the CSV")
 
+class JellyfishCsvHandlerNoLoginTokenRequired(webapp2.RequestHandler):
+    def get(self):
+            self.response.headers['Content-Type'] = 'text/csv'
+            self.response.headers['Access-Control-Allow-Origin'] = '*'
+            self.response.headers['Content-Disposition'] = 'attachment; filename=JellywatchSightings.csv;'
+            jellyfish.write_csv(self.response)
+
 class RecentJellyfishHandler(webapp2.RequestHandler):
     def get(self):
         token = self.request.get('token')
@@ -160,6 +167,7 @@ app = webapp2.WSGIApplication([
     ('/jellyfish/map', JellyfishMapHandler),
     ('/jellyfish/add', JellyfishAddHandler),
     ('/jellyfish/csv', JellyfishCsvHandler),
+    ('/jellyfish/csv/3f32e6beaa2042dd995bce8069233ec4', JellyfishCsvHandlerNoLoginTokenRequired),
     ('/jellyfish/recent', RecentJellyfishHandler),
     ('/photo', photo.ServePhotoHandler)
 ], debug=True)
