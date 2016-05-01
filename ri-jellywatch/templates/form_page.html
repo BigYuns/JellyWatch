@@ -15,7 +15,7 @@
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
     <script type="text/javascript" src="../public/scripts/data.js"></script>
     <script type="text/javascript" src="../public/scripts/resize-image.js"></script>	
-	
+	<script type="text/javascript" src="../public/scripts/typed.js"></script>
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
 
 </head>
@@ -25,12 +25,13 @@
     <div id="header">
         <div id="prev">
             <a href="" id="prev_text">go back</a>
-            </div>
+            <a href="index.html" id="main_page" style="display:none">Map</a>
+        </div>
         <div id="next">
             <a href="" id="next_text">continue</a>
             </div>
         <!-- <div id="page_title"></div> -->
-        <div id="logo">JELLY WATCH</div>
+        <div id="logo"><a href= "index.html" style="text-decoration:none; color:white;">JELLY WATCH</a></div>
     </div>
     
 
@@ -275,9 +276,12 @@
     ##################################### --> 
 
     <div id="success">
-        <div id="success_blue">
-            <div id="mascot"><img src='../public/img/jelly.png'></div>
-            <span id="thanks"> Thanks for helping us study and preserve the Bay!</span>
+        <div id="success_blue" >
+            <div class "mascot-wrapper" style="height:50px; margin-left:15%; padding-top:50%;">
+                <span class="mascot" style="color:white; font-size:1.5em;">
+                </span>
+            </div>
+           
             
         </div>
     </div>
@@ -483,6 +487,10 @@
                 if (response["success"] == true){
                     $('#photo_comments').hide();
                     $('#success').show();
+                    $('#prev_text').hide(); 
+                    $('#main_page').show(); 
+
+
                 };
             });
 
