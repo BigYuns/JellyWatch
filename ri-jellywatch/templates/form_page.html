@@ -225,26 +225,33 @@
             <h4 class="question"> How are people using the water nearby?</h4>
 			<div class='uses'>
                 <input type="checkbox" name="water_use" value="No one is using the water">
-                    <label class='checkbox_label'><div class='box'><img class='check' src='../public/img/check.svg'></div>
-                        </label>No one is using the water<br>
+                    <label class='checkbox_label'>
+                        <div class='box'><img class='check' src='../public/img/check.svg'></div>
+                        <span>No one is using the water</span></label><br>
                 <input type="checkbox" name="water_use" value="Sunbathing"> 
-                    <label class='checkbox_label'><div class='box'><img class='check' src='../public/img/check.svg'></div>
-                        </label>Sunbathing<br>
+                    <label class='checkbox_label'>
+                        <div class='box'><img class='check' src='../public/img/check.svg'></div>
+                        <span>Sunbathing</span></label><br>
                 <input type="checkbox" name="water_use" value="Swimming"> 
-                    <label class='checkbox_label'><div class='box'><img class='check' src='../public/img/check.svg'></div>
-                        </label>Swimming<br>
+                    <label class='checkbox_label'>
+                        <div class='box'><img class='check' src='../public/img/check.svg'></div>
+                        <span>Swimming</span></label><br>
                 <input type="checkbox" name="water_use" value="Fishing from shore"> 
-                    <label class='checkbox_label'><div class='box'><img class='check' src='../public/img/check.svg'></div>
-                        </label>Fishing from shore<br>
+                    <label class='checkbox_label'>
+                        <div class='box'><img class='check' src='../public/img/check.svg'></div>
+                        <span>Fishing from shore</span></label><br>
                 <input type="checkbox" name="water_use" value="Boating"> 
-                    <label class='checkbox_label'><div class='box'><img class='check' src='../public/img/check.svg'></div>
-                        </label>Boating<br>
+                    <label class='checkbox_label'>
+                        <div class='box'><img class='check' src='../public/img/check.svg'></div>
+                        <span>Boating</span></label><br>
                 <input type="checkbox" name="water_use" value="Harvesting shellfish"> 
-                    <label class='checkbox_label'><div class='box'><img class='check' src='../public/img/check.svg'></div>
-                        </label>Harvesting shellfish<br>
+                    <label class='checkbox_label'>
+                        <div class='box'><img class='check' src='../public/img/check.svg'></div>
+                        <span>Harvesting shellfish</span></label><br>
                 <input type="checkbox" name="water_use" value="Oyster lease"> 
-                    <label class='checkbox_label'><div class='box'><img class='check' src='../public/img/check.svg'></div>
-                        </label>Oyster lease
+                    <label class='checkbox_label'>
+                        <div class='box'><img class='check' src='../public/img/check.svg'></div>
+                        <span>Oyster lease</span></label>
 			</div>
 
         </div>
@@ -274,17 +281,21 @@
             <h4 class="question">Do you see unattached macroalgae blooms? </h4>
             <div class='environment'>
                     <input type="checkbox" name="macroalgae" value="None observed"> 
-                        <label class='checkbox_label'><div class='box'><img class='check' src='../public/img/check.svg'></div>
-                            </label>None observed<br>
+                        <label class='checkbox_label'>
+                            <div class='box'><img class='check' src='../public/img/check.svg'></div>
+                            <span>None observed</span></label><br>
                     <input type="checkbox" name="macroalgae" value="Green Sea Lettuce"> 
-                        <label class='checkbox_label'><div class='box'><img class='check' src='../public/img/check.svg'></div>
-                            </label>Green Sea Lettuce<br>
+                        <label class='checkbox_label'>
+                            <div class='box'><img class='check' src='../public/img/check.svg'></div>
+                            <span>Green Sea Lettuce</span></label><br>
                     <input type="checkbox" name="macroalgae" value="Red Algae (Grateloupia)">
-                        <label class='checkbox_label'><div class='box'><img class='check' src='../public/img/check.svg'></div>
-                            </label>Red Algae (Grateloupia)<br>
+                        <label class='checkbox_label'>
+                            <div class='box'><img class='check' src='../public/img/check.svg'></div>
+                            <span>Red Algae (Grateloupia)</span></label><br>
                     <input type="checkbox" name="macroalgae" value="Brown Seaweed">
-                        <label class='checkbox_label'><div class='box'><img class='check' src='../public/img/check.svg'></div>
-                            </label>Brown Seaweed<br>
+                        <label class='checkbox_label'>
+                            <div class='box'><img class='check' src='../public/img/check.svg'></div>
+                            <span>Brown Seaweed</span></label><br>
                     Other: <input type="text" name="macroalgae" id="macroalgae_other">
             </div>
 
@@ -440,7 +451,7 @@
         });
 
         $('input[type="checkbox"]').click(function(){
-            $(this).next().children().toggleClass('checked'); //toggles checkbox color
+            $(this).next().children('.box').toggleClass('checked'); //toggles checkbox color
             $(this).next().children().children().toggle(); //toggles check image
         })
 
