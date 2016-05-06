@@ -200,3 +200,12 @@
 #environment_questions input[type="checkbox"]{
     display:none;
 }
+
+#algae-options > img {
+	display: block;
+	margin: auto;
+	width: 100%;
+	max-width: 200px;
+	border-radius: 6px;
+	margin-bottom: 2em;
+}
