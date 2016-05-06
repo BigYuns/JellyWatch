@@ -40,11 +40,13 @@ h1{
 }
 
 #sub{
-  background: #95A7EC;
+  background-color: #95A7EC;
   box-shadow: 0px 2px 4px 0px rgba(0,0,0,0.50);
   border-radius: 5px;
   font-family: Rubik;
   font-size: 14px;
+  appearance: none;
+  -webkit-appearance: none;
   color: #FFFFFF;
   letter-spacing: 2.51px;
   line-height: 36px;
