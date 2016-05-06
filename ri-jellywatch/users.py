@@ -3,7 +3,6 @@ import pbkdf2
 import uuid
 
 TEST_MODE = False # True
-MASTER_TOKEN = 'YHALwCRjgUFZjNblcweLTSrdxkZGILOPDfyctnBeDuyYGZrtigUILOScZuYiUYhW'
 
 def hash_pwd(pwd_text):
     salt = "AF6FD01D57DD3DD71EAAAE2C225B1AD740FAADD575B6D68D6A3507D4DC8D9AD8"
@@ -11,7 +10,6 @@ def hash_pwd(pwd_text):
 
 def is_admin(token):
     if TEST_MODE and token == "!admin": return True
-    if token == MASTER_TOKEN: return True
     u = user_for_token(token)
     return u is not None and u.is_admin
 
@@ -27,6 +25,13 @@ def user_for_token(token):
         return ndb.Key(User, tk.email).get()
     else:
         return None
+
+def create_default_admin_user_if_nonexistent():
+    email = 'admin@admin.com'
+    pwd = 'jellywatch383703'
+    a = User.with_email(email)
+    if not a:
+        User.create_user(email, pwd, False, True)
 
 class User(ndb.Model):
     @classmethod
@@ -49,6 +54,7 @@ class User(ndb.Model):
     @classmethod
     def create_login_token(cls, email, pwd):
         # returns a login token string or null
+        create_default_admin_user_if_nonexistent()
         user = ndb.Key(User, email).get()
         if user and user.pwd_hash == hash_pwd(pwd):
             token = uuid.uuid4().hex

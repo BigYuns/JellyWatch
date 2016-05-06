@@ -157,6 +157,16 @@ class RecentJellyfishHandler(webapp2.RequestHandler):
         
         send_json(self, response)
 
+class DeleteJellyfishHandler(webapp2.RequestHandler):
+    def post(self):
+        token = self.request.get('token')
+        success = False
+        if users.is_admin(token):
+            id = self.request.get('id')
+            ndb.Key(jellyfish.Sighting, int(id)).delete()
+            success = True
+        send_json(self, {"success": success})
+
 app = webapp2.WSGIApplication([
     ('/', MainHandler),
     ('/test', TestPageHandler),
@@ -169,5 +179,6 @@ app = webapp2.WSGIApplication([
     ('/jellyfish/csv', JellyfishCsvHandler),
     ('/jellyfish/csv/3f32e6beaa2042dd995bce8069233ec4', JellyfishCsvHandlerNoLoginTokenRequired),
     ('/jellyfish/recent', RecentJellyfishHandler),
+    ('/jellyfish/delete', DeleteJellyfishHandler),
     ('/photo', photo.ServePhotoHandler)
 ], debug=True)
