@@ -231,6 +231,7 @@ span.mascot{
     display:none;
 }
 
+
 #jellyfish_questions input[type="radio"]{
     display: none;
 }
@@ -280,5 +281,15 @@ span.mascot{
     0% { opacity:1; }
     50% { opacity:0; }
     100% { opacity:1; }
+}
+
+
+#algae-options > img {
+	display: block;
+	margin: auto;
+	width: 100%;
+	max-width: 200px;
+	border-radius: 6px;
+	margin-bottom: 2em;
 }
 

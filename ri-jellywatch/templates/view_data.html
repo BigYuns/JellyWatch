@@ -36,7 +36,7 @@
 
 		<h2>Recent Jellyfish sightings</h2>
 		
-		<form action='/jellyfish/csv' method='POST'><input id='csv_token' type='hidden' name='token'/><input type=submit value="Download all sightings as a CSV"/></form>
+		<form action='/jellyfish/csv' method='POST'><input id='csv_token' type='hidden' name='token'/><input class= "csvbutton" type=submit value="Download all sightings as a CSV"/></form>
 		
 		<br/>
 		
@@ -50,23 +50,38 @@
 	<script>
 	$("#csv_token").val(Data.token);
 	
-	Data.getRecentSightings(function(data) {
-		data.headings.forEach(function(name) {
-			$('thead tr').append($(document.createElement('td')).text(name))
+	function reload() {
+		Data.getRecentSightings(function(data) {
+			data.headings.forEach(function(name) {
+				$('thead tr').append($(document.createElement('td')).text(name))
+			})
+			data.sightings.forEach(function(sighting) {
+				var row = $(document.createElement('tr'));
+				data.headings.forEach(function(name, i) {
+					var val = sighting[name];
+					var content = $(document.createElement('span')).text(val);
+					if (name.indexOf('photo_') == 0) {
+						content = $(document.createElement('a')).attr('href', val).text(val);
+					}
+					row.append($(document.createElement('td')).append(content));
+				});
+				var deleteButton = $(document.createElement('button')).text("Delete").click(function() {
+					if (confirm("Are you sure you want to delete this sighting?")) {
+						Data.deleteSighting(sighting.id, function(resp) {
+							if (resp.success) {
+								row.remove();
+								
+							}
+						})
+					}
+				});
+				row.append($(document.createElement('td')).append(deleteButton));
+				$('tbody').append(row)
+			})
 		})
-		data.sightings.forEach(function(sighting) {
-			var row = $(document.createElement('tr'));
-			data.headings.forEach(function(name, i) {
-				var val = sighting[name];
-				var content = $(document.createElement('span')).text(val);
-				if (name.indexOf('photo_') == 0) {
-					content = $(document.createElement('a')).attr('href', val).text(val);
-				}
-				row.append($(document.createElement('td')).append(content));
-			});
-			$('tbody').append(row)
-		})
-	})
+	}
+	
+	reload();
 	</script>
 </body>
 </html>

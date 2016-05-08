@@ -79,7 +79,7 @@ def sanitize_column_name(name):
     name = name.replace(' ', '_')
     return "".join(re.split(r"[^a-zA-Z0-9_]+", name))
 
-def get_sightings(limit=None):
+def get_sightings(limit=None, include_id=False):
     repeating_string_fields = ['water_uses', 'nearby_species', 'microalgae_blooms']
     single_fields = ['user_email', 'user_name', 'lat', 'lng', 'weather', 'wind_speed', 'attached_seaweed', 'date', 'time_of_day', 'location_name', 'temperature', 'comment_input']
     
@@ -104,6 +104,7 @@ def get_sightings(limit=None):
     for field in repeating_string_fields:
         columns += [repeating_string_column_name(field, val) for val in list(repeating_field_values[field])]
     columns += ['photo_{0}'.format(i+1) for i in xrange(max_photo_fields)]
+    if include_id: columns.append('id')
     
     colset = set(columns)
     sightings = []
@@ -121,6 +122,8 @@ def get_sightings(limit=None):
         
         if d.get('user_name') == 'null': d['user_name'] = ""
         
+        if include_id: d['id'] = sighting.key.id()
+        
         d = {sanitize_column_name(k): v for k,v in d.iteritems() if k in colset}
         sightings.append(d)
     
@@ -137,4 +140,4 @@ def write_csv(file):
 
 # headings, sightings = jellyfish.get_recent()
 def get_recent():
-    return get_sightings(limit=20)
+    return get_sightings(limit=20, include_id=True)

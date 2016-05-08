@@ -103,6 +103,12 @@ Data = {
 		sighting.user_name = localStorage.name;
 		Data.post('/jellyfish/add', {sighting: JSON.stringify(sighting), token: Data.token}, callback);
 	},
+	getRecentSightings: function(callback) {
+		Data.get('/jellyfish/recent', {}, callback);
+	},
+	deleteSighting: function(id, callback) {
+		Data.post('/jellyfish/delete', {id: id}, callback);
+	},
 	get: function(url, params, callback) {
 		var http = new XMLHttpRequest();
 		var reqURL = Data._url + url + "?" + Data._serialize(params);
@@ -117,9 +123,6 @@ Data = {
 		    }
 		}
 		http.send(null);
-	},
-	getRecentSightings: function(callback) {
-		Data.get('/jellyfish/recent', {}, callback);
 	},
 	post: function(url, params, callback) {
 		var http = new XMLHttpRequest();
@@ -144,8 +147,8 @@ Data = {
 	     str.push(encodeURIComponent(p) + "=" + encodeURIComponent(obj[p]));
 	  return str.join("&");
 	},
-	// _url: "https://ri-jellywatch.appspot.com",
-	_url: 'http://localhost:19080',
+	_url: "https://ri-jellywatch.appspot.com",
+	// _url: 'http://localhost:19080',
 	_setup: function() {
 		if (localStorage.user && localStorage.token) {
 			Data.token = localStorage.token;
