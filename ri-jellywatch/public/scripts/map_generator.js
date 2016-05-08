@@ -34,8 +34,11 @@ function initMap() {
 	var lastBoundsFetched = null;
 	
     google.maps.event.addListener(map, 'bounds_changed', function(){
+  	  	MapPos = {lat: map.getCenter().lat(), lng: map.getCenter().lng()};
+		
 		var needsReload = (!lastBoundsFetched || !boundsContainsBounds(lastBoundsFetched, map.getBounds()))
 		if (needsReload) {
+			
 			var bounds = expandBounds(map.getBounds(), 1.5);
 			lastBoundsFetched = bounds;
 	        var lat_min = bounds.getSouthWest().lat(); 
