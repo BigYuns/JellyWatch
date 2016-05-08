@@ -68,29 +68,58 @@
     left:0px;
     z-index:1000;
 }
+/*#success:before{
+    content:"";
+    background:url(../img/giphy.gif) no-repeat;
+    z-index:-1;
+    opacity:0.5;
+}*/
 
+.mascot{
+    opacity:1;
+}
 #success_blue{
-    width: 80%;
-    height: 60%;
-    position: relative;
-    background-color: #5052FC;
-    margin: 0 auto;
-    margin-top: 80px;
-    text-align: center;
-    font-family: Rubik;
-    padding-left: 5%;
-    padding-right: 5%;
+    background-image:url("../img/giphy.gif"); 
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    height:100%;
+    opacity:0.65; 
 }
 
-#mascot{
-    height: 80%;
+@-webkit-keyframes blink {
+  0% { opacity:1; }
+  50% { opacity:0; }
+  100% { opacity:1; }
+}
+@-moz-keyframes blink {
+  0% { opacity:1; }
+  50% { opacity:0; }
+  100% { opacity:1; }
+}
+@keyframes blink {
+  0% { opacity:1; }
+  50% { opacity:0; }
+  100% { opacity:1; }
+}
+#typed-cursor{
+  opacity: 1;
+  font-weight: 100;
+  -webkit-animation: blink 0.7s infinite;
+  -moz-animation: blink 0.7s infinite;
+  animation: blink 0.7s infinite;
 }
 
-#thanks{
+span.mascot{
     color: white;
     text-align: center;
+    font-family: Rubik;  
     position: relative;
-    margin-top: 60%;
+    margin-top: 60%;}      
 }
 
 #myImg{
@@ -164,6 +193,7 @@
     display: none;
 }
 
+
 /*checkbox stuff*/
 .box {
     float:left;
@@ -201,6 +231,59 @@
     display:none;
 }
 
+
+#jellyfish_questions input[type="radio"]{
+    display: none;
+}
+
+#success{
+    background-color: black;
+    position:fixed;
+    width:100%;
+    height:100%;
+    top: 80px;
+    left:0px;
+    z-index:-1000;
+}
+
+#success_blue{
+    background-image:url("../img/giphy.gif"); 
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    height:100%;
+    opacity:0.65;
+    z-index:-1; 
+}
+
+
+.typed-cursor{
+    opacity: 1;
+    -webkit-animation: blink 0.7s infinite;
+    -moz-animation: blink 0.7s infinite;
+    animation: blink 0.7s infinite;
+}
+@keyframes blink{
+    0% { opacity:1; }
+    50% { opacity:0; }
+    100% { opacity:1; }
+}
+@-webkit-keyframes blink{
+    0% { opacity:1; }
+    50% { opacity:0; }
+    100% { opacity:1; }
+}
+@-moz-keyframes blink{
+    0% { opacity:1; }
+    50% { opacity:0; }
+    100% { opacity:1; }
+}
+
+
 #algae-options > img {
 	display: block;
 	margin: auto;
@@ -209,3 +292,4 @@
 	border-radius: 6px;
 	margin-bottom: 2em;
 }
+

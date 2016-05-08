@@ -19,8 +19,6 @@ tr:nth-child(even) {
 	background: #dbdbdb;
 }
 table button {
-	/*width: 80%;
-	margin: 0 auto;*/
 	color: black;
 	padding: 5px 10px;
     text-align: center;
@@ -29,33 +27,25 @@ table button {
     margin: 0 auto;
     cursor: pointer;   
     font-family: Rubik;
-    /*width: 20%;*/
     background: #D1D1D1;
-    /*box-shadow: 4px 3px 4px 0px rgba(0,0,0,0.50);*/
 }
 #users{
-	/*width: 80%;*/
 	margin: 0 auto;
-	/*padding-top: 80px;*/
 }
 
 
 #content .button{
 	color: black;
-	/*padding: 5px 10px;*/
     text-align: center;
     text-decoration: none;
     font-size: 12px;
-/*    margin: 0 auto;
-*/    cursor: pointer;   
+    cursor: pointer;   
     font-family: Rubik;
-    /*width: 20%;*/
+
     background: #D1D1D1;
-/*    box-shadow: 4px 3px 4px 0px rgba(0,0,0,0.50);
-*/
 }
 #add_user_div .button{
-	box-shadow: 4px 3px 4px 0px rgba(0,0,0,0.50);
+	box-shadow: 4px 3px 4px 0px rgba(0,0,0,0.25);
 }
 #content .csvbutton{
 	color: black;
@@ -68,5 +58,5 @@ table button {
     font-family: Rubik;
     width: 25%;
     background: #D1D1D1;
-    box-shadow: 4px 3px 4px 0px rgba(0,0,0,0.50);
+    box-shadow: 4px 3px 4px 0px rgba(0,0,0,0.25);
 }
