@@ -65,7 +65,7 @@ function initMap() {
 	  				icon: iconForJellyfish(data[i])
 	                //icon: icon
 	              });//jellyMarker
-	  			(function(sighting) {
+	  			(function(sighting, jellyMarker) {
 	  				jellyMarker.addListener('click', function() {
 	  					var content = $("<dl></dl>");
 	  					Object.keys(sighting.jellyfish).forEach(function(jellyType) {
@@ -85,7 +85,7 @@ function initMap() {
 	  					})
 	  				    w.open(map, jellyMarker);
 	  				})
-	  			})(data[i]);
+	  			})(data[i], jellyMarker);
 	              jellyMarker.setMap(map); 
 	              index_check.add(i); 
 	            }//if
