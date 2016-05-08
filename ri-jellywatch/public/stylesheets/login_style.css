@@ -1,11 +1,11 @@
 body{
   background-color: #5052FC;
   color:white;
-  font-family: Roboto;
+  font-family: Roboto, sans-serif;
   background-image: url("../img/jelly_bg_test.png");
 }
 h1{
-  font-family: Rubik;
+  font-family: Rubik, sans-serif;
   font-weight: bold;
   letter-spacing: 11.66px;
   margin: 0 auto;
@@ -17,7 +17,7 @@ h1{
   border-radius: 5px;
   height: 30px;
   width: 170px;
-  font-family: Rubik;
+  font-family: Rubik, sans-serif;
   font-weight: lighter;
   line-height: 29px;
   font-size: 13px;
