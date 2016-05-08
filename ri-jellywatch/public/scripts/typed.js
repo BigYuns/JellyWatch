@@ -213,7 +213,7 @@
 
 $(function () {
     $("span.mascot").typed({
-        strings: ["Thanks for helping us study and preserve the Bay!"],
+        strings: ["Thanks for helping us study & preserve the Bay!"],
         typeSpeed: 30, // typing speed
         backDelay: 1800, // pause before backspacing
         callback: function () { $(this) }
