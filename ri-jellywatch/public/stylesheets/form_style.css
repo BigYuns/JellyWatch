@@ -88,7 +88,6 @@
     -o-background-size: cover;
     background-size: cover;
     height:100%;
-    opacity:0.65; 
 }
 
 @-webkit-keyframes blink {
@@ -256,10 +255,12 @@ span.mascot{
     -o-background-size: cover;
     background-size: cover;
     height:100%;
-    opacity:0.65;
     z-index:-1; 
 }
 
+.mascot, .typed-cursor {
+    opacity:0.65;
+}
 
 .typed-cursor{
     opacity: 1;
@@ -293,3 +294,51 @@ span.mascot{
 	margin-bottom: 2em;
 }
 
+#big-submit{
+  background-color: #5052FC;
+  width: 100%;
+  color: yellow;
+  border-radius: 5px;
+  font-family: Rubik;
+  font-size: 14px;
+  appearance: none;
+  -webkit-appearance: none;
+  line-height: 36px;
+  width: 100%;
+  height: 40px;
+  border: 2px solid transparent;
+  margin-top: 1em;
+}
+
+#big-submit:hover{
+  background: #95A7EC;
+  border: 2px solid #FFFFFF;
+}
+
+#success_blue {
+	position: relative;
+}
+
+#mascot {
+	width: 150px;
+	position: absolute;
+	margin-top: -90px;
+	margin-left: -50px;
+	top: 50%;
+	left: 50%;
+	text-align: center;
+}
+
+#mascot img {
+	width: 100px;
+}
+
+#mascot a {
+	color: yellow;
+	font-size: large;
+	font-weight: bold;
+	text-decoration: none;
+	display: block;
+	margin-top: 1em;
+	
+}
