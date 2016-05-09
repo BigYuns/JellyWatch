@@ -342,3 +342,10 @@ span.mascot{
 	margin-top: 1em;
 	
 }
+
+#myImg {
+	width: 100%;
+	max-width: 500px;
+	height: auto;
+	display: none;
+}
